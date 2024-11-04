@@ -1,3 +1,5 @@
+//数据库类：用于连接后端数据库，返回单例对象
+
 #ifndef DATABASECONNECTIONLZY_H
 #define DATABASECONNECTIONLZY_H
 

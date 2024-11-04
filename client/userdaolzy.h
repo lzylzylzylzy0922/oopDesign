@@ -1,3 +1,5 @@
+//dao类：管理用户
+
 #ifndef USERDAOLZY_H
 #define USERDAOLZY_H
 

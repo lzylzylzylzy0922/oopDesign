@@ -12,14 +12,21 @@ SOURCES += \
     databaseconnectionlzy.cpp \
     main.cpp \
     userdaolzy.cpp \
-    userlzy.cpp \
     utilsLzy.cpp \
     welcomepagelzy.cpp
 
 HEADERS += \
+    AccountBindingLzy.h \
+    AccountLzy.h \
+    FriendshipLzy.h \
+    FriendshipRequestLzy.h \
+    GroupLzy.h \
+    GroupMemberLzy.h \
+    LoginStatusLzy.h \
+    UserLzy.h \
+    UserServiceLzy.h \
     databaseconnectionlzy.h \
     userdaolzy.h \
-    userlzy.h \
     utilsLzy.h \
     welcomepagelzy.h
 
