@@ -1,5 +1,6 @@
 debug/databaseconnectionlzy.o
 debug/main.o
+debug/registerpagelzy.o
 debug/userdaolzy.o
 debug/utilsLzy.o
 debug/welcomepagelzy.o
@@ -13,6 +14,7 @@ debug/moc_LoginStatusLzy.o
 debug/moc_UserLzy.o
 debug/moc_UserServiceLzy.o
 debug/moc_databaseconnectionlzy.o
+debug/moc_registerpagelzy.o
 debug/moc_userdaolzy.o
 debug/moc_utilsLzy.o
 debug/moc_welcomepagelzy.o

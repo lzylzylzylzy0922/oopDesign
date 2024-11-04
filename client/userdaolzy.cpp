@@ -6,13 +6,14 @@ userDaoLzy::userDaoLzy(QObject *parent)
     database.open();
 }
 
-bool userDaoLzy::isUserExistsByAccount(QString accountId){
-    query.prepare("select * from account where account_id=:id");
-    query.bindValue(":id",accountId);
+bool userDaoLzy::isUserExistsByAccountAndType(QString accountId, QString type) {
+    query.prepare("SELECT * FROM account WHERE account_id = :id AND type = :type");
+    query.bindValue(":id", accountId);
+    query.bindValue(":type", type);
 
-    query.exec();
-    if(query.next())
+    if (query.exec() && query.next()) {
         return true;
+    }
     return false;
 }
 

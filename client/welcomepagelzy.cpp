@@ -25,6 +25,9 @@ welcomePageLzy::~welcomePageLzy()
 
 void welcomePageLzy::on_radioButton_clicked()
 {
+    ui->wechatAccount->clear();
+    ui->weiboAccount->clear();
+
     ui->qqAccount->setEnabled(true);
     ui->wechatAccount->setEnabled(false);
     ui->weiboAccount->setEnabled(false);
@@ -34,6 +37,9 @@ void welcomePageLzy::on_radioButton_clicked()
 
 void welcomePageLzy::on_radioButton_2_clicked()
 {
+    ui->qqAccount->clear();
+    ui->weiboAccount->clear();
+
     ui->qqAccount->setEnabled(false);
     ui->wechatAccount->setEnabled(true);
     ui->weiboAccount->setEnabled(false);
@@ -42,6 +48,9 @@ void welcomePageLzy::on_radioButton_2_clicked()
 
 void welcomePageLzy::on_radioButton_3_clicked()
 {
+    ui->qqAccount->clear();
+    ui->wechatAccount->clear();
+
     ui->qqAccount->setEnabled(false);
     ui->wechatAccount->setEnabled(false);
     ui->weiboAccount->setEnabled(true);
@@ -75,14 +84,20 @@ void welcomePageLzy::on_loginButton_clicked()
 {
 
     QString accountId;
+    QString type;
     QString password=ui->passwordEdit->text();
 
     //校验用户是否存在
     if(!ui->qqAccount->text().isEmpty()){
+        type="QQ";
         accountId=ui->qqAccount->text();
+
     }else if(!ui->wechatAccount->text().isEmpty()){
+        type="WECHAT";
         accountId=ui->wechatAccount->text();
+
     }else if(!ui->weiboAccount->text().isEmpty()){
+        type="WEIBO";
         accountId=ui->weiboAccount->text();
     }else{
         QMessageBox::warning(this,"警告","ID不能为空");
@@ -92,7 +107,7 @@ void welcomePageLzy::on_loginButton_clicked()
     qDebug()<<"accountID:"<<accountId;
 
     userDaoLzy* userDao=new userDaoLzy();
-    if(!userDao->isUserExistsByAccount(accountId)){
+    if(!userDao->isUserExistsByAccountAndType(accountId,type)){
         QMessageBox::warning(this,"警告","ID不存在");
     }else{
         //校验密码
@@ -106,5 +121,12 @@ void welcomePageLzy::on_loginButton_clicked()
 
 
 
+}
+
+
+void welcomePageLzy::on_registerButton_clicked()
+{
+    this->hide();
+    emit showRegisterPageLzy();
 }
 

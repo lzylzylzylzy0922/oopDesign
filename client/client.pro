@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     databaseconnectionlzy.cpp \
     main.cpp \
+    registerpagelzy.cpp \
     userdaolzy.cpp \
     utilsLzy.cpp \
     welcomepagelzy.cpp
@@ -26,11 +27,13 @@ HEADERS += \
     UserLzy.h \
     UserServiceLzy.h \
     databaseconnectionlzy.h \
+    registerpagelzy.h \
     userdaolzy.h \
     utilsLzy.h \
     welcomepagelzy.h
 
 FORMS += \
+    registerpagelzy.ui \
     welcomepagelzy.ui
 
 # Default rules for deployment.

@@ -22,6 +22,10 @@ public:
     ~welcomePageLzy();
     friend class utilsLzy;
     friend class userDaoLzy;
+
+signals:
+    void showRegisterPageLzy();
+
 private slots:
     void on_radioButton_clicked();
 
@@ -35,6 +39,8 @@ private slots:
     void on_passwordEdit_editingFinished();
 
     void on_loginButton_clicked();
+
+    void on_registerButton_clicked();
 
 private:
     Ui::welcomePageLzy *ui;
