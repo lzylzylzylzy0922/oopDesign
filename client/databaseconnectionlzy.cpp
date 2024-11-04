@@ -2,6 +2,7 @@
 
 QSqlDatabase databaseConnectionLzy::database;
 
+
 databaseConnectionLzy::databaseConnectionLzy(QObject *parent)
     : QObject{parent}
 {

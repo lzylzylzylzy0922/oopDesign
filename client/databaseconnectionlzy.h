@@ -5,6 +5,7 @@
 
 #include <QObject>
 #include<QSqlDatabase>
+#include<QSqlQuery>
 #include<QDebug>
 
 class databaseConnectionLzy : public QObject
@@ -17,7 +18,6 @@ private:
     explicit databaseConnectionLzy(QObject *parent = nullptr);
     ~databaseConnectionLzy(){};
     static QSqlDatabase database;
-
 signals:
 };
 

@@ -73,7 +73,38 @@ void welcomePageLzy::on_passwordEdit_editingFinished()
 
 void welcomePageLzy::on_loginButton_clicked()
 {
-    QSqlDatabase database=databaseConnectionLzy::getInstance();
+
+    QString accountId;
+    QString password=ui->passwordEdit->text();
+
+    //校验用户是否存在
+    if(!ui->qqAccount->text().isEmpty()){
+        accountId=ui->qqAccount->text();
+    }else if(!ui->wechatAccount->text().isEmpty()){
+        accountId=ui->wechatAccount->text();
+    }else if(!ui->weiboAccount->text().isEmpty()){
+        accountId=ui->weiboAccount->text();
+    }else{
+        QMessageBox::warning(this,"警告","ID不能为空");
+        return;
+    }
+
+    qDebug()<<"accountID:"<<accountId;
+
+    userDaoLzy* userDao=new userDaoLzy();
+    if(!userDao->isUserExistsByAccount(accountId)){
+        QMessageBox::warning(this,"警告","ID不存在");
+    }else{
+        //校验密码
+        if(!userDao->isPasswordCorrect(accountId,password))
+            QMessageBox::warning(this,"警告","密码错误");
+        else{
+            //跳转不同页面主界面 TODO
+        }
+
+    }
+
+
 
 }
 

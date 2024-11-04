@@ -3,8 +3,9 @@
 
 #include <QWidget>
 #include <QDebug>
+#include<QMessageBox>
 #include <utilsLzy.h>
-#include<databaseconnectionlzy.h>
+#include<userdaolzy.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -20,7 +21,7 @@ public:
     welcomePageLzy(QWidget *parent = nullptr);
     ~welcomePageLzy();
     friend class utilsLzy;
-    friend class databaseConnectionLzy;
+    friend class userDaoLzy;
 private slots:
     void on_radioButton_clicked();
 
