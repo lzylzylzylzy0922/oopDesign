@@ -106,7 +106,7 @@ void welcomePageLzy::on_loginButton_clicked()
 
     qDebug()<<"accountID:"<<accountId;
 
-    userDaoLzy* userDao=new userDaoLzy();
+    userDaoLzy* userDao=userDaoLzy::getInstance();
     if(!userDao->isUserExistsByAccountAndType(accountId,type)){
         QMessageBox::warning(this,"警告","ID不存在");
     }else{

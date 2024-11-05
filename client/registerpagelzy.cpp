@@ -91,10 +91,9 @@ void RegisterPageLzy::on_registerButton_clicked()
     }
 
     //检验用户是否已经存在
-    userDaoLzy* userDao=new userDaoLzy();
+    userDaoLzy* userDao=userDaoLzy::getInstance();
     if(userDao->isUserExistsByPhoneAndType(telephone,type)){
         QMessageBox::warning(this,"警告","用户已存在");
-        delete(userDao);
         return;
     }
 
@@ -103,10 +102,13 @@ void RegisterPageLzy::on_registerButton_clicked()
     qDebug()<<accountId;
     AccountLzy* account=new AccountLzy(accountId,type,nickname,inputPassword);
 
-    //创建用户 TODO
+    //创建用户
+    if(!userDao->createAccount(account,birth,location,telephone)){
+        QMessageBox::warning(this,"警告","用户已存在");
+        return;
+    }
 
-
-    delete(userDao);
+    QMessageBox::information(this,"提醒","你的账户ID是:"+accountId+"\n请务必记住");
 }
 
 void RegisterPageLzy::updateEchoMode(){

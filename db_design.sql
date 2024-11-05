@@ -2,8 +2,7 @@ CREATE TABLE user (
     user_id INT UNIQUE AUTO_INCREMENT PRIMARY KEY,
     birthday DATE,
     register_date DATETIME,
-    location ENUM('LOCATION1', 'LOCATION2', 'LOCATION3'), 
-    avatar VARCHAR(255),
+    location VARCHAR(50), 
     phone_number VARCHAR(20)
 ) AUTO_INCREMENT=10000;
 

@@ -2,14 +2,14 @@
 
 1.用户表user
 
-|     字段      |    类型     |   描述   |
-| :-----------: | :---------: | :------: |
-|    user_id    | int、unique |   主键   |
-|   birthday    |    date     | 出生日期 |
-| register_date |  datetime   | 注册时间 |
-|   location    |    enum     |  所在地  |
-|    avatar     |   varchar   | 头像路径 |
-| phone_number  |   varchar   |  手机号  |
+|     字段      |            类型             |   描述   |
+| :-----------: | :-------------------------: | :------: |
+|    user_id    | int、unique、auto_increment |   主键   |
+|   birthday    |            date             | 出生日期 |
+| register_date |          datetime           | 注册时间 |
+|   location    |            enum             |  所在地  |
+|    avatar     |           varchar           | 头像路径 |
+| phone_number  |           varchar           |  手机号  |
 
 2.账户表account
 
