@@ -5,8 +5,7 @@
 
 #include <QString>
 #include <QObject>
-
-enum class AccountType { QQ, WECHAT, WEIBO };
+#include"AccountType.h"
 
 
 class AccountLzy : public QObject {
@@ -20,8 +19,8 @@ private:
     QString password;
 
 public:
-    AccountLzy(const QString& acc_id, int userId, AccountType acc_type, const QString& acc_name, const QString& pwd, QObject *parent = nullptr)
-        : QObject(parent), accountId(acc_id), userId(userId), type(acc_type), accountName(acc_name), password(pwd) {}
+    AccountLzy(const QString& acc_id, AccountType acc_type, const QString& acc_name, const QString& pwd, QObject *parent = nullptr)
+        : QObject(parent), accountId(acc_id), type(acc_type), accountName(acc_name), password(pwd) {}
 
     QString getAccountId() const { return accountId; }
     int getUserId() const { return userId; }

@@ -5,8 +5,7 @@
 
 #include <QObject>
 #include <QDateTime>
-
-enum class AccountType { QQ, WECHAT, WEIBO };
+#include"AccountType.h"
 
 class UserLzy;
 

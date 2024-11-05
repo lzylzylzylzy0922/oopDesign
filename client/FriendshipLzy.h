@@ -4,8 +4,7 @@
 #define FRIENDSHIPLZY_H
 
 #include <QObject>
-
-enum class AccountType{ QQ,WECHAT,WEIBO };
+#include"AccountType.h"
 
 class UserLzy;
 

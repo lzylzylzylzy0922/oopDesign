@@ -19,6 +19,7 @@ SOURCES += \
 HEADERS += \
     AccountBindingLzy.h \
     AccountLzy.h \
+    AccountType.h \
     FriendshipLzy.h \
     FriendshipRequestLzy.h \
     GroupLzy.h \

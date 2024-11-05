@@ -17,32 +17,32 @@ class UserLzy : public QObject {
     Q_OBJECT
 
 private:
-    int user_id;
+    int userId;
     QDate birthday;
-    QDateTime register_date;
+    QDateTime registerDate;
     Location location;
     QString avatar;
-    QString phone_number;
+    QString phoneNumber;
     QList<AccountLzy*> accounts;
 
 public:
-    UserLzy(int id, const QDate& bday, const QDateTime& reg_date, Location loc, const QString& avtr, const QString& phone, QObject *parent = nullptr)
-        : QObject(parent), user_id(id), birthday(bday), register_date(reg_date), location(loc), avatar(avtr), phone_number(phone) {}
+    UserLzy(const QDate& bday, const QDateTime& reg_date, Location loc, const QString& avtr, const QString& phone, QObject *parent = nullptr)
+        : QObject(parent), birthday(bday), registerDate(reg_date), location(loc), avatar(avtr), phoneNumber(phone) {}
 
 
-    int getUserId() const { return user_id; }
+    int getUserId() const { return userId; }
     QDate getBirthday() const { return birthday; }
-    QDateTime getRegisterDate() const { return register_date; }
+    QDateTime getRegisterDate() const { return registerDate; }
     Location getLocation() const { return location; }
     QString getAvatar() const { return avatar; }
-    QString getPhoneNumber() const { return phone_number; }
+    QString getPhoneNumber() const { return phoneNumber; }
 
-    void setUserId(int id) { user_id = id; }
+    void setUserId(int id) { userId = id; }
     void setBirthday(const QDate& bday) { birthday = bday; }
-    void setRegisterDate(const QDateTime& reg_date) { register_date = reg_date; }
+    void setRegisterDate(const QDateTime& reg_date) { registerDate = reg_date; }
     void setLocation(Location loc) { location = loc; }
     void setAvatar(const QString& avtr) { avatar = avtr; }
-    void setPhoneNumber(const QString& phone) { phone_number = phone; }
+    void setPhoneNumber(const QString& phone) { phoneNumber = phone; }
 
     // 添加账户
     void addAccount(AccountLzy* account) {

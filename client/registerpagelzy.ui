@@ -42,12 +42,182 @@
   <widget class="QComboBox" name="locationBox">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>231</y>
-     <width>91</width>
-     <height>20</height>
+     <x>260</x>
+     <y>230</y>
+     <width>121</width>
+     <height>21</height>
     </rect>
    </property>
+   <item>
+    <property name="text">
+     <string>黑龙江省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>辽宁省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>吉林省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>河北省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>河南省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>湖北省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>湖南省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>山东省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>山西省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>陕西省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>安徽省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>浙江省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>江苏省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>福建省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>广东省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>海南省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>四川省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>云南省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>贵州省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>青海省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>甘肃省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>江西省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>台湾省</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>内蒙古</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>宁夏回族自治区</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>新建维吾尔自治区</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>西藏自治区</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>广西壮族自治区</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>北京市</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>上海市</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>天津市</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>重庆市</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>香港特别行政区</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>澳门特别行政区</string>
+    </property>
+   </item>
   </widget>
   <widget class="QPushButton" name="registerButton">
    <property name="geometry">
@@ -75,40 +245,40 @@
     <string>返回登录界面</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>60</x>
      <y>80</y>
      <width>451</width>
-     <height>16</height>
+     <height>18</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QRadioButton" name="qqRadioButton">
       <property name="text">
-       <string>QID</string>
+       <string>QQ</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QRadioButton" name="wechatRadioButton">
       <property name="text">
-       <string>WeChatID</string>
+       <string>WeChat</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QRadioButton" name="weiboRadioButton">
       <property name="text">
-       <string>WeiBoID</string>
+       <string>WeiBo</string>
       </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -162,18 +332,18 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>260</x>
      <y>110</y>
-     <width>116</width>
+     <width>128</width>
      <height>111</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QLineEdit" name="phonenumberEdit"/>
+     <widget class="QLineEdit" name="phoneNumberEdit"/>
     </item>
     <item>
      <widget class="QLineEdit" name="nicknameEdit"/>
@@ -183,7 +353,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>260</x>
@@ -200,6 +370,45 @@
      <widget class="QLineEdit" name="verifyPasswordEdit"/>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="reminderLabel">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>110</y>
+     <width>126</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;手机号格式错误&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="pwdVisual">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>280</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>显示密码</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="reminderPasswordLabel">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>350</y>
+     <width>141</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;密码至少六位且包含数字和字母&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
   </widget>
  </widget>
  <resources/>
