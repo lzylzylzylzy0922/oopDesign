@@ -102,10 +102,10 @@ bool userDaoLzy::createAccount(AccountLzy* account,QDate birth,QString location,
 
 
         //向account表插入数据
-        query.prepare("insert into account values (:accountId,:userId,:type,:accountName,:password);");
+        query.prepare("insert into account values (:accountId,:userId,:type,:accountName,:password,:avatar);");
         query.bindValue(":accountId",account->getAccountId());
         query.bindValue(":userId",userId);
-
+        query.bindValue(":avatar",account->getAvatar());
 
         QString type;
         if(account->getType()==AccountType::QQ){
@@ -123,4 +123,75 @@ bool userDaoLzy::createAccount(AccountLzy* account,QDate birth,QString location,
         return true;
     }
     return false;
+}
+
+AccountLzy* userDaoLzy::returnAccount(QString accountId){
+    query.prepare("select * from account where account_id=:accountId");
+    query.bindValue(":accountId",accountId);
+    query.exec();
+
+    if(query.value(2).toString()=="QQ"){
+        return new AccountLzy(accountId,AccountType::QQ,query.value(3).toString(),query.value(4).toString(),query.value(5).toString());
+    }else if(query.value(2).toString()=="WECHAT"){
+        return new AccountLzy(accountId,AccountType::WECHAT,query.value(3).toString(),query.value(4).toString(),query.value(5).toString());
+    }else{
+        return new AccountLzy(accountId,AccountType::WEIBO,query.value(3).toString(),query.value(4).toString(),query.value(5).toString());
+    }
+
+}
+
+void userDaoLzy::updateOnlineStatus(AccountLzy* account,loginStatus status){
+
+    QString ip=utilsLzy::getLocalIPAddress();
+    int userId=0;
+    //QString port=utilsLzy::getPort(&server);
+    qDebug()<<ip;
+    //获取user_id
+
+    query.prepare("select user_id from account where account_id=:accountId");
+    query.bindValue(":accountId",account->getAccountId());
+    query.exec();
+    if(query.next()){
+        userId=query.value(0).toInt();
+        qDebug()<<userId;
+    }
+
+    //先判断login_status中有没有该用户信息
+    query.prepare("select * from login_status where user_id=:userId;");
+    query.bindValue(":userId",userId);
+
+    query.exec();
+    if(query.next()&&status==loginStatus::OFFLINE){
+        query.prepare("update login_status set is_active=:isActive where user_id=:userId;");
+        query.bindValue(":isActive",0);
+        query.bindValue(":userId",userId);
+        query.exec();
+        qDebug()<<"更新"<<account->getAccountId()<<"离线";
+
+        return;
+    }
+
+    //向login_status插入
+    query.prepare("insert into login_status (user_id,type,login_time,is_active,ip,port) values (:userId,:type,:loginTime,:isActive,:ip,:port);");
+    query.bindValue(":userId",userId);
+
+
+
+
+
+    if(account->getType()==AccountType::QQ) query.bindValue(":type","QQ");
+    else if(account->getType()==AccountType::WECHAT) query.bindValue(":type","WECHAT");
+    else query.bindValue(":type","WEIBO");
+
+    query.bindValue(":loginTime",QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss"));
+
+    query.bindValue(":isActive",1);
+    qDebug()<<"更新"<<account->getAccountId()<<"在线";
+
+    query.bindValue(":ip",ip);
+    query.bindValue(":port",0);//暂时写0
+
+    query.exec();
+
+
 }

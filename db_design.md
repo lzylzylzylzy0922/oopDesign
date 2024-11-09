@@ -8,7 +8,6 @@
 |   birthday    |            date             | 出生日期 |
 | register_date |          datetime           | 注册时间 |
 |   location    |            enum             |  所在地  |
-|    avatar     |           varchar           | 头像路径 |
 | phone_number  |           varchar           |  手机号  |
 
 2.账户表account
@@ -20,6 +19,7 @@
 |     type     |      enum       |              账户类型(QQ、WECHAT、WEIBO)              |
 | account_name |     varchar     |                        账户名                         |
 |   password   |     varchar     |                       账户密码                        |
+|    avatar    |     varchar     |                       头像路径                        |
 
 3.账户绑定表account_binding
 

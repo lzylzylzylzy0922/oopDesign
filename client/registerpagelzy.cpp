@@ -100,7 +100,7 @@ void RegisterPageLzy::on_registerButton_clicked()
 
     QString accountId=utils->createAccountId(type);
     qDebug()<<accountId;
-    AccountLzy* account=new AccountLzy(accountId,type,nickname,inputPassword);
+    AccountLzy* account=new AccountLzy(accountId,type,nickname,inputPassword,NULL);
 
     //创建用户
     if(!userDao->createAccount(account,birth,location,telephone)){
@@ -121,4 +121,11 @@ void RegisterPageLzy::updateEchoMode(){
     }
     //if((ui->qqAccount->text().isEmpty()||))
     }
+
+
+void RegisterPageLzy::on_openWelcomePageButton_clicked()
+{
+    this->hide();
+    emit showWelcomePage();
+}
 

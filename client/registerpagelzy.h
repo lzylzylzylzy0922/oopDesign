@@ -24,6 +24,9 @@ public:
     ~RegisterPageLzy();
     friend class utilsLzy;
     friend class userDaoLzy;
+
+signals:
+    void showWelcomePage();
 public slots:
     void recvSignal();
     void updateEchoMode();
@@ -31,6 +34,8 @@ public slots:
 private slots:
     void on_registerButton_clicked();
 
+
+    void on_openWelcomePageButton_clicked();
 
 private:
     Ui::RegisterPageLzy *ui;

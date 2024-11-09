@@ -14,11 +14,13 @@ QQ和微信主要实现聊天功能(在加入群聊、可否群管理等方面�
 
 ![image-20241102001621152](./widget_design/image-20241102001621152.png)
 
-### 2.MainMenuPageLzy
+### 2.MainPageLzy
 
 实现模块：
 
 显示个人信息(点击跳转UserInfoPageLzy)，显示好友和群聊消息(点击跳转ChatPageLzy)，显示已有好友和群聊(点击跳转ChatPageLzy)、实现功能界面跳转(点击控件跳转FriendManagePageLzy或GroupManagePageLzy)
+
+![image-20241106225631492](./widget_design/image-20241106225631492.png)
 
 ### 3.FriendManagePageLzy
 

@@ -11,7 +11,8 @@ CREATE TABLE account (
     user_id INT,
     type ENUM('QQ', 'WECHAT', 'WEIBO'),
     account_name VARCHAR(100),
-    password VARCHAR(255)
+    password VARCHAR(255),
+    avatar VARCHAR(255)
 );
 
 CREATE TABLE account_binding (

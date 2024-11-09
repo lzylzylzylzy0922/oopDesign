@@ -25,6 +25,10 @@ public:
 
 signals:
     void showRegisterPageLzy();
+    void showMainPageLzy(QString AccountId);
+
+public slots:
+    void recvSignal();
 
 private slots:
     void on_radioButton_clicked();

@@ -114,7 +114,9 @@ void welcomePageLzy::on_loginButton_clicked()
         if(!userDao->isPasswordCorrect(accountId,password))
             QMessageBox::warning(this,"警告","密码错误");
         else{
-            //跳转不同页面主界面 TODO
+            //跳转主界面 TODO
+            this->hide();
+            emit showMainPageLzy(accountId);
         }
 
     }
@@ -128,5 +130,9 @@ void welcomePageLzy::on_registerButton_clicked()
 {
     this->hide();
     emit showRegisterPageLzy();
+}
+
+void welcomePageLzy::recvSignal(){
+    this->show();
 }
 

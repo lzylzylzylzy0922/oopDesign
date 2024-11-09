@@ -1,5 +1,6 @@
 release/databaseconnectionlzy.o
 release/main.o
+release/mainpagelzy.o
 release/registerpagelzy.o
 release/userdaolzy.o
 release/utilsLzy.o
@@ -14,6 +15,7 @@ release/moc_LoginStatusLzy.o
 release/moc_UserLzy.o
 release/moc_UserServiceLzy.o
 release/moc_databaseconnectionlzy.o
+release/moc_mainpagelzy.o
 release/moc_registerpagelzy.o
 release/moc_userdaolzy.o
 release/moc_utilsLzy.o

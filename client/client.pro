@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     databaseconnectionlzy.cpp \
     main.cpp \
+    mainpagelzy.cpp \
     registerpagelzy.cpp \
     userdaolzy.cpp \
     utilsLzy.cpp \
@@ -28,12 +29,14 @@ HEADERS += \
     UserLzy.h \
     UserServiceLzy.h \
     databaseconnectionlzy.h \
+    mainpagelzy.h \
     registerpagelzy.h \
     userdaolzy.h \
     utilsLzy.h \
     welcomepagelzy.h
 
 FORMS += \
+    mainpagelzy.ui \
     registerpagelzy.ui \
     welcomepagelzy.ui
 
