@@ -11,7 +11,6 @@ release/moc_FriendshipLzy.o
 release/moc_FriendshipRequestLzy.o
 release/moc_GroupLzy.o
 release/moc_GroupMemberLzy.o
-release/moc_LoginStatusLzy.o
 release/moc_UserLzy.o
 release/moc_UserServiceLzy.o
 release/moc_databaseconnectionlzy.o

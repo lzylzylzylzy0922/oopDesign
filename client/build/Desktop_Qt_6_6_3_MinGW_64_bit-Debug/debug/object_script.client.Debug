@@ -11,7 +11,6 @@ debug/moc_FriendshipLzy.o
 debug/moc_FriendshipRequestLzy.o
 debug/moc_GroupLzy.o
 debug/moc_GroupMemberLzy.o
-debug/moc_LoginStatusLzy.o
 debug/moc_UserLzy.o
 debug/moc_UserServiceLzy.o
 debug/moc_databaseconnectionlzy.o

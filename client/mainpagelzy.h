@@ -7,6 +7,12 @@
 #include<UserLzy.h>
 #include<QString>
 #include<QCloseEvent>
+#include<QTcpSocket>
+#include<QHostAddress>
+#include<QMessageBox>
+
+#define SERVER_ADDRESS "127.0.0.1"
+#define SERVER_PORT 8000
 
 namespace Ui {
 class MainPageLzy;
@@ -30,7 +36,7 @@ private:
     Ui::MainPageLzy *ui;
     static AccountLzy* account;
     userDaoLzy* userDao=userDaoLzy::getInstance();
-
+    QTcpSocket* socket;
     void closeEvent(QCloseEvent* event) override;
 };
 

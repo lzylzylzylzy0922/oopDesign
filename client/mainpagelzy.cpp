@@ -8,6 +8,10 @@ MainPageLzy::MainPageLzy(QWidget *parent)
     , ui(new Ui::MainPageLzy)
 {
     ui->setupUi(this);
+
+    socket=new QTcpSocket;
+
+
 }
 
 
@@ -19,6 +23,31 @@ MainPageLzy::~MainPageLzy()
 }
 
 void MainPageLzy::recvSignal(QString accountId){
+    socket->connectToHost(QHostAddress(SERVER_ADDRESS),SERVER_PORT);
+
+    connect(socket,&QTcpSocket::errorOccurred,[this](){
+        qDebug()<<"连接服务器失败";
+        QMessageBox::warning(this,"连接提示","连接异常，请检查网络");
+    });
+
+    //如果连接成功
+    connect(socket,&QTcpSocket::connected,[this,accountId](){
+        qDebug()<<account->getAccountId()<<"连接服务器成功";
+        QByteArray accountIdData=accountId.toUtf8();
+
+        socket->write(accountIdData);
+        qDebug()<<socket->bytesToWrite();
+        socket->flush();
+        qDebug()<<accountIdData;
+    });
+
+    //如果连接断开
+    connect(socket,&QTcpSocket::disconnected,[this](){
+        QMessageBox::warning(this,"连接提示","连接断开");
+    });
+
+
+
 
 
     AccountLzy* account = userDao->returnAccount(accountId);

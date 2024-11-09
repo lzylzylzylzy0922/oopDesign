@@ -6,6 +6,7 @@
 #include<QMessageBox>
 #include <utilsLzy.h>
 #include<userdaolzy.h>
+#include<QTcpSocket>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
