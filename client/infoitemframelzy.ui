@@ -1,0 +1,90 @@
+<ui version="4.0">
+ <class>infoItemFrameLzy</class>
+ <widget class="QFrame" name="infoItemFrameLzy">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>200</width>
+    <height>60</height>
+   </rect>
+  </property>
+  <property name="styleSheet">
+   <string>
+      QFrame {
+          background-color: #f0f0f0;
+          border-radius: 10px;
+          border: 1px solid #dcdcdc;
+          padding: 5px;
+      }
+   </string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QLabel" name="avatar">
+     <property name="minimumSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string>
+         QLabel {
+             border-radius: 20px;
+             border: 2px solid #cccccc;
+             background-color: #ffffff;
+         }
+      </string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="name">
+       <property name="styleSheet">
+        <string>
+           QLabel {
+               font-size: 14px;
+               color: #333333;
+               font-weight: bold;
+           }
+        </string>
+       </property>
+       <property name="text">
+        <string>Username</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="id">
+       <property name="styleSheet">
+        <string>
+           QLabel {
+               font-size: 12px;
+               color: #666666;
+           }
+        </string>
+       </property>
+       <property name="text">
+        <string>UserID</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

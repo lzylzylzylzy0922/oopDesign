@@ -1,7 +1,9 @@
 release/databaseconnectionlzy.o
+release/infoitemframelzy.o
 release/main.o
 release/mainpagelzy.o
 release/registerpagelzy.o
+release/searchpagelzy.o
 release/userdaolzy.o
 release/utilsLzy.o
 release/welcomepagelzy.o
@@ -14,8 +16,10 @@ release/moc_GroupMemberLzy.o
 release/moc_UserLzy.o
 release/moc_UserServiceLzy.o
 release/moc_databaseconnectionlzy.o
+release/moc_infoitemframelzy.o
 release/moc_mainpagelzy.o
 release/moc_registerpagelzy.o
+release/moc_searchpagelzy.o
 release/moc_userdaolzy.o
 release/moc_utilsLzy.o
 release/moc_welcomepagelzy.o

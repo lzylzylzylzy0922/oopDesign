@@ -10,6 +10,8 @@
 #include<QTcpSocket>
 #include<QHostAddress>
 #include<QMessageBox>
+#include<infoitemframelzy.h>
+#include<QVBoxLayout>
 
 #define SERVER_ADDRESS "127.0.0.1"
 #define SERVER_PORT 8000
@@ -25,6 +27,8 @@ class MainPageLzy : public QWidget
 public:
     explicit MainPageLzy(QWidget *parent = nullptr);
     ~MainPageLzy();
+signals:
+    void showSearchPageLzy(AccountLzy* acoount);
 
 public slots:
     void recvSignal(QString AccountId);

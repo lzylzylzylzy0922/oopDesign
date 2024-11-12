@@ -39,36 +39,48 @@ namespace {
 struct qt_meta_stringdata_CLASSMainPageLzyENDCLASS_t {};
 constexpr auto qt_meta_stringdata_CLASSMainPageLzyENDCLASS = QtMocHelpers::stringData(
     "MainPageLzy",
-    "recvSignal",
+    "showSearchPageLzy",
     "",
+    "AccountLzy*",
+    "acoount",
+    "recvSignal",
     "AccountId",
     "on_comboBox_activated",
     "index"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSMainPageLzyENDCLASS_t {
-    uint offsetsAndSizes[12];
+    uint offsetsAndSizes[18];
     char stringdata0[12];
-    char stringdata1[11];
+    char stringdata1[18];
     char stringdata2[1];
-    char stringdata3[10];
-    char stringdata4[22];
-    char stringdata5[6];
+    char stringdata3[12];
+    char stringdata4[8];
+    char stringdata5[11];
+    char stringdata6[10];
+    char stringdata7[22];
+    char stringdata8[6];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSMainPageLzyENDCLASS_t::offsetsAndSizes) + ofs), len 
 Q_CONSTINIT static const qt_meta_stringdata_CLASSMainPageLzyENDCLASS_t qt_meta_stringdata_CLASSMainPageLzyENDCLASS = {
     {
         QT_MOC_LITERAL(0, 11),  // "MainPageLzy"
-        QT_MOC_LITERAL(12, 10),  // "recvSignal"
-        QT_MOC_LITERAL(23, 0),  // ""
-        QT_MOC_LITERAL(24, 9),  // "AccountId"
-        QT_MOC_LITERAL(34, 21),  // "on_comboBox_activated"
-        QT_MOC_LITERAL(56, 5)   // "index"
+        QT_MOC_LITERAL(12, 17),  // "showSearchPageLzy"
+        QT_MOC_LITERAL(30, 0),  // ""
+        QT_MOC_LITERAL(31, 11),  // "AccountLzy*"
+        QT_MOC_LITERAL(43, 7),  // "acoount"
+        QT_MOC_LITERAL(51, 10),  // "recvSignal"
+        QT_MOC_LITERAL(62, 9),  // "AccountId"
+        QT_MOC_LITERAL(72, 21),  // "on_comboBox_activated"
+        QT_MOC_LITERAL(94, 5)   // "index"
     },
     "MainPageLzy",
-    "recvSignal",
+    "showSearchPageLzy",
     "",
+    "AccountLzy*",
+    "acoount",
+    "recvSignal",
     "AccountId",
     "on_comboBox_activated",
     "index"
@@ -83,20 +95,26 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainPageLzyENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    1,   32,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   26,    2, 0x0a,    1 /* Public */,
-       4,    1,   29,    2, 0x08,    3 /* Private */,
+       5,    1,   35,    2, 0x0a,    3 /* Public */,
+       7,    1,   38,    2, 0x08,    5 /* Private */,
+
+ // signals: parameters
+    QMetaType::Void, 0x80000000 | 3,    4,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString,    3,
-    QMetaType::Void, QMetaType::Int,    5,
+    QMetaType::Void, QMetaType::QString,    6,
+    QMetaType::Void, QMetaType::Int,    8,
 
        0        // eod
 };
@@ -110,6 +128,9 @@ Q_CONSTINIT const QMetaObject MainPageLzy::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSMainPageLzyENDCLASS_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<MainPageLzy, std::true_type>,
+        // method 'showSearchPageLzy'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<AccountLzy *, std::false_type>,
         // method 'recvSignal'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
@@ -126,9 +147,30 @@ void MainPageLzy::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         auto *_t = static_cast<MainPageLzy *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->recvSignal((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 1: _t->on_comboBox_activated((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 0: _t->showSearchPageLzy((*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[1]))); break;
+        case 1: _t->recvSignal((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 2: _t->on_comboBox_activated((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 0:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< AccountLzy* >(); break;
+            }
+            break;
+        }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        {
+            using _t = void (MainPageLzy::*)(AccountLzy * );
+            if (_t _q_method = &MainPageLzy::showSearchPageLzy; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+                *result = 0;
+                return;
+            }
         }
     }
 }
@@ -152,14 +194,21 @@ int MainPageLzy::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        if (_id < 3)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 3;
     }
     return _id;
+}
+
+// SIGNAL 0
+void MainPageLzy::showSearchPageLzy(AccountLzy * _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP

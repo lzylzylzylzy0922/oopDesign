@@ -10,6 +10,7 @@ welcomePageLzy::welcomePageLzy(QWidget *parent)
     ui->wechatAccount->setEnabled(false);
     ui->weiboAccount->setEnabled(false);
 
+
     ui->loginButton->setEnabled(false);
 
     ui->passwordEdit->setEchoMode(QLineEdit::Password);

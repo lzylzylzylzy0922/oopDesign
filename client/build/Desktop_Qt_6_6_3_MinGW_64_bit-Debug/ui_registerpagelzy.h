@@ -56,6 +56,8 @@ public:
     QLabel *reminderLabel;
     QCheckBox *pwdVisual;
     QLabel *reminderPasswordLabel;
+    QLabel *avatarLabel;
+    QPushButton *uploadAvatarButton;
 
     void setupUi(QWidget *RegisterPageLzy)
     {
@@ -214,6 +216,12 @@ public:
         reminderPasswordLabel = new QLabel(RegisterPageLzy);
         reminderPasswordLabel->setObjectName("reminderPasswordLabel");
         reminderPasswordLabel->setGeometry(QRect(260, 350, 141, 16));
+        avatarLabel = new QLabel(RegisterPageLzy);
+        avatarLabel->setObjectName("avatarLabel");
+        avatarLabel->setGeometry(QRect(80, 130, 40, 12));
+        uploadAvatarButton = new QPushButton(RegisterPageLzy);
+        uploadAvatarButton->setObjectName("uploadAvatarButton");
+        uploadAvatarButton->setGeometry(QRect(80, 230, 56, 18));
 
         retranslateUi(RegisterPageLzy);
 
@@ -274,6 +282,8 @@ public:
         reminderLabel->setText(QCoreApplication::translate("RegisterPageLzy", "<html><head/><body><p><span style=\" color:#ff0000;\">\346\211\213\346\234\272\345\217\267\346\240\274\345\274\217\351\224\231\350\257\257</span></p></body></html>", nullptr));
         pwdVisual->setText(QCoreApplication::translate("RegisterPageLzy", "\346\230\276\347\244\272\345\257\206\347\240\201", nullptr));
         reminderPasswordLabel->setText(QCoreApplication::translate("RegisterPageLzy", "<html><head/><body><p><span style=\" color:#ff0000;\">\345\257\206\347\240\201\350\207\263\345\260\221\345\205\255\344\275\215\344\270\224\345\214\205\345\220\253\346\225\260\345\255\227\345\222\214\345\255\227\346\257\215</span></p></body></html>", nullptr));
+        avatarLabel->setText(QCoreApplication::translate("RegisterPageLzy", "TextLabel", nullptr));
+        uploadAvatarButton->setText(QCoreApplication::translate("RegisterPageLzy", "\344\270\212\344\274\240\345\244\264\345\203\217", nullptr));
     } // retranslateUi
 
 };

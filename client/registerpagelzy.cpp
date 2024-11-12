@@ -15,6 +15,23 @@ RegisterPageLzy::RegisterPageLzy(QWidget *parent)
     ui->reminderPasswordLabel->hide();
 
     connect(ui->pwdVisual,SIGNAL(stateChanged(int)),this,SLOT(updateEchoMode()));
+
+    //处理头像（默认头像）
+    QPixmap avatarPixmap("E:/oopDesign/images/default_avatar.png");
+
+    if (!avatarPixmap.isNull()) {
+        // 缩放图片
+        avatarPixmap = avatarPixmap.scaled(75, 75, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+        ui->avatarLabel->setPixmap(avatarPixmap);
+    } else {
+        qDebug() << "图像没有被加载出来";
+    }
+
+    ui->avatarLabel->setAlignment(Qt::AlignCenter);
+    ui->avatarLabel->setFixedSize(75, 75);
+    ui->avatarLabel->setStyleSheet("border: 1px solid black;");
+
+
 }
 
 RegisterPageLzy::~RegisterPageLzy()
@@ -100,7 +117,11 @@ void RegisterPageLzy::on_registerButton_clicked()
 
     QString accountId=utils->createAccountId(type);
     qDebug()<<accountId;
-    AccountLzy* account=new AccountLzy(accountId,type,nickname,inputPassword,NULL);
+
+    QString avatar="E:/oopDesign/iamges/default_avatar.png";
+    if(this->avatarPath!="") avatar=this->avatarPath;
+
+    AccountLzy* account=new AccountLzy(accountId,type,nickname,inputPassword,avatar);
 
     //创建用户
     if(!userDao->createAccount(account,birth,location,telephone)){
@@ -127,5 +148,18 @@ void RegisterPageLzy::on_openWelcomePageButton_clicked()
 {
     this->hide();
     emit showWelcomePage();
+}
+
+
+void RegisterPageLzy::on_uploadAvatarButton_clicked()
+{
+    QString avatarPath=QFileDialog::getOpenFileName(this,"选择头像","","Image Files (*.png *.jpg *.bmp *.jpeg)");
+
+    QPixmap avatarPixmap(avatarPath);
+    if (!avatarPixmap.isNull()) {
+        avatarPixmap = avatarPixmap.scaled(75, 75, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+        ui->avatarLabel->setPixmap(avatarPixmap);
+        this->avatarPath=avatarPath;
+    }
 }
 

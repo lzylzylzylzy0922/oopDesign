@@ -10,9 +10,11 @@ CONFIG += c++17
 
 SOURCES += \
     databaseconnectionlzy.cpp \
+    infoitemframelzy.cpp \
     main.cpp \
     mainpagelzy.cpp \
     registerpagelzy.cpp \
+    searchpagelzy.cpp \
     userdaolzy.cpp \
     utilsLzy.cpp \
     welcomepagelzy.cpp
@@ -29,18 +31,24 @@ HEADERS += \
     UserLzy.h \
     UserServiceLzy.h \
     databaseconnectionlzy.h \
+    infoitemframelzy.h \
     mainpagelzy.h \
     registerpagelzy.h \
+    searchpagelzy.h \
     userdaolzy.h \
     utilsLzy.h \
     welcomepagelzy.h
 
 FORMS += \
+    infoitemframelzy.ui \
     mainpagelzy.ui \
     registerpagelzy.ui \
+    searchpagelzy.ui \
     welcomepagelzy.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES +=

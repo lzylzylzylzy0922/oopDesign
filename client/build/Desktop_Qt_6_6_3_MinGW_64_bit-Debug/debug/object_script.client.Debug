@@ -1,7 +1,9 @@
 debug/databaseconnectionlzy.o
+debug/infoitemframelzy.o
 debug/main.o
 debug/mainpagelzy.o
 debug/registerpagelzy.o
+debug/searchpagelzy.o
 debug/userdaolzy.o
 debug/utilsLzy.o
 debug/welcomepagelzy.o
@@ -14,8 +16,10 @@ debug/moc_GroupMemberLzy.o
 debug/moc_UserLzy.o
 debug/moc_UserServiceLzy.o
 debug/moc_databaseconnectionlzy.o
+debug/moc_infoitemframelzy.o
 debug/moc_mainpagelzy.o
 debug/moc_registerpagelzy.o
+debug/moc_searchpagelzy.o
 debug/moc_userdaolzy.o
 debug/moc_utilsLzy.o
 debug/moc_welcomepagelzy.o

@@ -25,81 +25,23 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QFrame" name="personalInfoframe">
+  <widget class="QWidget" name="personalInfowidget" native="true">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
      <width>381</width>
-     <height>71</height>
+     <height>111</height>
     </rect>
    </property>
-   <property name="frameShape">
-    <enum>QFrame::Shape::StyledPanel</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Shadow::Raised</enum>
-   </property>
-   <widget class="QLabel" name="avatarLabel">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>40</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>avatarLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="nicknameLabel">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>10</y>
-      <width>40</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>nicknameLabel</string>
-    </property>
-   </widget>
-   <widget class="Line" name="line">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>30</y>
-      <width>101</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Orientation::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="accountIdLabel">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>50</y>
-      <width>40</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>accountIdLabel</string>
-    </property>
-   </widget>
   </widget>
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>90</y>
+     <y>140</y>
      <width>351</width>
-     <height>501</height>
+     <height>451</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -167,7 +109,7 @@
     <rect>
      <x>20</x>
      <y>600</y>
-     <width>60</width>
+     <width>101</width>
      <height>22</height>
     </rect>
    </property>
@@ -178,12 +120,7 @@
    </item>
    <item>
     <property name="text">
-     <string>添加群聊</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>添加好友</string>
+     <string>添加好友/群聊</string>
     </property>
    </item>
    <item>

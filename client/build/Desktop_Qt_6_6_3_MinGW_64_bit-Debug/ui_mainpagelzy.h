@@ -12,8 +12,6 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
-#include <QtWidgets/QFrame>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QWidget>
@@ -23,11 +21,7 @@ QT_BEGIN_NAMESPACE
 class Ui_MainPageLzy
 {
 public:
-    QFrame *personalInfoframe;
-    QLabel *avatarLabel;
-    QLabel *nicknameLabel;
-    QFrame *line;
-    QLabel *accountIdLabel;
+    QWidget *personalInfowidget;
     QTabWidget *tabWidget;
     QWidget *messageTab;
     QScrollArea *messageArea;
@@ -44,28 +38,12 @@ public:
         MainPageLzy->resize(400, 630);
         MainPageLzy->setMinimumSize(QSize(400, 630));
         MainPageLzy->setMaximumSize(QSize(400, 630));
-        personalInfoframe = new QFrame(MainPageLzy);
-        personalInfoframe->setObjectName("personalInfoframe");
-        personalInfoframe->setGeometry(QRect(10, 10, 381, 71));
-        personalInfoframe->setFrameShape(QFrame::Shape::StyledPanel);
-        personalInfoframe->setFrameShadow(QFrame::Shadow::Raised);
-        avatarLabel = new QLabel(personalInfoframe);
-        avatarLabel->setObjectName("avatarLabel");
-        avatarLabel->setGeometry(QRect(20, 20, 40, 12));
-        nicknameLabel = new QLabel(personalInfoframe);
-        nicknameLabel->setObjectName("nicknameLabel");
-        nicknameLabel->setGeometry(QRect(100, 10, 40, 12));
-        line = new QFrame(personalInfoframe);
-        line->setObjectName("line");
-        line->setGeometry(QRect(100, 30, 101, 16));
-        line->setFrameShape(QFrame::HLine);
-        line->setFrameShadow(QFrame::Sunken);
-        accountIdLabel = new QLabel(personalInfoframe);
-        accountIdLabel->setObjectName("accountIdLabel");
-        accountIdLabel->setGeometry(QRect(100, 50, 40, 12));
+        personalInfowidget = new QWidget(MainPageLzy);
+        personalInfowidget->setObjectName("personalInfowidget");
+        personalInfowidget->setGeometry(QRect(10, 10, 381, 111));
         tabWidget = new QTabWidget(MainPageLzy);
         tabWidget->setObjectName("tabWidget");
-        tabWidget->setGeometry(QRect(20, 90, 351, 501));
+        tabWidget->setGeometry(QRect(20, 140, 351, 451));
         messageTab = new QWidget();
         messageTab->setObjectName("messageTab");
         messageArea = new QScrollArea(messageTab);
@@ -93,9 +71,8 @@ public:
         comboBox->addItem(QString());
         comboBox->addItem(QString());
         comboBox->addItem(QString());
-        comboBox->addItem(QString());
         comboBox->setObjectName("comboBox");
-        comboBox->setGeometry(QRect(20, 600, 60, 22));
+        comboBox->setGeometry(QRect(20, 600, 101, 22));
 
         retranslateUi(MainPageLzy);
 
@@ -108,16 +85,12 @@ public:
     void retranslateUi(QWidget *MainPageLzy)
     {
         MainPageLzy->setWindowTitle(QCoreApplication::translate("MainPageLzy", "Form", nullptr));
-        avatarLabel->setText(QCoreApplication::translate("MainPageLzy", "avatarLabel", nullptr));
-        nicknameLabel->setText(QCoreApplication::translate("MainPageLzy", "nicknameLabel", nullptr));
-        accountIdLabel->setText(QCoreApplication::translate("MainPageLzy", "accountIdLabel", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(messageTab), QCoreApplication::translate("MainPageLzy", "\346\266\210\346\201\257", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(contactsTab), QCoreApplication::translate("MainPageLzy", "\350\201\224\347\263\273\344\272\272", nullptr));
         comboBox->setItemText(0, QCoreApplication::translate("MainPageLzy", "\345\217\221\350\265\267\347\276\244\350\201\212", nullptr));
-        comboBox->setItemText(1, QCoreApplication::translate("MainPageLzy", "\346\267\273\345\212\240\347\276\244\350\201\212", nullptr));
-        comboBox->setItemText(2, QCoreApplication::translate("MainPageLzy", "\346\267\273\345\212\240\345\245\275\345\217\213", nullptr));
-        comboBox->setItemText(3, QCoreApplication::translate("MainPageLzy", "\347\273\221\345\256\232\350\264\246\346\210\267", nullptr));
-        comboBox->setItemText(4, QCoreApplication::translate("MainPageLzy", "\346\263\250\351\224\200\350\264\246\345\217\267", nullptr));
+        comboBox->setItemText(1, QCoreApplication::translate("MainPageLzy", "\346\267\273\345\212\240\345\245\275\345\217\213/\347\276\244\350\201\212", nullptr));
+        comboBox->setItemText(2, QCoreApplication::translate("MainPageLzy", "\347\273\221\345\256\232\350\264\246\346\210\267", nullptr));
+        comboBox->setItemText(3, QCoreApplication::translate("MainPageLzy", "\346\263\250\351\224\200\350\264\246\345\217\267", nullptr));
 
     } // retranslateUi
 

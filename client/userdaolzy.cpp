@@ -125,19 +125,29 @@ bool userDaoLzy::createAccount(AccountLzy* account,QDate birth,QString location,
     return false;
 }
 
+
 AccountLzy* userDaoLzy::returnAccount(QString accountId){
     query.prepare("select * from account where account_id=:accountId");
-    query.bindValue(":accountId",accountId);
-    query.exec();
+    query.bindValue(":accountId", accountId);
 
-    if(query.value(2).toString()=="QQ"){
-        return new AccountLzy(accountId,AccountType::QQ,query.value(3).toString(),query.value(4).toString(),query.value(5).toString());
-    }else if(query.value(2).toString()=="WECHAT"){
-        return new AccountLzy(accountId,AccountType::WECHAT,query.value(3).toString(),query.value(4).toString(),query.value(5).toString());
-    }else{
-        return new AccountLzy(accountId,AccountType::WEIBO,query.value(3).toString(),query.value(4).toString(),query.value(5).toString());
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return nullptr;  // 查询执行失败，返回 nullptr
     }
 
+    if (!query.next()) {
+        qWarning() << "No records found for account_id:" << accountId;
+        return nullptr;  // 如果没有记录，返回 nullptr
+    }
+
+
+    if (query.value(2).toString() == "QQ") {
+        return new AccountLzy(accountId, AccountType::QQ, query.value(3).toString(), query.value(4).toString(), query.value(5).toString());
+    } else if (query.value(2).toString() == "WECHAT") {
+        return new AccountLzy(accountId, AccountType::WECHAT, query.value(3).toString(), query.value(4).toString(), query.value(5).toString());
+    } else {
+        return new AccountLzy(accountId, AccountType::WEIBO, query.value(3).toString(), query.value(4).toString(), query.value(5).toString());
+    }
 }
 
 void userDaoLzy::updateOnlineStatus(AccountLzy* account,loginStatus status){
@@ -194,4 +204,12 @@ void userDaoLzy::updateOnlineStatus(AccountLzy* account,loginStatus status){
     query.exec();
 
 
+}
+
+QSqlQuery userDaoLzy::searchUsersById(QString text){
+    QSqlQuery query;
+    query.prepare("select * from account where account_id REGEXP :accountId");
+    query.bindValue(":accountId",text);
+    query.exec();
+    return query;
 }

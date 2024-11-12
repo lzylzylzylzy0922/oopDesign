@@ -1,7 +1,7 @@
 #include "mainpagelzy.h"
 #include "ui_mainpagelzy.h"
 
-AccountLzy* MainPageLzy::account;
+AccountLzy* MainPageLzy::account=nullptr;
 
 MainPageLzy::MainPageLzy(QWidget *parent)
     : QWidget(parent)
@@ -11,7 +11,8 @@ MainPageLzy::MainPageLzy(QWidget *parent)
 
     socket=new QTcpSocket;
 
-
+    QVBoxLayout* layout=new QVBoxLayout(ui->personalInfowidget);
+    ui->personalInfowidget->setLayout(layout);
 }
 
 
@@ -36,7 +37,6 @@ void MainPageLzy::recvSignal(QString accountId){
         QByteArray accountIdData=accountId.toUtf8();
 
         socket->write(accountIdData);
-        qDebug()<<socket->bytesToWrite();
         socket->flush();
         qDebug()<<accountIdData;
     });
@@ -47,17 +47,10 @@ void MainPageLzy::recvSignal(QString accountId){
     });
 
 
-
-
-
     AccountLzy* account = userDao->returnAccount(accountId);
 
     MainPageLzy::account=account;
     if (account) {
-        ui->avatarLabel->setPixmap(account->getAvatar());
-        ui->nicknameLabel->setText(account->getAccountName());
-        ui->accountIdLabel->setText(account->getAccountId());
-
         // 更新在线状态
         loginStatus status = loginStatus::ONLINE;
         userDao->updateOnlineStatus(account, status);
@@ -65,6 +58,8 @@ void MainPageLzy::recvSignal(QString accountId){
     } else {
         qDebug() << "无法获取账号信息";
     }
+    //构造个人信息
+    ui->personalInfowidget->layout()->addWidget(new infoItemFrameLzy(account->getAccountName(),account->getAccountId(),account->getAvatar()));
 
 }
 
@@ -75,24 +70,21 @@ void MainPageLzy::on_comboBox_activated(int index)
     case 0:
         //创建群聊 TODO
         //打开创建群聊界面
+
         qDebug()<<"打开创建群聊界面";
         break;
     case 1:
-        //添加群聊 TODO
+        //添加好友/群聊 TODO
         //打开搜索界面
+        emit showSearchPageLzy(account);
         qDebug()<<"打开搜索界面";
         break;
     case 2:
-        //添加好友 TODO
-        //打开搜索界面
-        qDebug()<<"打开搜索界面";
-        break;
-    case 3:
         //绑定账户 TODO
         //打开绑定界面
         qDebug()<<"打开绑定界面";
         break;
-    case 4:
+    case 3:
         //注销 TODO
         qDebug()<<"注销";
         break;

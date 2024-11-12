@@ -10,6 +10,8 @@
 #include<QDate>
 #include<QSqlDatabase>
 #include<QSqlQuery>
+#include<QPixmap>
+#include<QFileDialog>
 
 namespace Ui {
 class RegisterPageLzy;
@@ -34,11 +36,13 @@ public slots:
 private slots:
     void on_registerButton_clicked();
 
-
     void on_openWelcomePageButton_clicked();
+
+    void on_uploadAvatarButton_clicked();
 
 private:
     Ui::RegisterPageLzy *ui;
+    QString avatarPath;
 
 
 };
