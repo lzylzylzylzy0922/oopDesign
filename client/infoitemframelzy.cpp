@@ -1,14 +1,17 @@
 #include "infoitemframelzy.h"
 #include "ui_infoitemframelzy.h"
 
-infoItemFrameLzy::infoItemFrameLzy(QString name, QString id, QString avatarPath, QWidget *parent)
+infoItemFrameLzy::infoItemFrameLzy(AccountLzy* account,QString name, QString id, QString avatarPath, QWidget *parent)
     : QFrame(parent)
     , ui(new Ui::infoItemFrameLzy)
 {
+
+    this->account=account;
     ui->setupUi(this);
 
     ui->name->setText(name);
     ui->id->setText(id);
+    this->accountId=id;
 
     // 设置头像
     QPixmap avatarPixmap(avatarPath);
@@ -26,8 +29,18 @@ infoItemFrameLzy::infoItemFrameLzy(QString name, QString id, QString avatarPath,
 
         ui->avatar->setPixmap(roundedAvatar);
     }
+
 }
 
 infoItemFrameLzy::~infoItemFrameLzy() {
     delete ui;
 }
+
+void infoItemFrameLzy::mousePressEvent(QMouseEvent* event){
+    if(event->button()==Qt::LeftButton){
+        emit clicked(account,this->accountId);
+        qDebug()<<"个人信息栏被点击";
+    }
+    QFrame::mousePressEvent(event);
+}
+

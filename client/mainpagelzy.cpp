@@ -59,7 +59,7 @@ void MainPageLzy::recvSignal(QString accountId){
         qDebug() << "无法获取账号信息";
     }
     //构造个人信息
-    ui->personalInfowidget->layout()->addWidget(new infoItemFrameLzy(account->getAccountName(),account->getAccountId(),account->getAvatar()));
+    ui->personalInfowidget->layout()->addWidget(new infoItemFrameLzy(account,account->getAccountName(),account->getAccountId(),account->getAvatar()));
 
 }
 

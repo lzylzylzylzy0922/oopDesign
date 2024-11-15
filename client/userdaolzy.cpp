@@ -150,6 +150,46 @@ AccountLzy* userDaoLzy::returnAccount(QString accountId){
     }
 }
 
+UserLzy* userDaoLzy::returnUser(QString accountId){
+    query.prepare("select user_id from account where account_id=:accountId");
+    query.bindValue(":accountId",accountId);
+
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return nullptr;  // 查询执行失败，返回 nullptr
+    }
+
+    if (!query.next()) {
+        qWarning() << "No records found for account_id:" << accountId;
+        return nullptr;  // 如果没有记录，返回 nullptr
+    }
+
+    int userId=query.value(0).toInt();
+
+    query.prepare("select * from user where user_id=:userId");
+    query.bindValue(":userId",userId);
+
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return nullptr;  // 查询执行失败，返回 nullptr
+    }
+
+    if (!query.next()) {
+        qWarning() << "No records found for account_id:" << accountId;
+        return nullptr;  // 如果没有记录，返回 nullptr
+    }
+
+    QDate birth=query.value(1).toDate();
+    QDateTime registerTime=query.value(2).toDateTime();
+    QString location=query.value(3).toString();
+    QString telephone=query.value(4).toString();
+
+
+    UserLzy* user=new UserLzy(birth,registerTime,location,telephone);
+
+    return user;
+}
+
 void userDaoLzy::updateOnlineStatus(AccountLzy* account,loginStatus status){
 
     QString ip=utilsLzy::getLocalIPAddress();

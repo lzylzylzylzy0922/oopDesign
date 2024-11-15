@@ -29,9 +29,8 @@ CREATE TABLE friendship (
 );
 
 CREATE TABLE friend_request (
-    user_id INT,
-    friend_id INT,
-    type ENUM('QQ', 'WECHAT', 'WEIBO'),
+    account_id VARCHAR(50) NOT NULL,
+    friend_account_id VARCHAR(50) NOT NULL,
     request_time DATETIME,
     status ENUM('PENDING', 'REJECTED')
 );

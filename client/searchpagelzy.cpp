@@ -55,7 +55,9 @@ void SearchPageLzy::searchUsers(QString text){
         if(this->account->getAccountId()==account->getAccountId()) continue;//跳过自己
 
         qDebug()<<"搜索到用户："<<account->getAccountName();
-        infoItemFrameLzy* infoItem=new infoItemFrameLzy(account->getAccountName(),account->getAccountId(),account->getAvatar());
+        infoItemFrameLzy* infoItem=new infoItemFrameLzy(account,account->getAccountName(),account->getAccountId(),account->getAvatar());
+
+        connect(infoItem, &infoItemFrameLzy::clicked, this, &SearchPageLzy::onInfoItemClicked);
 
         if(!users.contains(account->getAccountId())){
             users.append(account->getAccountId());
@@ -91,4 +93,11 @@ void SearchPageLzy::on_searchButton_clicked()
 void SearchPageLzy::recvSignal(AccountLzy* account){
     this->account=account;
     this->show();
+}
+
+void SearchPageLzy::onInfoItemClicked(AccountLzy* account,const QString& accountId){
+    account=this->account;
+
+    InfoFormPageLzy* infoForm=new InfoFormPageLzy(account,accountId);
+    infoForm->show();
 }

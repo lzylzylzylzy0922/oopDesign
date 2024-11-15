@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     databaseconnectionlzy.cpp \
+    infoformpagelzy.cpp \
     infoitemframelzy.cpp \
     main.cpp \
     mainpagelzy.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     UserLzy.h \
     UserServiceLzy.h \
     databaseconnectionlzy.h \
+    infoformpagelzy.h \
     infoitemframelzy.h \
     mainpagelzy.h \
     registerpagelzy.h \
@@ -40,6 +42,7 @@ HEADERS += \
     welcomepagelzy.h
 
 FORMS += \
+    infoformpagelzy.ui \
     infoitemframelzy.ui \
     mainpagelzy.ui \
     registerpagelzy.ui \

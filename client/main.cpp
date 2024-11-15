@@ -2,6 +2,7 @@
 #include"registerpagelzy.h"
 #include<mainpagelzy.h>
 #include<searchpagelzy.h>
+#include<infoformpagelzy.h>
 #include <QApplication>
 
 int main(int argc, char *argv[])

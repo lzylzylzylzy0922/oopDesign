@@ -40,13 +40,13 @@
 
 4.好友申请friend_request
 
-|     字段     |   类型   |            描述             |
-| :----------: | :------: | :-------------------------: |
-|   user_id    |   int    |          申请人ID           |
-|  friend_id   |   int    |        申请好友的ID         |
-|     type     |   enum   | 账户类型(QQ、WECHAT、WEIBO) |
-| request_time | datetime |          申请时间           |
-|    status    |   enum   | 状态("PENDING"/"REJECTED")  |
+|       字段        |   类型   |            描述             |
+| :---------------: | :------: | :-------------------------: |
+|    account_id     | varchar  |          申请人ID           |
+| friend_account_id | varchar  |        申请好友的ID         |
+|       type        |   enum   | 账户类型(QQ、WECHAT、WEIBO) |
+|   request_time    | datetime |          申请时间           |
+|      status       |   enum   | 状态("PENDING"/"REJECTED")  |
 
 5.群申请group_request
 

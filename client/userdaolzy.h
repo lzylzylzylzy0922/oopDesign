@@ -24,7 +24,8 @@ public:
     bool isPasswordCorrect(QString accountId,QString password);              //校验密码是否正确
     bool isUserExistsByPhoneAndType(QString phoneNumber,AccountType type);//通过手机号和应用类型判断账户是否存在
     bool createAccount(AccountLzy* account,QDate birth,QString location,QString telephone); //创建账户
-    AccountLzy* returnAccount(QString AccountId);                        //通过账户id返回account实体类
+    AccountLzy* returnAccount(QString AccountId);                        //通过账户id返回account实体指针
+    UserLzy* returnUser(QString AccountId);                             //通过账号id返回user实体指针
     void updateOnlineStatus(AccountLzy* account,loginStatus status);     // 更新用户状态
     QSqlQuery searchUsersById(QString text);
 private:
