@@ -28,6 +28,7 @@ public:
     UserLzy* returnUser(QString AccountId);                             //通过账号id返回user实体指针
     void updateOnlineStatus(AccountLzy* account,loginStatus status);     // 更新用户状态
     QSqlQuery searchUsersById(QString text);
+    bool checkIfFriend(int userId1,int userId2,AccountType type);                                                  //查询双方是否为好友
 private:
     explicit userDaoLzy(QObject *parent = nullptr);
     static userDaoLzy* userDao;

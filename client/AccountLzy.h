@@ -20,8 +20,8 @@ private:
     QString avatar;
 
 public:
-    AccountLzy(const QString& acc_id, AccountType acc_type, const QString& acc_name, const QString& pwd, const QString& avt,QObject *parent = nullptr)
-        : QObject(parent), accountId(acc_id), type(acc_type), accountName(acc_name), password(pwd),avatar(avt) {}
+    AccountLzy(const QString& acc_id, int uid,AccountType acc_type, const QString& acc_name, const QString& pwd, const QString& avt,QObject *parent = nullptr)
+        : QObject(parent), accountId(acc_id), userId(uid), type(acc_type), accountName(acc_name), password(pwd),avatar(avt) {}
 
     QString getAccountId() const { return accountId; }
     int getUserId() const { return userId; }

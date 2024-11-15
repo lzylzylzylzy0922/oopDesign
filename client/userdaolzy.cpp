@@ -142,11 +142,11 @@ AccountLzy* userDaoLzy::returnAccount(QString accountId){
 
 
     if (query.value(2).toString() == "QQ") {
-        return new AccountLzy(accountId, AccountType::QQ, query.value(3).toString(), query.value(4).toString(), query.value(5).toString());
+        return new AccountLzy(accountId, query.value(1).toInt(),AccountType::QQ, query.value(3).toString(), query.value(4).toString(), query.value(5).toString());
     } else if (query.value(2).toString() == "WECHAT") {
-        return new AccountLzy(accountId, AccountType::WECHAT, query.value(3).toString(), query.value(4).toString(), query.value(5).toString());
+        return new AccountLzy(accountId, query.value(1).toInt(), AccountType::WECHAT, query.value(3).toString(), query.value(4).toString(), query.value(5).toString());
     } else {
-        return new AccountLzy(accountId, AccountType::WEIBO, query.value(3).toString(), query.value(4).toString(), query.value(5).toString());
+        return new AccountLzy(accountId, query.value(1).toInt(), AccountType::WEIBO, query.value(3).toString(), query.value(4).toString(), query.value(5).toString());
     }
 }
 
@@ -252,4 +252,33 @@ QSqlQuery userDaoLzy::searchUsersById(QString text){
     query.bindValue(":accountId",text);
     query.exec();
     return query;
+}
+
+bool userDaoLzy::checkIfFriend(int userId1,int userId2,AccountType type){
+    qDebug()<<userId1<<userId2;
+
+    query.prepare("select * from friendship where user_id=:userId1 and friend_id=:userId2 and type=:type");
+    query.bindValue(":userId1",userId1);
+    query.bindValue(":userId2",userId2);
+    QString t;
+    if(type==AccountType::QQ){
+        t="QQ";
+    }else if(type==AccountType::WECHAT){
+        t="WECHAT";
+    }else{
+        t="WEIBO";
+    }
+    query.bindValue(":type",t);
+
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return false;  // 查询执行失败，返回 nullptr
+    }
+
+    if (!query.next()) {
+        qWarning() << "No records";
+        return false;  // 如果没有记录，返回 nullptr
+    }
+
+    return true;
 }

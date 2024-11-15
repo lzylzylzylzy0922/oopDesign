@@ -22,8 +22,13 @@ InfoFormPageLzy::InfoFormPageLzy(AccountLzy* account,QString acid,QWidget *paren
 
     ui->locationEdit->setReadOnly(true);
     ui->locationEdit->setText(user->getLocation());
+    qDebug()<<account->getUserId();
 
-
+    if(userDao->checkIfFriend(account->getUserId(),searchAccount->getUserId(),account->getType())){
+        ui->addFriendButton->hide();
+    }else{
+        ui->sendMessageButton->hide();
+    }
 
 
 }
