@@ -1,20 +1,21 @@
 #include "infoformpagelzy.h"
 #include "ui_infoformpagelzy.h"
 
-InfoFormPageLzy::InfoFormPageLzy(AccountLzy* account,QString acid,QWidget *parent)
+InfoFormPageLzy::InfoFormPageLzy(AccountLzy* account,AccountLzy* searchAccount,QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::InfoFormPageLzy)
 {
     ui->setupUi(this);
 
-    AccountLzy* searchAccount=userDao->returnAccount(acid);
+    this->account=account;
+    this->searchAccount=searchAccount;
 
     QVBoxLayout* layout=new QVBoxLayout(ui->container);
     ui->container->setLayout(layout);
-    infoItemFrameLzy* infoItem=new infoItemFrameLzy(account,searchAccount->getAccountName(),searchAccount->getAccountId(),searchAccount->getAvatar());
+    infoItemFrameLzy* infoItem=new infoItemFrameLzy(searchAccount,searchAccount->getAccountName(),searchAccount->getAccountId(),searchAccount->getAvatar());
     ui->container->layout()->addWidget(infoItem);
 
-    UserLzy* user=userDao->returnUser(acid);
+    UserLzy* user=userDao->returnUser(this->searchAccount->getAccountId());
 
 
     ui->birthdayEdit->setReadOnly(true);
@@ -24,9 +25,19 @@ InfoFormPageLzy::InfoFormPageLzy(AccountLzy* account,QString acid,QWidget *paren
     ui->locationEdit->setText(user->getLocation());
     qDebug()<<account->getUserId();
 
-    if(userDao->checkIfFriend(account->getUserId(),searchAccount->getUserId(),account->getType())){
+    bool hasSentRequest = userDao->ifSentAddFriendRequest(searchAccount, account);
+    bool isFriend = userDao->checkIfFriend(account->getUserId(), searchAccount->getUserId(), account->getType());
+
+    if (hasSentRequest) {
         ui->addFriendButton->hide();
-    }else{
+        ui->sendMessageButton->hide();
+    } else if (isFriend) {
+        ui->addFriendButton->hide();
+        ui->rejectButton->hide();
+        ui->agreeButton->hide();
+    } else {
+        ui->rejectButton->hide();
+        ui->agreeButton->hide();
         ui->sendMessageButton->hide();
     }
 
@@ -38,4 +49,13 @@ InfoFormPageLzy::~InfoFormPageLzy()
     delete ui;
 }
 
+
+
+void InfoFormPageLzy::on_addFriendButton_clicked()
+{
+    userDao->addFriend(this->account,this->searchAccount);
+    qDebug()<<this->account->getAccountId()<<"向"<<this->searchAccount->getAccountId()<<"发送了好友申请";
+    QMessageBox::information(this,"提示","已向用户提交用户申请");
+
+}
 

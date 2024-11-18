@@ -45,7 +45,7 @@ constexpr auto qt_meta_stringdata_CLASSSearchPageLzyENDCLASS = QtMocHelpers::str
     "account",
     "on_searchButton_clicked",
     "onInfoItemClicked",
-    "accountId"
+    "friendAccount"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSSearchPageLzyENDCLASS_t {
@@ -57,7 +57,7 @@ struct qt_meta_stringdata_CLASSSearchPageLzyENDCLASS_t {
     char stringdata4[8];
     char stringdata5[24];
     char stringdata6[18];
-    char stringdata7[10];
+    char stringdata7[14];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSSearchPageLzyENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -70,7 +70,7 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSSearchPageLzyENDCLASS_t qt_meta
         QT_MOC_LITERAL(38, 7),  // "account"
         QT_MOC_LITERAL(46, 23),  // "on_searchButton_clicked"
         QT_MOC_LITERAL(70, 17),  // "onInfoItemClicked"
-        QT_MOC_LITERAL(88, 9)   // "accountId"
+        QT_MOC_LITERAL(88, 13)   // "friendAccount"
     },
     "SearchPageLzy",
     "recvSignal",
@@ -79,7 +79,7 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSSearchPageLzyENDCLASS_t qt_meta
     "account",
     "on_searchButton_clicked",
     "onInfoItemClicked",
-    "accountId"
+    "friendAccount"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -106,7 +106,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSSearchPageLzyENDCLASS[] = {
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 3, QMetaType::QString,    4,    7,
+    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3,    4,    7,
 
        0        // eod
 };
@@ -128,7 +128,7 @@ Q_CONSTINIT const QMetaObject SearchPageLzy::staticMetaObject = { {
         // method 'onInfoItemClicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<AccountLzy *, std::false_type>,
-        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
+        QtPrivate::TypeAndForceComplete<AccountLzy *, std::false_type>
     >,
     nullptr
 } };
@@ -141,7 +141,7 @@ void SearchPageLzy::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         switch (_id) {
         case 0: _t->recvSignal((*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[1]))); break;
         case 1: _t->on_searchButton_clicked(); break;
-        case 2: _t->onInfoItemClicked((*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 2: _t->onInfoItemClicked((*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -157,6 +157,7 @@ void SearchPageLzy::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 2:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 1:
             case 0:
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< AccountLzy* >(); break;
             }

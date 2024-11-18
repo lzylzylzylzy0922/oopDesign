@@ -21,14 +21,17 @@ QT_BEGIN_NAMESPACE
 class Ui_MainPageLzy
 {
 public:
-    QWidget *personalInfowidget;
+    QWidget *personalInfoWidget;
     QTabWidget *tabWidget;
     QWidget *messageTab;
     QScrollArea *messageArea;
-    QWidget *scrollAreaWidgetContents;
+    QWidget *messageContainer;
     QWidget *contactsTab;
-    QScrollArea *scrollArea;
-    QWidget *scrollAreaWidgetContents_2;
+    QScrollArea *contactsArea;
+    QWidget *contactsContainer;
+    QWidget *requestTab;
+    QScrollArea *requestArea;
+    QWidget *requestContainer;
     QComboBox *comboBox;
 
     void setupUi(QWidget *MainPageLzy)
@@ -38,9 +41,9 @@ public:
         MainPageLzy->resize(400, 630);
         MainPageLzy->setMinimumSize(QSize(400, 630));
         MainPageLzy->setMaximumSize(QSize(400, 630));
-        personalInfowidget = new QWidget(MainPageLzy);
-        personalInfowidget->setObjectName("personalInfowidget");
-        personalInfowidget->setGeometry(QRect(10, 10, 381, 111));
+        personalInfoWidget = new QWidget(MainPageLzy);
+        personalInfoWidget->setObjectName("personalInfoWidget");
+        personalInfoWidget->setGeometry(QRect(10, 10, 381, 111));
         tabWidget = new QTabWidget(MainPageLzy);
         tabWidget->setObjectName("tabWidget");
         tabWidget->setGeometry(QRect(20, 140, 351, 451));
@@ -50,22 +53,33 @@ public:
         messageArea->setObjectName("messageArea");
         messageArea->setGeometry(QRect(0, 0, 341, 471));
         messageArea->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 339, 469));
-        messageArea->setWidget(scrollAreaWidgetContents);
+        messageContainer = new QWidget();
+        messageContainer->setObjectName("messageContainer");
+        messageContainer->setGeometry(QRect(0, 0, 339, 469));
+        messageArea->setWidget(messageContainer);
         tabWidget->addTab(messageTab, QString());
         contactsTab = new QWidget();
         contactsTab->setObjectName("contactsTab");
-        scrollArea = new QScrollArea(contactsTab);
-        scrollArea->setObjectName("scrollArea");
-        scrollArea->setGeometry(QRect(0, 0, 341, 471));
-        scrollArea->setWidgetResizable(true);
-        scrollAreaWidgetContents_2 = new QWidget();
-        scrollAreaWidgetContents_2->setObjectName("scrollAreaWidgetContents_2");
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 339, 469));
-        scrollArea->setWidget(scrollAreaWidgetContents_2);
+        contactsArea = new QScrollArea(contactsTab);
+        contactsArea->setObjectName("contactsArea");
+        contactsArea->setGeometry(QRect(0, 0, 341, 471));
+        contactsArea->setWidgetResizable(true);
+        contactsContainer = new QWidget();
+        contactsContainer->setObjectName("contactsContainer");
+        contactsContainer->setGeometry(QRect(0, 0, 339, 469));
+        contactsArea->setWidget(contactsContainer);
         tabWidget->addTab(contactsTab, QString());
+        requestTab = new QWidget();
+        requestTab->setObjectName("requestTab");
+        requestArea = new QScrollArea(requestTab);
+        requestArea->setObjectName("requestArea");
+        requestArea->setGeometry(QRect(0, 0, 341, 431));
+        requestArea->setWidgetResizable(true);
+        requestContainer = new QWidget();
+        requestContainer->setObjectName("requestContainer");
+        requestContainer->setGeometry(QRect(0, 0, 339, 429));
+        requestArea->setWidget(requestContainer);
+        tabWidget->addTab(requestTab, QString());
         comboBox = new QComboBox(MainPageLzy);
         comboBox->addItem(QString());
         comboBox->addItem(QString());
@@ -87,6 +101,7 @@ public:
         MainPageLzy->setWindowTitle(QCoreApplication::translate("MainPageLzy", "Form", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(messageTab), QCoreApplication::translate("MainPageLzy", "\346\266\210\346\201\257", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(contactsTab), QCoreApplication::translate("MainPageLzy", "\350\201\224\347\263\273\344\272\272", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(requestTab), QCoreApplication::translate("MainPageLzy", "\347\224\263\350\257\267", nullptr));
         comboBox->setItemText(0, QCoreApplication::translate("MainPageLzy", "\345\217\221\350\265\267\347\276\244\350\201\212", nullptr));
         comboBox->setItemText(1, QCoreApplication::translate("MainPageLzy", "\346\267\273\345\212\240\345\245\275\345\217\213/\347\276\244\350\201\212", nullptr));
         comboBox->setItemText(2, QCoreApplication::translate("MainPageLzy", "\347\273\221\345\256\232\350\264\246\346\210\267", nullptr));

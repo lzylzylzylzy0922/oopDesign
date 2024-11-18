@@ -15,13 +15,17 @@ class InfoFormPageLzy : public QWidget
     Q_OBJECT
 
 public:
-    explicit InfoFormPageLzy(AccountLzy* account,QString acid,QWidget *parent = nullptr);
+    explicit InfoFormPageLzy(AccountLzy* account,AccountLzy* searchAccount,QWidget *parent = nullptr);
     ~InfoFormPageLzy();
+
+private slots:
+    void on_addFriendButton_clicked();
 
 private:
     Ui::InfoFormPageLzy *ui;
     userDaoLzy* userDao=userDaoLzy::getInstance();
-    AccountLzy* account;
+    AccountLzy* account;//自己
+    AccountLzy* searchAccount;
 
 };
 

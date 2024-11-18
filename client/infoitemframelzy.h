@@ -7,6 +7,7 @@
 #include <QPainterPath>
 #include<QMouseEvent>
 #include<AccountLzy.h>
+#include<userdaolzy.h>
 
 namespace Ui {
 class infoItemFrameLzy;
@@ -21,14 +22,13 @@ public:
 
 private:
     Ui::infoItemFrameLzy *ui;
-    AccountLzy* account;
+    AccountLzy* account;//资料卡上的人
     QString accountId;
-
 
     void mousePressEvent(QMouseEvent* event) override;
 
 signals:
-    void clicked(AccountLzy* account,const QString& accountId);
+    void clicked(AccountLzy* account,AccountLzy* friendAccount);
 };
 
 #endif // INFOITEMFRAMELZY_H

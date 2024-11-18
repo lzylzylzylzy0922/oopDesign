@@ -85,10 +85,10 @@
   <widget class="QPushButton" name="addFriendButton">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>270</y>
-     <width>56</width>
-     <height>18</height>
+     <x>160</x>
+     <y>280</y>
+     <width>51</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="text">
@@ -98,14 +98,40 @@
   <widget class="QPushButton" name="sendMessageButton">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>300</y>
-     <width>56</width>
-     <height>18</height>
+     <x>160</x>
+     <y>290</y>
+     <width>51</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="text">
     <string>发信息</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="rejectButton">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>290</y>
+     <width>71</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>通过好友申请</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="agreeButton">
+   <property name="geometry">
+    <rect>
+     <x>65</x>
+     <y>288</y>
+     <width>61</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>拒绝好友申请</string>
    </property>
   </widget>
  </widget>

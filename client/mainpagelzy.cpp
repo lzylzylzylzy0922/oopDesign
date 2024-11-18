@@ -11,8 +11,8 @@ MainPageLzy::MainPageLzy(QWidget *parent)
 
     socket=new QTcpSocket;
 
-    QVBoxLayout* layout=new QVBoxLayout(ui->personalInfowidget);
-    ui->personalInfowidget->setLayout(layout);
+    QVBoxLayout* layout=new QVBoxLayout(ui->personalInfoWidget);
+    ui->personalInfoWidget->setLayout(layout);
 }
 
 
@@ -21,6 +21,30 @@ MainPageLzy::~MainPageLzy()
 
     userDao->updateOnlineStatus(account,loginStatus::OFFLINE);
     delete ui;
+}
+
+
+void MainPageLzy::initRequestTab(const QString& accountId){
+    QVBoxLayout* layout=new QVBoxLayout;
+    QWidget* container=new QWidget;
+    container->setLayout(layout);
+
+    ui->requestArea->setWidget(container);
+    ui->requestArea->setWidgetResizable(true);
+    ui->requestArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);// 确保显示垂直滚动条
+    QSqlQuery query=userDao->searchRequest(accountId);
+
+    QString id;
+    AccountLzy* account;
+    while(query.next()){
+        id=query.value(0).toString();
+        account=userDao->returnAccount(id);
+        infoItemFrameLzy* newItem=new infoItemFrameLzy(account,account->getAccountName(),account->getAccountId(),account->getAvatar());
+        newItem->setFixedSize(300,88);
+
+        connect(newItem, &infoItemFrameLzy::clicked, this, &MainPageLzy::onInfoItemClicked);
+        ui->requestArea->widget()->layout()->addWidget(newItem);
+    }
 }
 
 void MainPageLzy::recvSignal(QString accountId){
@@ -59,7 +83,10 @@ void MainPageLzy::recvSignal(QString accountId){
         qDebug() << "无法获取账号信息";
     }
     //构造个人信息
-    ui->personalInfowidget->layout()->addWidget(new infoItemFrameLzy(account,account->getAccountName(),account->getAccountId(),account->getAvatar()));
+    ui->personalInfoWidget->layout()->addWidget(new infoItemFrameLzy(account,account->getAccountName(),account->getAccountId(),account->getAvatar()));
+
+    //初始化requestTab
+    initRequestTab(accountId);
 
 }
 
@@ -93,8 +120,15 @@ void MainPageLzy::on_comboBox_activated(int index)
     }
 }
 
+void MainPageLzy::onInfoItemClicked(AccountLzy* account,AccountLzy* friendAccount){
+    account=this->account;
+    InfoFormPageLzy* infoForm=new InfoFormPageLzy(account,friendAccount);
+    infoForm->show();
+}
+
 void MainPageLzy::closeEvent(QCloseEvent* event){
     userDao->updateOnlineStatus(account,loginStatus::OFFLINE);
+
     event->accept();
 
 }

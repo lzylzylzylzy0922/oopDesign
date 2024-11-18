@@ -38,7 +38,8 @@ infoItemFrameLzy::~infoItemFrameLzy() {
 
 void infoItemFrameLzy::mousePressEvent(QMouseEvent* event){
     if(event->button()==Qt::LeftButton){
-        emit clicked(account,this->accountId);
+
+        emit clicked(account,userDaoLzy::getInstance()->returnAccount(this->accountId));
         qDebug()<<"个人信息栏被点击";
     }
     QFrame::mousePressEvent(event);

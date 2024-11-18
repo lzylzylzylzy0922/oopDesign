@@ -121,7 +121,7 @@ void RegisterPageLzy::on_registerButton_clicked()
     QString avatar="E:/oopDesign/iamges/default_avatar.png";
     if(this->avatarPath!="") avatar=this->avatarPath;
 
-    AccountLzy* account=new AccountLzy(accountId,NULL,type,nickname,inputPassword,avatar);
+    AccountLzy* account=new AccountLzy(accountId,0,type,nickname,inputPassword,avatar);
 
     //创建用户
     if(!userDao->createAccount(account,birth,location,telephone)){

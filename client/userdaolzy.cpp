@@ -282,3 +282,52 @@ bool userDaoLzy::checkIfFriend(int userId1,int userId2,AccountType type){
 
     return true;
 }
+
+bool userDaoLzy::ifSentAddFriendRequest(AccountLzy* account,AccountLzy* friendAccount){
+    query.prepare("select * from friend_request where account_id=:accountId and friend_account_id=:friendAccountId");
+    query.bindValue(":accountId",account->getAccountId());
+    query.bindValue(":friendAccountId",friendAccount->getAccountId());
+
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return false;  // 查询执行失败，返回 nullptr
+    }
+
+    if (!query.next()) {
+        qWarning() << "No records";
+        return false;  // 如果没有记录，返回 false
+    }
+
+    return true;
+}
+
+bool userDaoLzy::addFriend(AccountLzy* account,AccountLzy* friendAccount){
+    if(this->ifSentAddFriendRequest(account,friendAccount)){
+        return false;
+    }
+
+    query.prepare("insert into friend_request values (:accountId,:friendAccountId,:time,:status);");
+    query.bindValue(":accountId",account->getAccountId());
+    query.bindValue(":friendAccountId",friendAccount->getAccountId());
+    query.bindValue(":time",((new QDateTime())->currentDateTime()).toString("yyyy-MM-dd HH:mm:ss"));
+    query.bindValue(":status","PENDING");
+
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return false;
+    }
+
+    return true;
+}
+
+QSqlQuery userDaoLzy::searchRequest(const QString& accountId){
+    QSqlQuery query;
+    query.prepare("select * from friend_request where friend_account_id=:friendAccountId;");
+    query.bindValue(":friendAccountId",accountId);
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return query;
+    }
+
+    return query;
+}

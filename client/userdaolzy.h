@@ -14,6 +14,7 @@
 #include<AccountLzy.h>
 #include<LoginStatusLzy.h>
 #include<utilsLzy.h>
+#include<QMessageBox>
 
 class userDaoLzy : public QObject
 {
@@ -29,6 +30,9 @@ public:
     void updateOnlineStatus(AccountLzy* account,loginStatus status);     // 更新用户状态
     QSqlQuery searchUsersById(QString text);
     bool checkIfFriend(int userId1,int userId2,AccountType type);                                                  //查询双方是否为好友
+    bool addFriend(AccountLzy* account,AccountLzy* friendAccount);//添加好友
+    bool ifSentAddFriendRequest(AccountLzy* account,AccountLzy* friendAccount);//是否已经发送好友申请
+    QSqlQuery searchRequest(const QString& accountId);
 private:
     explicit userDaoLzy(QObject *parent = nullptr);
     static userDaoLzy* userDao;

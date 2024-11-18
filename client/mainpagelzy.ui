@@ -25,7 +25,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="personalInfowidget" native="true">
+  <widget class="QWidget" name="personalInfoWidget" native="true">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -63,7 +63,7 @@
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents">
+     <widget class="QWidget" name="messageContainer">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -79,7 +79,7 @@
     <attribute name="title">
      <string>联系人</string>
     </attribute>
-    <widget class="QScrollArea" name="scrollArea">
+    <widget class="QScrollArea" name="contactsArea">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -91,13 +91,41 @@
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents_2">
+     <widget class="QWidget" name="contactsContainer">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
         <width>339</width>
         <height>469</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="requestTab">
+    <attribute name="title">
+     <string>申请</string>
+    </attribute>
+    <widget class="QScrollArea" name="requestArea">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>341</width>
+       <height>431</height>
+      </rect>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="requestContainer">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>339</width>
+        <height>429</height>
        </rect>
       </property>
      </widget>

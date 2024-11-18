@@ -35,7 +35,7 @@ public slots:
 
 private slots:
     void on_searchButton_clicked();
-    void onInfoItemClicked(AccountLzy* account,const QString& accountId);//第一个参数：自己，第二个参数：别人
+    void onInfoItemClicked(AccountLzy* account,AccountLzy* friendAccount);//第一个参数：自己，第二个参数：别人
 private:
     Ui::SearchPageLzy *ui;
     static AccountLzy* account;

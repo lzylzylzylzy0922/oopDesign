@@ -95,9 +95,9 @@ void SearchPageLzy::recvSignal(AccountLzy* account){
     this->show();
 }
 
-void SearchPageLzy::onInfoItemClicked(AccountLzy* account,const QString& accountId){
+void SearchPageLzy::onInfoItemClicked(AccountLzy* account,AccountLzy* friendAccount){
     account=this->account;
-
-    InfoFormPageLzy* infoForm=new InfoFormPageLzy(account,accountId);
+    AccountLzy* searchAccount=friendAccount;
+    InfoFormPageLzy* infoForm=new InfoFormPageLzy(account,searchAccount);
     infoForm->show();
 }

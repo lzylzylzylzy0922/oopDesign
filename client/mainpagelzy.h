@@ -12,6 +12,7 @@
 #include<QMessageBox>
 #include<infoitemframelzy.h>
 #include<QVBoxLayout>
+#include<infoformpagelzy.h>
 
 #define SERVER_ADDRESS "127.0.0.1"
 #define SERVER_PORT 8000
@@ -35,12 +36,15 @@ public slots:
 
 private slots:
     void on_comboBox_activated(int index);
+    void onInfoItemClicked(AccountLzy* account,AccountLzy* friendAccount);
 
 private:
     Ui::MainPageLzy *ui;
-    static AccountLzy* account;
+    static AccountLzy* account;//自己
     userDaoLzy* userDao=userDaoLzy::getInstance();
     QTcpSocket* socket;
+
+    void initRequestTab(const QString& accountId);
     void closeEvent(QCloseEvent* event) override;
 };
 

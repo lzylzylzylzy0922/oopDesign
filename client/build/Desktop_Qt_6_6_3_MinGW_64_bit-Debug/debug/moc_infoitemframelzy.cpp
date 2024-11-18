@@ -43,7 +43,7 @@ constexpr auto qt_meta_stringdata_CLASSinfoItemFrameLzyENDCLASS = QtMocHelpers::
     "",
     "AccountLzy*",
     "account",
-    "accountId"
+    "friendAccount"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSinfoItemFrameLzyENDCLASS_t {
@@ -53,7 +53,7 @@ struct qt_meta_stringdata_CLASSinfoItemFrameLzyENDCLASS_t {
     char stringdata2[1];
     char stringdata3[12];
     char stringdata4[8];
-    char stringdata5[10];
+    char stringdata5[14];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSinfoItemFrameLzyENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -64,14 +64,14 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSinfoItemFrameLzyENDCLASS_t qt_m
         QT_MOC_LITERAL(25, 0),  // ""
         QT_MOC_LITERAL(26, 11),  // "AccountLzy*"
         QT_MOC_LITERAL(38, 7),  // "account"
-        QT_MOC_LITERAL(46, 9)   // "accountId"
+        QT_MOC_LITERAL(46, 13)   // "friendAccount"
     },
     "infoItemFrameLzy",
     "clicked",
     "",
     "AccountLzy*",
     "account",
-    "accountId"
+    "friendAccount"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -94,7 +94,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSinfoItemFrameLzyENDCLASS[] = {
        1,    2,   20,    2, 0x06,    1 /* Public */,
 
  // signals: parameters
-    QMetaType::Void, 0x80000000 | 3, QMetaType::QString,    4,    5,
+    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3,    4,    5,
 
        0        // eod
 };
@@ -111,7 +111,7 @@ Q_CONSTINIT const QMetaObject infoItemFrameLzy::staticMetaObject = { {
         // method 'clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<AccountLzy *, std::false_type>,
-        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
+        QtPrivate::TypeAndForceComplete<AccountLzy *, std::false_type>
     >,
     nullptr
 } };
@@ -122,7 +122,7 @@ void infoItemFrameLzy::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         auto *_t = static_cast<infoItemFrameLzy *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->clicked((*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 0: _t->clicked((*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -131,6 +131,7 @@ void infoItemFrameLzy::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 0:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 1:
             case 0:
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< AccountLzy* >(); break;
             }
@@ -139,7 +140,7 @@ void infoItemFrameLzy::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (infoItemFrameLzy::*)(AccountLzy * , const QString & );
+            using _t = void (infoItemFrameLzy::*)(AccountLzy * , AccountLzy * );
             if (_t _q_method = &infoItemFrameLzy::clicked; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
@@ -179,7 +180,7 @@ int infoItemFrameLzy::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void infoItemFrameLzy::clicked(AccountLzy * _t1, const QString & _t2)
+void infoItemFrameLzy::clicked(AccountLzy * _t1, AccountLzy * _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
