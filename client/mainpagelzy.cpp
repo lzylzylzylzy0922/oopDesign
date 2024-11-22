@@ -9,8 +9,6 @@ MainPageLzy::MainPageLzy(QWidget *parent)
 {
     ui->setupUi(this);
 
-    socket=new QTcpSocket;
-
     QVBoxLayout* layout=new QVBoxLayout(ui->personalInfoWidget);
     ui->personalInfoWidget->setLayout(layout);
 }
@@ -48,28 +46,28 @@ void MainPageLzy::initRequestTab(const QString& accountId){
 }
 
 void MainPageLzy::recvSignal(QString accountId){
-    socket->connectToHost(QHostAddress(SERVER_ADDRESS),SERVER_PORT);
-
-    connect(socket,&QTcpSocket::errorOccurred,[this](){
+    connect(clientSocket,&QTcpSocket::errorOccurred,[this](){
         qDebug()<<"连接服务器失败";
         QMessageBox::warning(this,"连接提示","连接异常，请检查网络");
     });
 
     //如果连接成功
-    connect(socket,&QTcpSocket::connected,[this,accountId](){
-        qDebug()<<account->getAccountId()<<"连接服务器成功";
+    if (clientSocket->state() == QTcpSocket::ConnectedState) {
         QByteArray accountIdData=accountId.toUtf8();
 
-        socket->write(accountIdData);
-        socket->flush();
-        qDebug()<<accountIdData;
-    });
+        clientSocket->write(accountIdData);
+        clientSocket->flush();
+
+    }
 
     //如果连接断开
-    connect(socket,&QTcpSocket::disconnected,[this](){
+    connect(clientSocket,&QTcpSocket::disconnected,[this](){
         QMessageBox::warning(this,"连接提示","连接断开");
     });
 
+
+    qDebug() << "Socket thread:" << clientSocket->thread();
+    qDebug() << "Current thread:" << QThread::currentThread();
 
     AccountLzy* account = userDao->returnAccount(accountId);
 

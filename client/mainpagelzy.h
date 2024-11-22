@@ -13,6 +13,8 @@
 #include<infoitemframelzy.h>
 #include<QVBoxLayout>
 #include<infoformpagelzy.h>
+#include<tcpconnectionmanager.h>
+#include<QThread>
 
 #define SERVER_ADDRESS "127.0.0.1"
 #define SERVER_PORT 8000
@@ -42,7 +44,7 @@ private:
     Ui::MainPageLzy *ui;
     static AccountLzy* account;//自己
     userDaoLzy* userDao=userDaoLzy::getInstance();
-    QTcpSocket* socket;
+    QTcpSocket* clientSocket=TcpConnectionManager::getInstance();
 
     void initRequestTab(const QString& accountId);
     void closeEvent(QCloseEvent* event) override;

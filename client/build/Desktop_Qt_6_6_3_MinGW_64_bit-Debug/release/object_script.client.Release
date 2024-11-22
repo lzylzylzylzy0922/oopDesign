@@ -5,6 +5,7 @@ release/main.o
 release/mainpagelzy.o
 release/registerpagelzy.o
 release/searchpagelzy.o
+release/tcpconnectionmanager.o
 release/userdaolzy.o
 release/utilsLzy.o
 release/welcomepagelzy.o
@@ -22,6 +23,7 @@ release/moc_infoitemframelzy.o
 release/moc_mainpagelzy.o
 release/moc_registerpagelzy.o
 release/moc_searchpagelzy.o
+release/moc_tcpconnectionmanager.o
 release/moc_userdaolzy.o
 release/moc_utilsLzy.o
 release/moc_welcomepagelzy.o

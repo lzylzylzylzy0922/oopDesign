@@ -16,6 +16,7 @@ SOURCES += \
     mainpagelzy.cpp \
     registerpagelzy.cpp \
     searchpagelzy.cpp \
+    tcpconnectionmanager.cpp \
     userdaolzy.cpp \
     utilsLzy.cpp \
     welcomepagelzy.cpp
@@ -37,6 +38,7 @@ HEADERS += \
     mainpagelzy.h \
     registerpagelzy.h \
     searchpagelzy.h \
+    tcpconnectionmanager.h \
     userdaolzy.h \
     utilsLzy.h \
     welcomepagelzy.h
