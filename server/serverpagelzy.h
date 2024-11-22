@@ -33,6 +33,8 @@ private:
 
     void addUser(QTcpSocket *socket,QString accountId);
     void removeUser(QTcpSocket *socket);
+    void forwardFriendRequest(QString type,QString fromId,QString toId);
+    QTcpSocket* getSocketById(QString accountId);
 
 };
 #endif // SERVERPAGELZY_H

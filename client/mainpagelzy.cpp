@@ -45,6 +45,14 @@ void MainPageLzy::initRequestTab(const QString& accountId){
     }
 }
 
+void MainPageLzy::updateRequestTab(AccountLzy* account){
+    infoItemFrameLzy* newItem=new infoItemFrameLzy(account,account->getAccountName(),account->getAccountId(),account->getAvatar());
+    newItem->setFixedSize(300,88);
+
+    connect(newItem, &infoItemFrameLzy::clicked, this, &MainPageLzy::onInfoItemClicked);
+    ui->requestArea->widget()->layout()->addWidget(newItem);
+}
+
 void MainPageLzy::recvSignal(QString accountId){
     connect(clientSocket,&QTcpSocket::errorOccurred,[this](){
         qDebug()<<"连接服务器失败";
@@ -67,8 +75,8 @@ void MainPageLzy::recvSignal(QString accountId){
     });
 
 
-    qDebug() << "Socket thread:" << clientSocket->thread();
-    qDebug() << "Current thread:" << QThread::currentThread();
+    //监听server
+    connect(clientSocket,&QTcpSocket::readyRead,this,&MainPageLzy::OnReadyRead);
 
     AccountLzy* account = userDao->returnAccount(accountId);
 
@@ -130,4 +138,16 @@ void MainPageLzy::closeEvent(QCloseEvent* event){
 
     event->accept();
 
+}
+
+void MainPageLzy::OnReadyRead(){
+    QByteArray data=clientSocket->readAll();
+    QJsonDocument doc=QJsonDocument::fromJson(data);
+
+    QJsonObject obj=doc.object();
+
+    if(obj["type"].toString()=="friend_request"){
+        AccountLzy* account=userDao->returnAccount(obj["from_id"].toString());
+        updateRequestTab(account);
+    }
 }

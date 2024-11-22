@@ -40,6 +40,7 @@ public slots:
 private slots:
     void on_comboBox_activated(int index);
     void onInfoItemClicked(AccountLzy* account,AccountLzy* friendAccount);
+    void OnReadyRead();//处理server发送的信息
 
 private:
     Ui::MainPageLzy *ui;
@@ -48,6 +49,7 @@ private:
     QTcpSocket* clientSocket=TcpConnectionManager::getInstance();
 
     void initRequestTab(const QString& accountId);
+    void updateRequestTab(AccountLzy* account);
     void closeEvent(QCloseEvent* event) override;
 };
 

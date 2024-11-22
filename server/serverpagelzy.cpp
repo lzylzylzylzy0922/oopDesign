@@ -41,8 +41,7 @@ serverPageLzy::serverPageLzy(QWidget *parent)
 
                 qDebug() << "收到好友申请: 从" << fromId << "到" << toId;
 
-                // 转发好友请求给目标用户
-                //forwardFriendRequest(fromId, toId);
+                forwardFriendRequest(type,fromId, toId);
             } else {
                 qDebug() << "未知消息类型:" << type;
             }
@@ -93,4 +92,26 @@ void serverPageLzy::removeUser(QTcpSocket* socket){
 
 
     }
+}
+
+QTcpSocket* serverPageLzy::getSocketById(QString accountId){
+    for(auto item:users.keys()){
+        if(item==accountId)
+            return users[item];
+    }
+    return nullptr;
+}
+
+void serverPageLzy::forwardFriendRequest(QString type,QString fromId,QString toId){
+    QTcpSocket* clientSocket=this->getSocketById(toId);
+    if(clientSocket==nullptr){
+        return;
+    }
+
+    QJsonObject obj;
+    obj["type"]=type;
+    obj["from_id"]=fromId;
+    QJsonDocument doc(obj);
+
+    clientSocket->write(doc.toJson());
 }
