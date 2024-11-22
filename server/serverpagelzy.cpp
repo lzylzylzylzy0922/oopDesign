@@ -16,12 +16,36 @@ serverPageLzy::serverPageLzy(QWidget *parent)
     connect(server, &QTcpServer::newConnection, this, [this]() {
         QTcpSocket* clientSocket = server->nextPendingConnection();
 
-        connect(clientSocket,&QTcpSocket::readyRead,[clientSocket,this](){
-            QByteArray accountIdData=clientSocket->readAll();
+        connect(clientSocket, &QTcpSocket::readyRead, [clientSocket, this]() {
+            QByteArray data = clientSocket->readAll();
 
-            accountId=QString::fromUtf8(accountIdData);
+            // 解析 Json
+            QJsonDocument doc = QJsonDocument::fromJson(data);
+            if (!doc.isObject()) {
+                qDebug() << "非JSON格式数据，忽略";
+                return;
+            }
 
-            addUser(clientSocket,accountId);
+            QJsonObject obj = doc.object();
+            QString type = obj["type"].toString();
+            qDebug()<<"客户端向服务器发送了"<<type<<"请求";
+
+            if(type=="add_user"){
+                accountId=obj["account_id"].toString();
+                addUser(clientSocket,accountId);
+            }
+
+            else if (type == "friend_request") {
+                QString fromId = obj["account_id"].toString();
+                QString toId = obj["friend_account_id"].toString();
+
+                qDebug() << "收到好友申请: 从" << fromId << "到" << toId;
+
+                // 转发好友请求给目标用户
+                //forwardFriendRequest(fromId, toId);
+            } else {
+                qDebug() << "未知消息类型:" << type;
+            }
         });
 
         connect(clientSocket, &QTcpSocket::disconnected, this, [this, clientSocket]() {

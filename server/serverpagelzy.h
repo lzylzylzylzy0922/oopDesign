@@ -6,6 +6,8 @@
 #include<QTcpServer>
 #include<QMap>
 #include<QDebug>
+#include<QJsonDocument>
+#include<QJsonObject>
 
 #define PORT 8000
 

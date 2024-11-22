@@ -54,8 +54,12 @@ InfoFormPageLzy::~InfoFormPageLzy()
 void InfoFormPageLzy::on_addFriendButton_clicked()
 {
     userDao->addFriend(this->account,this->searchAccount);
+
+    QJsonDocument doc=utils->toJsonDoc("friend_request",this->account->getAccountId(),this->searchAccount->getAccountId());
+    QTcpSocket* clientSocket=TcpConnectionManager::getInstance();
+    clientSocket->write(doc.toJson());
+
     qDebug()<<this->account->getAccountId()<<"向"<<this->searchAccount->getAccountId()<<"发送了好友申请";
     QMessageBox::information(this,"提示","已向用户提交用户申请");
-
 }
 

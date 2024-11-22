@@ -11,6 +11,8 @@
 #include <QHostAddress>
 #include <QNetworkInterface>
 #include <QTcpServer>
+#include<QJsonDocument>
+#include<QJsonObject>
 
 class utilsLzy : public QObject
 {
@@ -39,6 +41,10 @@ public:
         }
         return 0;  // 如果服务器未启动，则返回0
     }
+
+    static QJsonDocument toJsonDoc(QString type,QString accountId,QString friendAccountId);
+
+    static QJsonDocument toJsonDoc(QString type,QString accountId);
 
 private:
     explicit utilsLzy(QObject *parent = nullptr);

@@ -10,9 +10,11 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
+    requesthandlerlzy.cpp \
     serverpagelzy.cpp
 
 HEADERS += \
+    requesthandlerlzy.h \
     serverpagelzy.h
 
 FORMS += \

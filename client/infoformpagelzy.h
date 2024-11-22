@@ -5,7 +5,11 @@
 #include<QVBoxLayout>
 #include<infoitemframelzy.h>
 #include<userdaolzy.h>
-
+#include<utilsLzy.h>
+#include<QJsonDocument>
+#include<QJsonObject>
+#include<QTcpSocket>
+#include<tcpconnectionmanager.h>
 namespace Ui {
 class InfoFormPageLzy;
 }
@@ -24,6 +28,7 @@ private slots:
 private:
     Ui::InfoFormPageLzy *ui;
     userDaoLzy* userDao=userDaoLzy::getInstance();
+    utilsLzy* utils=utilsLzy::getInstance();
     AccountLzy* account;//自己
     AccountLzy* searchAccount;
 

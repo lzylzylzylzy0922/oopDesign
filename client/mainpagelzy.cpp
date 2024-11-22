@@ -53,9 +53,10 @@ void MainPageLzy::recvSignal(QString accountId){
 
     //如果连接成功
     if (clientSocket->state() == QTcpSocket::ConnectedState) {
-        QByteArray accountIdData=accountId.toUtf8();
+        utilsLzy* utils=utilsLzy::getInstance();
+        QJsonDocument doc=utils->toJsonDoc("add_user",accountId);
 
-        clientSocket->write(accountIdData);
+        clientSocket->write(doc.toJson());
         clientSocket->flush();
 
     }

@@ -47,3 +47,24 @@ QString utilsLzy::createAccountId(AccountType type){
 
     return accountId;
 }
+
+QJsonDocument utilsLzy::toJsonDoc(QString type,QString accountId,QString friendAccountId){
+    QJsonObject request;
+    request["type"]=type;
+    request["account_id"]=accountId;
+    request["friend_account_id"]=friendAccountId;
+
+    QJsonDocument doc(request);
+
+    return doc;
+}
+
+QJsonDocument utilsLzy::toJsonDoc(QString type,QString accountId){
+    QJsonObject request;
+    request["type"]=type;
+    request["account_id"]=accountId;
+    QJsonDocument doc(request);
+
+    return doc;
+}
+
