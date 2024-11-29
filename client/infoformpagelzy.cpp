@@ -33,11 +33,11 @@ InfoFormPageLzy::InfoFormPageLzy(AccountLzy* account,AccountLzy* searchAccount,Q
         ui->sendMessageButton->hide();
     } else if (isFriend) {
         ui->addFriendButton->hide();
-        ui->rejectButton->hide();
         ui->agreeButton->hide();
+        ui->rejectButton->hide();
     } else {
-        ui->rejectButton->hide();
         ui->agreeButton->hide();
+        ui->rejectButton->hide();
         ui->sendMessageButton->hide();
     }
 
@@ -53,6 +53,7 @@ InfoFormPageLzy::~InfoFormPageLzy()
 
 void InfoFormPageLzy::on_addFriendButton_clicked()
 {
+    if(userDao->ifSentAddFriendRequest(this->account,this->searchAccount)) return;
     userDao->addFriend(this->account,this->searchAccount);
 
     QJsonDocument doc=utils->toJsonDoc("friend_request",this->account->getAccountId(),this->searchAccount->getAccountId());
@@ -61,5 +62,25 @@ void InfoFormPageLzy::on_addFriendButton_clicked()
 
     qDebug()<<this->account->getAccountId()<<"向"<<this->searchAccount->getAccountId()<<"发送了好友申请";
     QMessageBox::information(this,"提示","已向用户提交用户申请");
+
+}
+
+
+
+void InfoFormPageLzy::on_agreeButton_clicked()
+{
+    userDao->acceptFriendRequest(this->account,this->searchAccount);
+
+    QJsonDocument doc=utils->toJsonDoc("accept_friend_request",this->account->getAccountId(),this->searchAccount->getAccountId());
+    QTcpSocket* clientSocket=TcpConnectionManager::getInstance();
+    clientSocket->write(doc.toJson());
+    clientSocket->flush();
+
+    qDebug()<<this->account->getAccountId()<<"同意了"<<this->searchAccount->getAccountId()<<"的好友申请";
+
+    TackleFriendRequest tfs=TackleFriendRequest::AGREE;
+    emit updateMainPageLzy(this->searchAccount,tfs);
+
+    this->hide();
 }
 

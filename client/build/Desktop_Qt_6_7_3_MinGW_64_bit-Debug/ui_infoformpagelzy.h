@@ -30,8 +30,8 @@ public:
     QLabel *label_2;
     QPushButton *addFriendButton;
     QPushButton *sendMessageButton;
-    QPushButton *rejectButton;
     QPushButton *agreeButton;
+    QPushButton *rejectButton;
 
     void setupUi(QWidget *InfoFormPageLzy)
     {
@@ -64,12 +64,12 @@ public:
         sendMessageButton = new QPushButton(InfoFormPageLzy);
         sendMessageButton->setObjectName("sendMessageButton");
         sendMessageButton->setGeometry(QRect(160, 290, 51, 21));
-        rejectButton = new QPushButton(InfoFormPageLzy);
-        rejectButton->setObjectName("rejectButton");
-        rejectButton->setGeometry(QRect(260, 290, 71, 21));
         agreeButton = new QPushButton(InfoFormPageLzy);
         agreeButton->setObjectName("agreeButton");
-        agreeButton->setGeometry(QRect(65, 288, 61, 21));
+        agreeButton->setGeometry(QRect(260, 290, 71, 21));
+        rejectButton = new QPushButton(InfoFormPageLzy);
+        rejectButton->setObjectName("rejectButton");
+        rejectButton->setGeometry(QRect(65, 288, 61, 21));
 
         retranslateUi(InfoFormPageLzy);
 
@@ -83,8 +83,8 @@ public:
         label_2->setText(QCoreApplication::translate("InfoFormPageLzy", "\346\211\200\345\234\250\345\234\260\357\274\232", nullptr));
         addFriendButton->setText(QCoreApplication::translate("InfoFormPageLzy", "\346\267\273\345\212\240\345\245\275\345\217\213", nullptr));
         sendMessageButton->setText(QCoreApplication::translate("InfoFormPageLzy", "\345\217\221\344\277\241\346\201\257", nullptr));
-        rejectButton->setText(QCoreApplication::translate("InfoFormPageLzy", "\351\200\232\350\277\207\345\245\275\345\217\213\347\224\263\350\257\267", nullptr));
-        agreeButton->setText(QCoreApplication::translate("InfoFormPageLzy", "\346\213\222\347\273\235\345\245\275\345\217\213\347\224\263\350\257\267", nullptr));
+        agreeButton->setText(QCoreApplication::translate("InfoFormPageLzy", "\351\200\232\350\277\207\345\245\275\345\217\213\347\224\263\350\257\267", nullptr));
+        rejectButton->setText(QCoreApplication::translate("InfoFormPageLzy", "\346\213\222\347\273\235\345\245\275\345\217\213\347\224\263\350\257\267", nullptr));
     } // retranslateUi
 
 };

@@ -30,6 +30,9 @@ infoItemFrameLzy::infoItemFrameLzy(AccountLzy* account,QString name, QString id,
         ui->avatar->setPixmap(roundedAvatar);
     }
 
+
+    this->setProperty("accountId", account->getAccountId());
+
 }
 
 infoItemFrameLzy::~infoItemFrameLzy() {

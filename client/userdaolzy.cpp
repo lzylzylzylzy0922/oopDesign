@@ -126,7 +126,7 @@ bool userDaoLzy::createAccount(AccountLzy* account,QDate birth,QString location,
 }
 
 
-AccountLzy* userDaoLzy::returnAccount(QString accountId){
+AccountLzy* userDaoLzy::returnAccount(const QString& accountId){
     query.prepare("select * from account where account_id=:accountId");
     query.bindValue(":accountId", accountId);
 
@@ -330,4 +330,102 @@ QSqlQuery userDaoLzy::searchRequest(const QString& accountId){
     }
 
     return query;
+}
+
+
+
+void userDaoLzy::acceptFriendRequest(AccountLzy* owner,AccountLzy* friendAccount){
+    //更改好友申请表
+    query.prepare("delete from friend_request where account_id=:friendAccount;");
+
+    query.bindValue(":friendAccount",friendAccount->getAccountId());
+
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return;
+    }
+
+    //更改好友表(两项）
+    query.prepare("insert into friendship values (:userId,:friendId,:type)");
+
+    query.bindValue(":userId",owner->getUserId());
+
+    query.bindValue(":friendId",friendAccount->getUserId());
+
+    if(owner->getType()==AccountType::QQ){
+        query.bindValue(":type","QQ");
+    }else if(owner->getType()==AccountType::WECHAT){
+        query.bindValue(":type","WECHAT");
+    }else{
+        query.bindValue(":type","WEIBO");
+    }
+
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return;
+    }
+
+
+    query.prepare("insert into friendship values (:userId,:friendId,:type)");
+
+    query.bindValue(":userId",friendAccount->getUserId());
+
+    query.bindValue(":friendId",owner->getUserId());
+
+    if(owner->getType()==AccountType::QQ){
+        query.bindValue(":type","QQ");
+    }else if(owner->getType()==AccountType::WECHAT){
+        query.bindValue(":type","WECHAT");
+    }else{
+        query.bindValue(":type","WEIBO");
+    }
+
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return;
+    }
+}
+
+QSqlQuery userDaoLzy::searchContacts(const QString& accountId){
+    QSqlQuery query;
+
+    qDebug()<<accountId;
+    AccountLzy* account=userDao->returnAccount(accountId);
+
+    query.prepare("select * from friendship where user_id=:user_Id;");
+    query.bindValue(":user_Id",account->getUserId());
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return query;
+    }
+
+    return query;
+}
+
+AccountLzy* userDaoLzy::returnAccountByUserId(int userId,const QString& type){
+    query.prepare("select * from account where user_id=:userId and type=:type;");
+
+    query.bindValue(":userId",userId);
+    query.bindValue(":type",type);
+
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+    }
+
+    if (!query.next()) {
+        qWarning() << "No records found";
+        return nullptr;
+    }
+
+    AccountLzy* account=nullptr;
+    if(type=="QQ"){
+        account=new AccountLzy(query.value(0).toString(),userId,AccountType::QQ,query.value(3).toString(),query.value(4).toString(),query.value(5).toString());
+    }else if(type=="WECHAT"){
+        account=new AccountLzy(query.value(0).toString(),userId,AccountType::WECHAT,query.value(3).toString(),query.value(4).toString(),query.value(5).toString());
+    }else{
+        account=new AccountLzy(query.value(0).toString(),userId,AccountType::WEIBO,query.value(3).toString(),query.value(4).toString(),query.value(5).toString());
+    }
+
+    return account;
+
 }

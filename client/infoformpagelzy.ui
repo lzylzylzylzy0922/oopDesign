@@ -108,7 +108,7 @@
     <string>发信息</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="rejectButton">
+  <widget class="QPushButton" name="agreeButton">
    <property name="geometry">
     <rect>
      <x>260</x>
@@ -121,7 +121,7 @@
     <string>通过好友申请</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="agreeButton">
+  <widget class="QPushButton" name="rejectButton">
    <property name="geometry">
     <rect>
      <x>65</x>

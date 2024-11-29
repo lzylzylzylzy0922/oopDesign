@@ -114,4 +114,6 @@ void serverPageLzy::forwardFriendRequest(QString type,QString fromId,QString toI
     QJsonDocument doc(obj);
 
     clientSocket->write(doc.toJson());
+    clientSocket->flush();
+    qDebug()<<"将"<<fromId<<"的好友申请转发给"<<toId;
 }

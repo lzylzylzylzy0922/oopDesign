@@ -45,6 +45,34 @@ void MainPageLzy::initRequestTab(const QString& accountId){
     }
 }
 
+void MainPageLzy::initContactsTab(const QString& accountId){
+    QVBoxLayout* layout=new QVBoxLayout;
+    QWidget* container=new QWidget;
+    container->setLayout(layout);
+
+    ui->contactsArea->setWidget(container);
+    ui->contactsArea->setWidgetResizable(true);
+    ui->contactsArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);// 确保显示垂直滚动条
+    QSqlQuery query=userDao->searchContacts(accountId);
+
+    int friendId;
+    AccountLzy* account;
+    QString type;
+    while(query.next()){
+        friendId=query.value(1).toInt();
+        type=query.value(2).toString();
+
+
+        account=userDao->returnAccountByUserId(friendId,type);
+        if(account==nullptr) qDebug()<<"============";
+        infoItemFrameLzy* newItem=new infoItemFrameLzy(account,account->getAccountName(),account->getAccountId(),account->getAvatar());
+        newItem->setFixedSize(300,88);
+
+        connect(newItem, &infoItemFrameLzy::clicked, this, &MainPageLzy::onInfoItemClicked);
+        ui->contactsArea->widget()->layout()->addWidget(newItem);
+    }
+}
+
 void MainPageLzy::updateRequestTab(AccountLzy* account){
     infoItemFrameLzy* newItem=new infoItemFrameLzy(account,account->getAccountName(),account->getAccountId(),account->getAvatar());
     newItem->setFixedSize(300,88);
@@ -94,6 +122,8 @@ void MainPageLzy::recvSignal(QString accountId){
 
     //初始化requestTab
     initRequestTab(accountId);
+    //初始化contactsTab
+    initContactsTab(this->account->getAccountId());
 
 }
 
@@ -130,6 +160,8 @@ void MainPageLzy::on_comboBox_activated(int index)
 void MainPageLzy::onInfoItemClicked(AccountLzy* account,AccountLzy* friendAccount){
     account=this->account;
     InfoFormPageLzy* infoForm=new InfoFormPageLzy(account,friendAccount);
+    connect(infoForm,&InfoFormPageLzy::updateMainPageLzy,this,&MainPageLzy::updateByInfoFormPageLzy);
+
     infoForm->show();
 }
 
@@ -147,7 +179,49 @@ void MainPageLzy::OnReadyRead(){
     QJsonObject obj=doc.object();
 
     if(obj["type"].toString()=="friend_request"){
-        AccountLzy* account=userDao->returnAccount(obj["from_id"].toString());
-        updateRequestTab(account);
+        AccountLzy* fromAccount=userDao->returnAccount(obj["from_id"].toString());
+        qDebug()<<fromAccount->getAccountId();
+        if (fromAccount) {
+            // 更新好友申请表，添加新的申请项
+            updateRequestTab(fromAccount);
+        } else {
+            qDebug() << "无法找到请求的账户信息";
+        }
     }
+}
+
+
+
+void MainPageLzy::updateByInfoFormPageLzy(AccountLzy* searchAccount,TackleFriendRequest tfs){
+    if (tfs == TackleFriendRequest::AGREE) {
+        QLayout* layout = ui->requestArea->widget()->layout();
+
+
+        infoItemFrameLzy* itemToRemove = nullptr;
+        // 遍历布局，查找并移除对应的组件
+
+        for (int i = 0; i < layout->count(); ++i) {
+            QWidget* widget = layout->itemAt(i)->widget();
+            if(widget)
+                qDebug()<<widget->property("accountId");
+
+            if (widget && widget->property("accountId").toString() == searchAccount->getAccountId()) {
+                itemToRemove = qobject_cast<infoItemFrameLzy*>(widget);
+                break;
+            }
+        }
+
+        if (itemToRemove) {
+            layout->removeWidget(itemToRemove);
+            itemToRemove->deleteLater();
+        }
+
+        //在联系人界面加入该用户
+        infoItemFrameLzy* newContact=new infoItemFrameLzy(searchAccount,searchAccount->getAccountName(),searchAccount->getAccountId(),searchAccount->getAvatar());
+        newContact->setFixedSize(300,88);
+        connect(newContact, &infoItemFrameLzy::clicked, this, &MainPageLzy::onInfoItemClicked);
+
+        ui->contactsArea->widget()->layout()->addWidget(newContact);
+    }
+
 }

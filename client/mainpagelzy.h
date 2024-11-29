@@ -20,6 +20,7 @@
 #define SERVER_ADDRESS "127.0.0.1"
 #define SERVER_PORT 8000
 
+
 namespace Ui {
 class MainPageLzy;
 }
@@ -41,6 +42,7 @@ private slots:
     void on_comboBox_activated(int index);
     void onInfoItemClicked(AccountLzy* account,AccountLzy* friendAccount);
     void OnReadyRead();//处理server发送的信息
+    void updateByInfoFormPageLzy(AccountLzy* searchAccount,TackleFriendRequest tfs);
 
 private:
     Ui::MainPageLzy *ui;
@@ -49,6 +51,7 @@ private:
     QTcpSocket* clientSocket=TcpConnectionManager::getInstance();
 
     void initRequestTab(const QString& accountId);
+    void initContactsTab(const QString& accountId);
     void updateRequestTab(AccountLzy* account);
     void closeEvent(QCloseEvent* event) override;
 };
