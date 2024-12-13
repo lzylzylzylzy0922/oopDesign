@@ -187,16 +187,22 @@ void MainPageLzy::OnReadyRead(){
         } else {
             qDebug() << "无法找到请求的账户信息";
         }
-    }
-}
+    }else if(obj["type"].toString()=="friend_request_agreed"){
+        AccountLzy* fromAccount=userDao->returnAccount(obj["from_id"].toString());
+        if(fromAccount){
+            infoItemFrameLzy* newContact=new infoItemFrameLzy(fromAccount,fromAccount->getAccountName(),fromAccount->getAccountId(),fromAccount->getAvatar());
+            newContact->setFixedSize(300,88);
+            connect(newContact, &infoItemFrameLzy::clicked, this, &MainPageLzy::onInfoItemClicked);
 
+            ui->contactsArea->widget()->layout()->addWidget(newContact);
+        }
+    }else if(obj["type"].toString()=="friend_request_rejected"){
+        AccountLzy* fromAccount=userDao->returnAccount(obj["from_id"].toString());
+        AccountLzy* searchAccount=userDao->returnAccount(obj["to_id"].toString());
 
+        QMessageBox::warning(this,"好友申请提示",fromAccount->getAccountId()+"拒绝了你的好友申请");
 
-void MainPageLzy::updateByInfoFormPageLzy(AccountLzy* searchAccount,TackleFriendRequest tfs){
-    if (tfs == TackleFriendRequest::AGREE) {
         QLayout* layout = ui->requestArea->widget()->layout();
-
-
         infoItemFrameLzy* itemToRemove = nullptr;
         // 遍历布局，查找并移除对应的组件
 
@@ -210,18 +216,58 @@ void MainPageLzy::updateByInfoFormPageLzy(AccountLzy* searchAccount,TackleFriend
                 break;
             }
         }
+    }
+}
 
-        if (itemToRemove) {
-            layout->removeWidget(itemToRemove);
-            itemToRemove->deleteLater();
+
+
+void MainPageLzy::updateByInfoFormPageLzy(AccountLzy* searchAccount,TackleFriendRequest tfs){
+    QLayout* layout = ui->requestArea->widget()->layout();
+
+
+    infoItemFrameLzy* itemToRemove = nullptr;
+    // 遍历布局，查找并移除对应的组件
+
+    for (int i = 0; i < layout->count(); ++i) {
+        QWidget* widget = layout->itemAt(i)->widget();
+        if(widget)
+            qDebug()<<widget->property("accountId");
+
+        if (widget && widget->property("accountId").toString() == searchAccount->getAccountId()) {
+            itemToRemove = qobject_cast<infoItemFrameLzy*>(widget);
+            break;
         }
+    }
 
+    if (itemToRemove) {
+        layout->removeWidget(itemToRemove);
+        itemToRemove->deleteLater();
+    }
+
+    if (tfs == TackleFriendRequest::AGREE) {
         //在联系人界面加入该用户
         infoItemFrameLzy* newContact=new infoItemFrameLzy(searchAccount,searchAccount->getAccountName(),searchAccount->getAccountId(),searchAccount->getAvatar());
         newContact->setFixedSize(300,88);
         connect(newContact, &infoItemFrameLzy::clicked, this, &MainPageLzy::onInfoItemClicked);
 
+        //向该用户发送已经通过好友申请信息
+        utilsLzy* utils=utilsLzy::getInstance();
+        QJsonDocument doc=utils->toJsonDoc("friend_request_agreed",this->account->getAccountId(),searchAccount->getAccountId());
+        qDebug()<<"用户同意了好友申请";
+        clientSocket->write(doc.toJson());
+        clientSocket->flush();
+
+
         ui->contactsArea->widget()->layout()->addWidget(newContact);
+    }
+    else{
+        utilsLzy* utils=utilsLzy::getInstance();
+        QJsonDocument doc=utils->toJsonDoc("friend_request_rejected",this->account->getAccountId(),searchAccount->getAccountId());
+        qDebug()<<"用户拒绝了好友申请";
+        clientSocket->write(doc.toJson());
+        clientSocket->flush();
+
+
     }
 
 }

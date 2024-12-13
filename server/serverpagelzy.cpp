@@ -42,7 +42,26 @@ serverPageLzy::serverPageLzy(QWidget *parent)
                 qDebug() << "收到好友申请: 从" << fromId << "到" << toId;
 
                 forwardFriendRequest(type,fromId, toId);
-            } else {
+            }
+
+            else if(type=="friend_request_agreed"){
+                QString fromId = obj["account_id"].toString();
+                QString toId = obj["friend_account_id"].toString();
+
+                qDebug() << "好友申请通过: 从" << fromId << "到" << toId;
+
+                forwardFriendRequest(type,fromId, toId);
+            }
+
+            else if(type=="friend_request_rejected"){
+                QString fromId = obj["account_id"].toString();
+                QString toId = obj["friend_account_id"].toString();
+
+                qDebug() << "好友申请拒绝: 从" << fromId << "到" << toId;
+
+                forwardFriendRequest(type,fromId, toId);
+            }
+            else {
                 qDebug() << "未知消息类型:" << type;
             }
         });

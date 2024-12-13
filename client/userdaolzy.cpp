@@ -334,7 +334,7 @@ QSqlQuery userDaoLzy::searchRequest(const QString& accountId){
 
 
 
-void userDaoLzy::acceptFriendRequest(AccountLzy* owner,AccountLzy* friendAccount){
+void userDaoLzy::agreeFriendRequest(AccountLzy* owner,AccountLzy* friendAccount){
     //更改好友申请表
     query.prepare("delete from friend_request where account_id=:friendAccount;");
 
@@ -379,6 +379,18 @@ void userDaoLzy::acceptFriendRequest(AccountLzy* owner,AccountLzy* friendAccount
     }else{
         query.bindValue(":type","WEIBO");
     }
+
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return;
+    }
+}
+
+void userDaoLzy::rejectFriendRequest(AccountLzy* owner,AccountLzy* friendAccount){
+    //更改好友申请表
+    query.prepare("delete from friend_request where account_id=:friendAccount;");
+
+    query.bindValue(":friendAccount",friendAccount->getAccountId());
 
     if (!query.exec()) {
         qWarning() << "SQL query execution failed:" << query.lastError().text();

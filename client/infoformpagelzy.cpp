@@ -69,9 +69,9 @@ void InfoFormPageLzy::on_addFriendButton_clicked()
 
 void InfoFormPageLzy::on_agreeButton_clicked()
 {
-    userDao->acceptFriendRequest(this->account,this->searchAccount);
+    userDao->agreeFriendRequest(this->account,this->searchAccount);
 
-    QJsonDocument doc=utils->toJsonDoc("accept_friend_request",this->account->getAccountId(),this->searchAccount->getAccountId());
+    QJsonDocument doc=utils->toJsonDoc("friend_request_agreed",this->account->getAccountId(),this->searchAccount->getAccountId());
     QTcpSocket* clientSocket=TcpConnectionManager::getInstance();
     clientSocket->write(doc.toJson());
     clientSocket->flush();
@@ -79,6 +79,24 @@ void InfoFormPageLzy::on_agreeButton_clicked()
     qDebug()<<this->account->getAccountId()<<"同意了"<<this->searchAccount->getAccountId()<<"的好友申请";
 
     TackleFriendRequest tfs=TackleFriendRequest::AGREE;
+    emit updateMainPageLzy(this->searchAccount,tfs);
+
+    this->hide();
+}
+
+
+void InfoFormPageLzy::on_rejectButton_clicked()
+{
+    userDao->rejectFriendRequest(this->account,this->searchAccount);
+
+    QJsonDocument doc=utils->toJsonDoc("friend_request_rejected",this->account->getAccountId(),this->searchAccount->getAccountId());
+    QTcpSocket* clientSocket=TcpConnectionManager::getInstance();
+    clientSocket->write(doc.toJson());
+    clientSocket->flush();
+
+    qDebug()<<this->account->getAccountId()<<"拒绝了"<<this->searchAccount->getAccountId()<<"的好友申请";
+
+    TackleFriendRequest tfs=TackleFriendRequest::REJECT;
     emit updateMainPageLzy(this->searchAccount,tfs);
 
     this->hide();

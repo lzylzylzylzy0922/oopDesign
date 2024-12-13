@@ -30,6 +30,8 @@ private slots:
 
     void on_agreeButton_clicked();
 
+    void on_rejectButton_clicked();
+
 private:
     Ui::InfoFormPageLzy *ui;
     userDaoLzy* userDao=userDaoLzy::getInstance();

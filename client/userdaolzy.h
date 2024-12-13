@@ -33,7 +33,8 @@ public:
     bool addFriend(AccountLzy* account,AccountLzy* friendAccount);//添加好友
     bool ifSentAddFriendRequest(AccountLzy* account,AccountLzy* friendAccount);//是否已经发送好友申请
     QSqlQuery searchRequest(const QString& accountId);
-    void acceptFriendRequest(AccountLzy* owner,AccountLzy* friendAccount);//同意好友申请
+    void agreeFriendRequest(AccountLzy* owner,AccountLzy* friendAccount);//同意好友申请
+    void rejectFriendRequest(AccountLzy* owner,AccountLzy* friendAccount);
     QSqlQuery searchContacts(const QString& accountId);
     AccountLzy* returnAccountByUserId(int userId,const QString& type);
 private:
