@@ -40,13 +40,19 @@ constexpr auto qt_meta_stringdata_CLASSMainPageLzyENDCLASS = QtMocHelpers::strin
     "",
     "AccountLzy*",
     "acoount",
+    "showCreateGroupPageLzy",
+    "account",
     "recvSignal",
     "AccountId",
+    "updateByCreateGroupPageLzy",
+    "GroupLzy*",
+    "group",
+    "type",
     "on_comboBox_activated",
     "index",
     "onInfoItemClicked",
-    "account",
     "friendAccount",
+    "onGroupItemClicked",
     "OnReadyRead",
     "updateByInfoFormPageLzy",
     "searchAccount",
@@ -64,32 +70,38 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainPageLzyENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
+       2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   50,    2, 0x06,    1 /* Public */,
+       1,    1,   68,    2, 0x06,    1 /* Public */,
+       5,    1,   71,    2, 0x06,    3 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       5,    1,   53,    2, 0x0a,    3 /* Public */,
-       7,    1,   56,    2, 0x08,    5 /* Private */,
-       9,    2,   59,    2, 0x08,    7 /* Private */,
-      12,    0,   64,    2, 0x08,   10 /* Private */,
-      13,    2,   65,    2, 0x08,   11 /* Private */,
+       7,    1,   74,    2, 0x0a,    5 /* Public */,
+       9,    2,   77,    2, 0x0a,    7 /* Public */,
+      13,    1,   82,    2, 0x08,   10 /* Private */,
+      15,    2,   85,    2, 0x08,   12 /* Private */,
+      17,    1,   90,    2, 0x08,   15 /* Private */,
+      18,    0,   93,    2, 0x08,   17 /* Private */,
+      19,    2,   94,    2, 0x08,   18 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void, 0x80000000 | 3,    6,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString,    6,
-    QMetaType::Void, QMetaType::Int,    8,
-    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3,   10,   11,
+    QMetaType::Void, QMetaType::QString,    8,
+    QMetaType::Void, 0x80000000 | 10, QMetaType::Int,   11,   12,
+    QMetaType::Void, QMetaType::Int,   14,
+    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3,    6,   16,
+    QMetaType::Void, 0x80000000 | 10,   11,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 15,   14,   16,
+    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 21,   20,   22,
 
        0        // eod
 };
@@ -106,9 +118,16 @@ Q_CONSTINIT const QMetaObject MainPageLzy::staticMetaObject = { {
         // method 'showSearchPageLzy'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<AccountLzy *, std::false_type>,
+        // method 'showCreateGroupPageLzy'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<AccountLzy *, std::false_type>,
         // method 'recvSignal'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        // method 'updateByCreateGroupPageLzy'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<GroupLzy *, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'on_comboBox_activated'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
@@ -116,6 +135,9 @@ Q_CONSTINIT const QMetaObject MainPageLzy::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<AccountLzy *, std::false_type>,
         QtPrivate::TypeAndForceComplete<AccountLzy *, std::false_type>,
+        // method 'onGroupItemClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<GroupLzy *, std::false_type>,
         // method 'OnReadyRead'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'updateByInfoFormPageLzy'
@@ -133,11 +155,14 @@ void MainPageLzy::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         (void)_t;
         switch (_id) {
         case 0: _t->showSearchPageLzy((*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[1]))); break;
-        case 1: _t->recvSignal((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 2: _t->on_comboBox_activated((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 3: _t->onInfoItemClicked((*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[2]))); break;
-        case 4: _t->OnReadyRead(); break;
-        case 5: _t->updateByInfoFormPageLzy((*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<TackleFriendRequest>>(_a[2]))); break;
+        case 1: _t->showCreateGroupPageLzy((*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[1]))); break;
+        case 2: _t->recvSignal((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 3: _t->updateByCreateGroupPageLzy((*reinterpret_cast< std::add_pointer_t<GroupLzy*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
+        case 4: _t->on_comboBox_activated((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 5: _t->onInfoItemClicked((*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[2]))); break;
+        case 6: _t->onGroupItemClicked((*reinterpret_cast< std::add_pointer_t<GroupLzy*>>(_a[1]))); break;
+        case 7: _t->OnReadyRead(); break;
+        case 8: _t->updateByInfoFormPageLzy((*reinterpret_cast< std::add_pointer_t<AccountLzy*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<TackleFriendRequest>>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -150,7 +175,21 @@ void MainPageLzy::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< AccountLzy* >(); break;
             }
             break;
+        case 1:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< AccountLzy* >(); break;
+            }
+            break;
         case 3:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< GroupLzy* >(); break;
+            }
+            break;
+        case 5:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 1:
@@ -158,7 +197,14 @@ void MainPageLzy::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< AccountLzy* >(); break;
             }
             break;
-        case 5:
+        case 6:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< GroupLzy* >(); break;
+            }
+            break;
+        case 8:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
@@ -172,6 +218,13 @@ void MainPageLzy::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
             using _t = void (MainPageLzy::*)(AccountLzy * );
             if (_t _q_method = &MainPageLzy::showSearchPageLzy; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 0;
+                return;
+            }
+        }
+        {
+            using _t = void (MainPageLzy::*)(AccountLzy * );
+            if (_t _q_method = &MainPageLzy::showCreateGroupPageLzy; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+                *result = 1;
                 return;
             }
         }
@@ -197,13 +250,13 @@ int MainPageLzy::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 9;
     }
     return _id;
 }
@@ -213,5 +266,12 @@ void MainPageLzy::showSearchPageLzy(AccountLzy * _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+
+// SIGNAL 1
+void MainPageLzy::showCreateGroupPageLzy(AccountLzy * _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_WARNING_POP

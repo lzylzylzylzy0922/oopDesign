@@ -29,6 +29,9 @@ public:
     QWidget *contactsTab;
     QScrollArea *contactsArea;
     QWidget *contactsContainer;
+    QWidget *groupTab;
+    QScrollArea *groupArea;
+    QWidget *scrollAreaWidgetContents;
     QWidget *requestTab;
     QScrollArea *requestArea;
     QWidget *requestContainer;
@@ -69,6 +72,17 @@ public:
         contactsContainer->setGeometry(QRect(0, 0, 339, 469));
         contactsArea->setWidget(contactsContainer);
         tabWidget->addTab(contactsTab, QString());
+        groupTab = new QWidget();
+        groupTab->setObjectName("groupTab");
+        groupArea = new QScrollArea(groupTab);
+        groupArea->setObjectName("groupArea");
+        groupArea->setGeometry(QRect(-1, -1, 351, 431));
+        groupArea->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 349, 429));
+        groupArea->setWidget(scrollAreaWidgetContents);
+        tabWidget->addTab(groupTab, QString());
         requestTab = new QWidget();
         requestTab->setObjectName("requestTab");
         requestArea = new QScrollArea(requestTab);
@@ -90,7 +104,7 @@ public:
 
         retranslateUi(MainPageLzy);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainPageLzy);
@@ -101,6 +115,7 @@ public:
         MainPageLzy->setWindowTitle(QCoreApplication::translate("MainPageLzy", "Form", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(messageTab), QCoreApplication::translate("MainPageLzy", "\346\266\210\346\201\257", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(contactsTab), QCoreApplication::translate("MainPageLzy", "\350\201\224\347\263\273\344\272\272", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(groupTab), QCoreApplication::translate("MainPageLzy", "\347\276\244\350\201\212", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(requestTab), QCoreApplication::translate("MainPageLzy", "\347\224\263\350\257\267", nullptr));
         comboBox->setItemText(0, QCoreApplication::translate("MainPageLzy", "\345\217\221\350\265\267\347\276\244\350\201\212", nullptr));
         comboBox->setItemText(1, QCoreApplication::translate("MainPageLzy", "\346\267\273\345\212\240\345\245\275\345\217\213/\347\276\244\350\201\212", nullptr));

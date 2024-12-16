@@ -64,7 +64,7 @@
 |  group_id   |   int    |        群ID        |
 |    name     | varchar  |        群名        |
 |    type     |   enum   | 群类型(QQ、WECHAT) |
-|  owner_id   |   int    | 群主ID(指向user表) |
+|  owner_id   |   int    |       群主ID       |
 | create_time | datetime |      创建时间      |
 
 5.群成员表group_member

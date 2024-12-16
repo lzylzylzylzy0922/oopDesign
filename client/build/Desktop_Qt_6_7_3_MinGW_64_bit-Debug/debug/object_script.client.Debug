@@ -1,9 +1,12 @@
+debug/creategrouppagelzy.o
 debug/databaseconnectionlzy.o
+debug/groupitemframelzy.o
 debug/infoformpagelzy.o
 debug/infoitemframelzy.o
 debug/main.o
 debug/mainpagelzy.o
 debug/registerpagelzy.o
+debug/searchforcontactslzy.o
 debug/searchpagelzy.o
 debug/tcpconnectionmanager.o
 debug/userdaolzy.o
@@ -17,11 +20,14 @@ debug/moc_GroupLzy.o
 debug/moc_GroupMemberLzy.o
 debug/moc_UserLzy.o
 debug/moc_UserServiceLzy.o
+debug/moc_creategrouppagelzy.o
 debug/moc_databaseconnectionlzy.o
+debug/moc_groupitemframelzy.o
 debug/moc_infoformpagelzy.o
 debug/moc_infoitemframelzy.o
 debug/moc_mainpagelzy.o
 debug/moc_registerpagelzy.o
+debug/moc_searchforcontactslzy.o
 debug/moc_searchpagelzy.o
 debug/moc_tcpconnectionmanager.o
 debug/moc_userdaolzy.o

@@ -20,11 +20,12 @@ private:
     GroupType type;
     QList<GroupMemberLzy*> members; // 群员列表
     QDateTime createTime;
-    int ownerId; // Declare ownerId
+    int ownerId;
 
 public:
-    GroupLzy(int g_id, const GroupType& t, const QString& grp_name, QObject *parent = nullptr)
-        : QObject(parent), groupId(g_id), name(grp_name), type(t), members(), createTime(QDateTime::currentDateTime()), ownerId(0) {}
+    GroupLzy(int g_id, const GroupType& t, const QString& grp_name, int owner_id, QObject *parent = nullptr)
+        : QObject(parent), groupId(g_id), name(grp_name), type(t), members(), createTime(QDateTime::currentDateTime()), ownerId(owner_id) {}
+
 
     void addMember(GroupMemberLzy* member) {
         members.append(member);

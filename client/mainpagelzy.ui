@@ -45,7 +45,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="messageTab">
     <attribute name="title">
@@ -98,6 +98,34 @@
         <y>0</y>
         <width>339</width>
         <height>469</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="groupTab">
+    <attribute name="title">
+     <string>群聊</string>
+    </attribute>
+    <widget class="QScrollArea" name="groupArea">
+     <property name="geometry">
+      <rect>
+       <x>-1</x>
+       <y>-1</y>
+       <width>351</width>
+       <height>431</height>
+      </rect>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>349</width>
+        <height>429</height>
        </rect>
       </property>
      </widget>

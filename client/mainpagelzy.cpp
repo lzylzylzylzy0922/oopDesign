@@ -11,6 +11,7 @@ MainPageLzy::MainPageLzy(QWidget *parent)
 
     QVBoxLayout* layout=new QVBoxLayout(ui->personalInfoWidget);
     ui->personalInfoWidget->setLayout(layout);
+
 }
 
 
@@ -64,7 +65,6 @@ void MainPageLzy::initContactsTab(const QString& accountId){
 
 
         account=userDao->returnAccountByUserId(friendId,type);
-        if(account==nullptr) qDebug()<<"============";
         infoItemFrameLzy* newItem=new infoItemFrameLzy(account,account->getAccountName(),account->getAccountId(),account->getAvatar());
         newItem->setFixedSize(300,88);
 
@@ -124,6 +124,8 @@ void MainPageLzy::recvSignal(QString accountId){
     initRequestTab(accountId);
     //初始化contactsTab
     initContactsTab(this->account->getAccountId());
+    //初始化groupTab
+    initGroupTab(account->getAccountId());
 
 }
 
@@ -134,11 +136,11 @@ void MainPageLzy::on_comboBox_activated(int index)
     case 0:
         //创建群聊 TODO
         //打开创建群聊界面
-
+        emit showCreateGroupPageLzy(account);
         qDebug()<<"打开创建群聊界面";
         break;
     case 1:
-        //添加好友/群聊 TODO
+        //添加好友/群聊
         //打开搜索界面
         emit showSearchPageLzy(account);
         qDebug()<<"打开搜索界面";
@@ -164,6 +166,11 @@ void MainPageLzy::onInfoItemClicked(AccountLzy* account,AccountLzy* friendAccoun
 
     infoForm->show();
 }
+
+void MainPageLzy::onGroupItemClicked(GroupLzy* group){
+    //TODO
+}
+
 
 void MainPageLzy::closeEvent(QCloseEvent* event){
     userDao->updateOnlineStatus(account,loginStatus::OFFLINE);
@@ -270,4 +277,36 @@ void MainPageLzy::updateByInfoFormPageLzy(AccountLzy* searchAccount,TackleFriend
 
     }
 
+}
+
+void MainPageLzy::initGroupTab(const QString& accountId){
+    QVBoxLayout* layout=new QVBoxLayout;
+    QWidget* container=new QWidget;
+    container->setLayout(layout);
+
+    ui->groupArea->setWidget(container);
+    ui->groupArea->setWidgetResizable(true);
+    ui->groupArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+
+    QSqlQuery query=userDao->searchGroups(accountId);
+
+    while(query.next()){
+        int groupId=query.value(0).toInt();
+        GroupLzy* group=userDao->getGroup(groupId);
+        GroupItemFrameLzy* newItem=new GroupItemFrameLzy(group);
+        newItem->setFixedSize(300,110);
+
+        connect(newItem, &GroupItemFrameLzy::clicked, this, &MainPageLzy::onGroupItemClicked);
+        ui->groupArea->widget()->layout()->addWidget(newItem);
+    }
+}
+
+void MainPageLzy::updateByCreateGroupPageLzy(GroupLzy* group,int type){
+    if(type==0){
+        GroupItemFrameLzy* newItem=new GroupItemFrameLzy(group);
+        newItem->setFixedSize(300,110);
+
+        connect(newItem, &GroupItemFrameLzy::clicked, this, &MainPageLzy::onGroupItemClicked);
+        ui->groupArea->widget()->layout()->addWidget(newItem);
+    }
 }

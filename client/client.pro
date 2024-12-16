@@ -9,12 +9,15 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    creategrouppagelzy.cpp \
     databaseconnectionlzy.cpp \
+    groupitemframelzy.cpp \
     infoformpagelzy.cpp \
     infoitemframelzy.cpp \
     main.cpp \
     mainpagelzy.cpp \
     registerpagelzy.cpp \
+    searchforcontactslzy.cpp \
     searchpagelzy.cpp \
     tcpconnectionmanager.cpp \
     userdaolzy.cpp \
@@ -32,11 +35,14 @@ HEADERS += \
     LoginStatusLzy.h \
     UserLzy.h \
     UserServiceLzy.h \
+    creategrouppagelzy.h \
     databaseconnectionlzy.h \
+    groupitemframelzy.h \
     infoformpagelzy.h \
     infoitemframelzy.h \
     mainpagelzy.h \
     registerpagelzy.h \
+    searchforcontactslzy.h \
     searchpagelzy.h \
     tcpconnectionmanager.h \
     userdaolzy.h \
@@ -44,10 +50,13 @@ HEADERS += \
     welcomepagelzy.h
 
 FORMS += \
+    creategrouppagelzy.ui \
+    groupitemframelzy.ui \
     infoformpagelzy.ui \
     infoitemframelzy.ui \
     mainpagelzy.ui \
     registerpagelzy.ui \
+    searchforcontactslzy.ui \
     searchpagelzy.ui \
     welcomepagelzy.ui
 

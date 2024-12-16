@@ -61,6 +61,18 @@ serverPageLzy::serverPageLzy(QWidget *parent)
 
                 forwardFriendRequest(type,fromId, toId);
             }
+
+            else if(type=="invit_friends"){
+                QJsonArray dataArray = obj["data"].toArray();
+
+                for (const QJsonValue &value : dataArray) {
+                    if (value.isString()) {
+                        QString accountId = value.toString();
+
+                        forwardFriendRequest(type,,accountId);
+                    }
+                }
+            }
             else {
                 qDebug() << "未知消息类型:" << type;
             }

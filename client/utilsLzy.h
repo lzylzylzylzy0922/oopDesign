@@ -6,6 +6,7 @@
 #include <QObject>
 #include <QString>
 #include <QRegularExpression>
+#include<AccountLzy.h>
 #include "AccountType.h"
 #include<QRandomGenerator>
 #include <QHostAddress>
@@ -45,6 +46,8 @@ public:
     static QJsonDocument toJsonDoc(QString type,QString accountId,QString friendAccountId);
 
     static QJsonDocument toJsonDoc(QString type,QString accountId);
+
+    static QString getType(AccountLzy* account);
 
 private:
     explicit utilsLzy(QObject *parent = nullptr);

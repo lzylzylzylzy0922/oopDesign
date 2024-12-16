@@ -16,6 +16,7 @@
 #include<tcpconnectionmanager.h>
 #include<QThread>
 #include<utilsLzy.h>
+#include<groupitemframelzy.h>
 
 #define SERVER_ADDRESS "127.0.0.1"
 #define SERVER_PORT 8000
@@ -34,13 +35,16 @@ public:
     ~MainPageLzy();
 signals:
     void showSearchPageLzy(AccountLzy* acoount);
+    void showCreateGroupPageLzy(AccountLzy* account);
 
 public slots:
     void recvSignal(QString AccountId);
+    void updateByCreateGroupPageLzy(GroupLzy* group,int type);//0入群,1退群
 
 private slots:
     void on_comboBox_activated(int index);
     void onInfoItemClicked(AccountLzy* account,AccountLzy* friendAccount);
+    void onGroupItemClicked(GroupLzy* group);
     void OnReadyRead();//处理server发送的信息
     void updateByInfoFormPageLzy(AccountLzy* searchAccount,TackleFriendRequest tfs);
 
@@ -52,6 +56,7 @@ private:
 
     void initRequestTab(const QString& accountId);
     void initContactsTab(const QString& accountId);
+    void initGroupTab(const QString& accountId);
     void updateRequestTab(AccountLzy* account);
     void closeEvent(QCloseEvent* event) override;
 };

@@ -14,6 +14,7 @@
 #include<AccountLzy.h>
 #include<LoginStatusLzy.h>
 #include<utilsLzy.h>
+#include<GroupLzy.h>
 #include<QMessageBox>
 
 class userDaoLzy : public QObject
@@ -33,10 +34,15 @@ public:
     bool addFriend(AccountLzy* account,AccountLzy* friendAccount);//添加好友
     bool ifSentAddFriendRequest(AccountLzy* account,AccountLzy* friendAccount);//是否已经发送好友申请
     QSqlQuery searchRequest(const QString& accountId);
+    QSqlQuery searchGroups(const QString& accountId);
     void agreeFriendRequest(AccountLzy* owner,AccountLzy* friendAccount);//同意好友申请
     void rejectFriendRequest(AccountLzy* owner,AccountLzy* friendAccount);
     QSqlQuery searchContacts(const QString& accountId);
     AccountLzy* returnAccountByUserId(int userId,const QString& type);
+    bool createGroup(int groupId,QString groupName,QString type,int ownerId,const QDateTime& currentTime);
+    GroupLzy* getGroup(int groupId);
+    void addGroupMember(GroupLzy* group,UserLzy* user,int role);//0群主，1管理员，2普通成员
+
 private:
     explicit userDaoLzy(QObject *parent = nullptr);
     static userDaoLzy* userDao;

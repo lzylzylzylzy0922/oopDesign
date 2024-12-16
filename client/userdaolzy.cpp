@@ -187,6 +187,8 @@ UserLzy* userDaoLzy::returnUser(QString accountId){
 
     UserLzy* user=new UserLzy(birth,registerTime,location,telephone);
 
+    user->setUserId(userId);
+
     return user;
 }
 
@@ -440,4 +442,81 @@ AccountLzy* userDaoLzy::returnAccountByUserId(int userId,const QString& type){
 
     return account;
 
+}
+
+
+bool userDaoLzy::createGroup(int groupId,QString groupName,QString type,int ownerId,const QDateTime& currentTime){
+    query.prepare("insert into user_group (group_id,name,type,owner_id,create_time) values (:groupId,:groupName,:type,:ownerId,:createTime);");
+
+    qDebug()<<groupId<<groupName<<type<<ownerId<<currentTime;
+
+    query.bindValue(":groupId",groupId);
+    query.bindValue(":groupName",groupName);
+    query.bindValue(":type",type);
+    query.bindValue(":ownerId",ownerId);
+    query.bindValue(":createTime",currentTime.toString("yyyy-MM-dd hh:mm:ss"));
+
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return false;
+    }
+
+    return true;
+}
+
+QSqlQuery userDaoLzy::searchGroups(const QString& accountId){
+    QSqlQuery query;
+    query.prepare("select * from group_member where user_id=:userId");
+
+    UserLzy* user=userDao->returnUser(accountId);
+    query.bindValue(":userId",user->getUserId());
+
+    delete user;
+
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+    }
+
+    return query;
+}
+
+GroupLzy* userDaoLzy::getGroup(int groupId){
+    query.prepare("select * from user_group where group_id=:groupId");
+    query.bindValue(":groupId",groupId);
+
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return nullptr;
+    }
+
+    if (!query.next()) {
+        qWarning() << "No records found";
+        return nullptr;
+    }
+
+    QString groupName=query.value(1).toString();
+    int ownerId=query.value(3).toInt();
+    QString createTime=query.value(2).toString();
+
+    if(query.value(2).toString()=="QQ"){
+        return new GroupLzy(groupId,GroupType::QQ,groupName,ownerId);
+    }else{
+        return new GroupLzy(groupId,GroupType::WECHAT,groupName,ownerId);
+    }
+
+}
+
+void userDaoLzy::addGroupMember(GroupLzy* group,UserLzy* user,int role){
+    query.prepare("insert into group_member (group_id,user_id,role) values (:groupId,:userId,:role);");
+
+    query.bindValue(":groupId",group->getGroupId());
+    query.bindValue(":userId",user->getUserId());
+    if(role==0) query.bindValue(":role","OWNER");
+    else if(role==1) query.bindValue(":role","ADMIN");
+    else query.bindValue(":role","MEMBER");
+
+    if (!query.exec()) {
+        qWarning() << "add group member failed:" << query.lastError().text();
+        return;
+    }
 }

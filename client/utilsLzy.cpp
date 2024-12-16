@@ -68,3 +68,13 @@ QJsonDocument utilsLzy::toJsonDoc(QString type,QString accountId){
     return doc;
 }
 
+QString utilsLzy::getType(AccountLzy* account){
+    if(account->getType()==AccountType::QQ){
+        return "QQ";
+    }else if(account->getType()==AccountType::WECHAT){
+        return "WECHAT";
+    }else{
+        return "WEIBO";
+    }
+}
+
