@@ -68,16 +68,30 @@ void SearchForContactsLzy::recvSignal(AccountLzy* account,int groupId){
 
 void SearchForContactsLzy::on_pushButton_clicked()
 {
+    //json
     QTcpSocket* clientSocket=TcpConnectionManager::getInstance();
     QJsonObject obj;
-    obj["type"]="invit_firends";
+    obj["type"]="invit_friends";
     obj["data"]=selectedUsers;
     obj["group_id"]=groupId;
-    qDebug()<<groupId;
 
     qDebug()<<obj<<Qt::endl;
     QJsonDocument doc(obj);
     clientSocket->write(doc.toJson());
     clientSocket->flush();
+
+    //插入group_member表中
+    userDaoLzy* userDao=userDaoLzy::getInstance();
+    QJsonArray dataArray = obj["data"].toArray();
+
+    for (const QJsonValue &value : dataArray) {
+        if (value.isString()) {
+            QString accountId = value.toString();
+            if(userDao->isMember(userDao->getGroup(groupId),userDao->returnUser(accountId)))
+                continue;
+            userDao->addGroupMember(userDao->getGroup(groupId),userDao->returnUser(accountId),2);//普通群成员
+        }
+    }
+
 }
 

@@ -27,6 +27,7 @@ serverPageLzy::serverPageLzy(QWidget *parent)
             }
 
             QJsonObject obj = doc.object();
+            qDebug()<<"----------------"<<obj;
             QString type = obj["type"].toString();
             qDebug()<<"客户端向服务器发送了"<<type<<"请求";
 
@@ -63,16 +64,17 @@ serverPageLzy::serverPageLzy(QWidget *parent)
             }
 
             else if(type=="invit_friends"){
+                int groupId=obj["group_id"].toInt();
                 QJsonArray dataArray = obj["data"].toArray();
 
                 for (const QJsonValue &value : dataArray) {
                     if (value.isString()) {
                         QString accountId = value.toString();
-
-                        forwardFriendRequest(type,,accountId);
+                        forwardGroupJson(type,groupId,accountId);
                     }
                 }
             }
+
             else {
                 qDebug() << "未知消息类型:" << type;
             }
@@ -136,6 +138,7 @@ QTcpSocket* serverPageLzy::getSocketById(QString accountId){
 void serverPageLzy::forwardFriendRequest(QString type,QString fromId,QString toId){
     QTcpSocket* clientSocket=this->getSocketById(toId);
     if(clientSocket==nullptr){
+        qDebug()<<"用户不在列表中，未查找到socket";
         return;
     }
 
@@ -146,5 +149,22 @@ void serverPageLzy::forwardFriendRequest(QString type,QString fromId,QString toI
 
     clientSocket->write(doc.toJson());
     clientSocket->flush();
-    qDebug()<<"将"<<fromId<<"的好友申请转发给"<<toId;
+    qDebug()<<"将"<<fromId<<"的<<type<<转发给"<<toId;
+}
+
+void serverPageLzy::forwardGroupJson(QString type,int groupId,QString toId){
+    QTcpSocket* clientSocket=this->getSocketById(toId);
+    if(clientSocket==nullptr){
+        qDebug()<<"用户不在列表中，未查找到socket";
+        return;
+    }
+
+    QJsonObject obj;
+    obj["type"]=type;
+    obj["group_id"]=groupId;
+    QJsonDocument doc(obj);
+
+    clientSocket->write(doc.toJson());
+    clientSocket->flush();
+    qDebug()<<"将群"<<groupId<<"的"<<type<<"转发给"<<toId;
 }

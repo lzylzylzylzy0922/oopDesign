@@ -35,6 +35,7 @@ private:
     void addUser(QTcpSocket *socket,QString accountId);
     void removeUser(QTcpSocket *socket);
     void forwardFriendRequest(QString type,QString fromId,QString toId);
+    void forwardGroupJson(QString type,int groupId,QString toId);
     QTcpSocket* getSocketById(QString accountId);
 
 };

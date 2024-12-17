@@ -35,6 +35,11 @@ CreateGroupPageLzy::~CreateGroupPageLzy()
 void CreateGroupPageLzy::recvSignal(AccountLzy* account){
     this->account=account;
 
+    ui->groupId->clear();
+    ui->groupName->clear();
+    ui->createGroupButton->show();
+    ui->invitFriendButton->hide();
+
     this->show();
 }
 
@@ -92,6 +97,7 @@ void CreateGroupPageLzy::on_createGroupButton_clicked()
         userDao->addGroupMember(userDao->getGroup(groupId),userDao->returnUser(account->getAccountId()),0);
         //更新界面
         emit updateMainPageLzy(userDao->getGroup(groupId),0);
+
         QMessageBox::information(this, "提醒", "创建群聊成功");
         ui->createGroupButton->hide();
         ui->invitFriendButton->show();

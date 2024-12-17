@@ -520,3 +520,22 @@ void userDaoLzy::addGroupMember(GroupLzy* group,UserLzy* user,int role){
         return;
     }
 }
+
+bool userDaoLzy::isMember(GroupLzy* group,UserLzy* user){
+    query.prepare("select * from group_member where group_id=:groupId and user_id=:userId;");
+
+    query.bindValue(":groupId",group->getGroupId());
+    query.bindValue(":userId",user->getUserId());
+
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return false;
+    }
+
+    if (!query.next()) {
+        qWarning() << "No records found";
+        return false;
+    }
+
+    return true;
+}

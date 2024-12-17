@@ -223,6 +223,20 @@ void MainPageLzy::OnReadyRead(){
                 break;
             }
         }
+    }else if(obj["type"].toString()=="invit_friends"){
+        int groupId=obj["group_id"].toInt();
+        GroupLzy* group=userDao->getGroup(groupId);
+        if(userDao->isMember(group,userDao->returnUser(account->getAccountId())))
+            return;
+
+        GroupItemFrameLzy* newItem=new GroupItemFrameLzy(group);
+        newItem->setFixedSize(300,110);
+
+        connect(newItem, &GroupItemFrameLzy::clicked, this, &MainPageLzy::onGroupItemClicked);
+        ui->groupArea->widget()->layout()->addWidget(newItem);
+
+        //提示
+        QMessageBox::information(this,"提示","你被邀请加入群聊"+QString::number(groupId));
     }
 }
 

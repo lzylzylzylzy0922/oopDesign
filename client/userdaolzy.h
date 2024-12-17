@@ -42,6 +42,7 @@ public:
     bool createGroup(int groupId,QString groupName,QString type,int ownerId,const QDateTime& currentTime);
     GroupLzy* getGroup(int groupId);
     void addGroupMember(GroupLzy* group,UserLzy* user,int role);//0群主，1管理员，2普通成员
+    bool isMember(GroupLzy* group,UserLzy* user);
 
 private:
     explicit userDaoLzy(QObject *parent = nullptr);
