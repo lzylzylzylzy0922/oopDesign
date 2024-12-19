@@ -35,7 +35,11 @@ namespace {
 #ifdef QT_MOC_HAS_STRINGDATA
 struct qt_meta_stringdata_CLASSGroupFormPageLzyENDCLASS_t {};
 constexpr auto qt_meta_stringdata_CLASSGroupFormPageLzyENDCLASS = QtMocHelpers::stringData(
-    "GroupFormPageLzy"
+    "GroupFormPageLzy",
+    "showGroupMemberQuery",
+    "",
+    "groupId",
+    "on_searchMemberButton_clicked"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -48,12 +52,24 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGroupFormPageLzyENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    1,   26,    2, 0x06,    1 /* Public */,
+
+ // slots: name, argc, parameters, tag, flags, initial metatype offsets
+       4,    0,   29,    2, 0x08,    3 /* Private */,
+
+ // signals: parameters
+    QMetaType::Void, QMetaType::Int,    3,
+
+ // slots: parameters
+    QMetaType::Void,
 
        0        // eod
 };
@@ -66,17 +82,36 @@ Q_CONSTINIT const QMetaObject GroupFormPageLzy::staticMetaObject = { {
     nullptr,
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSGroupFormPageLzyENDCLASS_t,
         // Q_OBJECT / Q_GADGET
-        QtPrivate::TypeAndForceComplete<GroupFormPageLzy, std::true_type>
+        QtPrivate::TypeAndForceComplete<GroupFormPageLzy, std::true_type>,
+        // method 'showGroupMemberQuery'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'on_searchMemberButton_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
 
 void GroupFormPageLzy::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    (void)_o;
-    (void)_id;
-    (void)_c;
-    (void)_a;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        auto *_t = static_cast<GroupFormPageLzy *>(_o);
+        (void)_t;
+        switch (_id) {
+        case 0: _t->showGroupMemberQuery((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 1: _t->on_searchMemberButton_clicked(); break;
+        default: ;
+        }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        {
+            using _t = void (GroupFormPageLzy::*)(int );
+            if (_t _q_method = &GroupFormPageLzy::showGroupMemberQuery; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+                *result = 0;
+                return;
+            }
+        }
+    }
 }
 
 const QMetaObject *GroupFormPageLzy::metaObject() const
@@ -95,6 +130,24 @@ void *GroupFormPageLzy::qt_metacast(const char *_clname)
 int GroupFormPageLzy::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 2)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 2;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 2)
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+        _id -= 2;
+    }
     return _id;
+}
+
+// SIGNAL 0
+void GroupFormPageLzy::showGroupMemberQuery(int _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP

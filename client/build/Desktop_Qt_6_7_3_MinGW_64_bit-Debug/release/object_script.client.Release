@@ -2,6 +2,7 @@ release/creategrouppagelzy.o
 release/databaseconnectionlzy.o
 release/groupformpagelzy.o
 release/groupitemframelzy.o
+release/groupmemberquerylzy.o
 release/infoformpagelzy.o
 release/infoitemframelzy.o
 release/main.o
@@ -25,6 +26,7 @@ release/moc_creategrouppagelzy.o
 release/moc_databaseconnectionlzy.o
 release/moc_groupformpagelzy.o
 release/moc_groupitemframelzy.o
+release/moc_groupmemberquerylzy.o
 release/moc_infoformpagelzy.o
 release/moc_infoitemframelzy.o
 release/moc_mainpagelzy.o

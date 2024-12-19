@@ -32,6 +32,7 @@ public:
     QPushButton *exitButton;
     QPushButton *dissolveButton;
     QPushButton *tackleAdminButton;
+    QPushButton *searchMemberButton;
     QPushButton *tackleMemberButton;
 
     void setupUi(QWidget *GroupFormPageLzy)
@@ -70,10 +71,13 @@ public:
         dissolveButton->setGeometry(QRect(160, 310, 56, 18));
         tackleAdminButton = new QPushButton(GroupFormPageLzy);
         tackleAdminButton->setObjectName("tackleAdminButton");
-        tackleAdminButton->setGeometry(QRect(310, 300, 56, 18));
+        tackleAdminButton->setGeometry(QRect(305, 297, 61, 21));
+        searchMemberButton = new QPushButton(GroupFormPageLzy);
+        searchMemberButton->setObjectName("searchMemberButton");
+        searchMemberButton->setGeometry(QRect(300, 337, 71, 21));
         tackleMemberButton = new QPushButton(GroupFormPageLzy);
         tackleMemberButton->setObjectName("tackleMemberButton");
-        tackleMemberButton->setGeometry(QRect(310, 340, 61, 18));
+        tackleMemberButton->setGeometry(QRect(300, 260, 61, 21));
 
         retranslateUi(GroupFormPageLzy);
 
@@ -89,7 +93,8 @@ public:
         exitButton->setText(QCoreApplication::translate("GroupFormPageLzy", "\351\200\200\345\207\272\347\276\244\350\201\212", nullptr));
         dissolveButton->setText(QCoreApplication::translate("GroupFormPageLzy", "\350\247\243\346\225\243\347\276\244\350\201\212", nullptr));
         tackleAdminButton->setText(QCoreApplication::translate("GroupFormPageLzy", "\345\244\204\347\220\206\347\256\241\347\220\206\345\221\230", nullptr));
-        tackleMemberButton->setText(QCoreApplication::translate("GroupFormPageLzy", "\345\244\204\347\220\206\347\276\244\346\210\220\345\221\230", nullptr));
+        searchMemberButton->setText(QCoreApplication::translate("GroupFormPageLzy", "\346\237\245\347\234\213\347\276\244\346\210\220\345\221\230", nullptr));
+        tackleMemberButton->setText(QCoreApplication::translate("GroupFormPageLzy", "\347\256\241\347\220\206\347\276\244\346\210\220\345\221\230", nullptr));
     } // retranslateUi
 
 };

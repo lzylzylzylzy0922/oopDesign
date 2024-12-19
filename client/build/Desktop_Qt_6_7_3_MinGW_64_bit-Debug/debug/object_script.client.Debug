@@ -2,6 +2,7 @@ debug/creategrouppagelzy.o
 debug/databaseconnectionlzy.o
 debug/groupformpagelzy.o
 debug/groupitemframelzy.o
+debug/groupmemberquerylzy.o
 debug/infoformpagelzy.o
 debug/infoitemframelzy.o
 debug/main.o
@@ -25,6 +26,7 @@ debug/moc_creategrouppagelzy.o
 debug/moc_databaseconnectionlzy.o
 debug/moc_groupformpagelzy.o
 debug/moc_groupitemframelzy.o
+debug/moc_groupmemberquerylzy.o
 debug/moc_infoformpagelzy.o
 debug/moc_infoitemframelzy.o
 debug/moc_mainpagelzy.o
