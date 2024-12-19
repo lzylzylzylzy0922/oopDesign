@@ -17,6 +17,7 @@
 #include<QThread>
 #include<utilsLzy.h>
 #include<groupitemframelzy.h>
+#include<groupformpagelzy.h>
 #include<QJsonArray>
 
 #define SERVER_ADDRESS "127.0.0.1"

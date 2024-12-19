@@ -1,5 +1,6 @@
 release/creategrouppagelzy.o
 release/databaseconnectionlzy.o
+release/groupformpagelzy.o
 release/groupitemframelzy.o
 release/infoformpagelzy.o
 release/infoitemframelzy.o
@@ -22,6 +23,7 @@ release/moc_UserLzy.o
 release/moc_UserServiceLzy.o
 release/moc_creategrouppagelzy.o
 release/moc_databaseconnectionlzy.o
+release/moc_groupformpagelzy.o
 release/moc_groupitemframelzy.o
 release/moc_infoformpagelzy.o
 release/moc_infoitemframelzy.o

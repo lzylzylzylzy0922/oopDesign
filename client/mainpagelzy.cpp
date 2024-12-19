@@ -168,7 +168,9 @@ void MainPageLzy::onInfoItemClicked(AccountLzy* account,AccountLzy* friendAccoun
 }
 
 void MainPageLzy::onGroupItemClicked(GroupLzy* group){
-    //TODO
+    GroupFormPageLzy* infoForm=new GroupFormPageLzy(group,account);
+
+    infoForm->show();
 }
 
 

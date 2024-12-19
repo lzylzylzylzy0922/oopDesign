@@ -44,6 +44,7 @@ public:
     GroupLzy* getGroup(int groupId);
     void addGroupMember(GroupLzy* group,UserLzy* user,int role);//0群主，1管理员，2普通成员
     bool isMember(GroupLzy* group,UserLzy* user);
+    void updateUserService(int userId,QString type);
 
 private:
     explicit userDaoLzy(QObject *parent = nullptr);

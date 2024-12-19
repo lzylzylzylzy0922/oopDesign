@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     creategrouppagelzy.cpp \
     databaseconnectionlzy.cpp \
+    groupformpagelzy.cpp \
     groupitemframelzy.cpp \
     infoformpagelzy.cpp \
     infoitemframelzy.cpp \
@@ -37,6 +38,7 @@ HEADERS += \
     UserServiceLzy.h \
     creategrouppagelzy.h \
     databaseconnectionlzy.h \
+    groupformpagelzy.h \
     groupitemframelzy.h \
     infoformpagelzy.h \
     infoitemframelzy.h \
@@ -51,6 +53,7 @@ HEADERS += \
 
 FORMS += \
     creategrouppagelzy.ui \
+    groupformpagelzy.ui \
     groupitemframelzy.ui \
     infoformpagelzy.ui \
     infoitemframelzy.ui \

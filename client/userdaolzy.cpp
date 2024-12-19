@@ -50,7 +50,7 @@ bool userDaoLzy::isUserExistsByPhoneAndType(QString phoneNumber,AccountType type
         t="WEIBO";
     }
 
-    query.prepare("select * from user where phone_number=:phoneNumber");
+    query.prepare("select * from user where phone_number=:phoneNumber;");
     query.bindValue(":phoneNumber",phoneNumber);
 
     query.exec();
@@ -71,13 +71,16 @@ bool userDaoLzy::isUserExistsByPhoneAndType(QString phoneNumber,AccountType type
 }
 
 bool userDaoLzy::createAccount(AccountLzy* account,QDate birth,QString location,QString telephone){
-    //先判断account表中用户是否已经存在
+    //先判断user表中用户是否已经存在
+    int userId=0;
+
     QSqlQuery query;
-    query.prepare("select * from account where account_id=:accountId");
-    query.bindValue(":accountId",account->getAccountId());
+    query.prepare("select * from user where phone_number=:telephone");
+    query.bindValue(":telephone",telephone);
     query.exec();
     //qDebug()<<query.size();
     //如果不存在，先向user表中插入，并获得user_id，再向account表中插入
+    //如果存在用户，直接向account表中插入
     if(!query.next()){
         //向user表中插入
         UserLzy* user=new UserLzy(birth,QDateTime::currentDateTime(),location,telephone);
@@ -90,7 +93,7 @@ bool userDaoLzy::createAccount(AccountLzy* account,QDate birth,QString location,
         query.bindValue(":phoneNumber",user->getPhoneNumber());
 
         //获得user_id
-        int userId;
+
         if (query.exec()) {  // 确保查询成功并且有记录返回
             userId = query.lastInsertId().toInt();  // 获取user_id
             qDebug() << "User ID:" << userId;
@@ -99,7 +102,9 @@ bool userDaoLzy::createAccount(AccountLzy* account,QDate birth,QString location,
             qDebug()<<query.lastError().text();
             return false;
         }
-
+    }else{
+        userId=query.value(0).toInt();
+    }
 
         //向account表插入数据
         query.prepare("insert into account values (:accountId,:userId,:type,:accountName,:password,:avatar);");
@@ -121,7 +126,7 @@ bool userDaoLzy::createAccount(AccountLzy* account,QDate birth,QString location,
 
         query.exec();
         return true;
-    }
+
     return false;
 }
 
@@ -577,4 +582,18 @@ bool userDaoLzy::isMember(GroupLzy* group,UserLzy* user){
     }
 
     return true;
+}
+
+void userDaoLzy::updateUserService(int userId,QString type){
+    query.prepare("insert into user_service (user_id,type,status,create_time) values (:userId,:type,:status,:createTime);");
+
+    query.bindValue(":userId",userId);
+    query.bindValue(":type",type);
+    query.bindValue(":status",1);
+    query.bindValue(":createTime",QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss"));
+
+    if (!query.exec()) {
+        qWarning() << "update user_service failed:" << query.lastError().text();
+        return;
+    }
 }

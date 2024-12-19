@@ -129,6 +129,9 @@ void RegisterPageLzy::on_registerButton_clicked()
         return;
     }
 
+    //更新user_service表
+    userDao->updateUserService(userDao->returnUser(account->getAccountId())->getUserId(),utils->getType(account));
+
     QMessageBox::information(this,"提醒","你的账户ID是:"+accountId+"\n请务必记住");
 }
 
