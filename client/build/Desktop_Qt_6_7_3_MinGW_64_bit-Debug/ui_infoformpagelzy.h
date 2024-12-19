@@ -32,6 +32,7 @@ public:
     QPushButton *sendMessageButton;
     QPushButton *agreeButton;
     QPushButton *rejectButton;
+    QPushButton *removeFriendButton;
 
     void setupUi(QWidget *InfoFormPageLzy)
     {
@@ -70,6 +71,9 @@ public:
         rejectButton = new QPushButton(InfoFormPageLzy);
         rejectButton->setObjectName("rejectButton");
         rejectButton->setGeometry(QRect(65, 288, 61, 21));
+        removeFriendButton = new QPushButton(InfoFormPageLzy);
+        removeFriendButton->setObjectName("removeFriendButton");
+        removeFriendButton->setGeometry(QRect(160, 320, 56, 21));
 
         retranslateUi(InfoFormPageLzy);
 
@@ -85,6 +89,7 @@ public:
         sendMessageButton->setText(QCoreApplication::translate("InfoFormPageLzy", "\345\217\221\344\277\241\346\201\257", nullptr));
         agreeButton->setText(QCoreApplication::translate("InfoFormPageLzy", "\351\200\232\350\277\207\345\245\275\345\217\213\347\224\263\350\257\267", nullptr));
         rejectButton->setText(QCoreApplication::translate("InfoFormPageLzy", "\346\213\222\347\273\235\345\245\275\345\217\213\347\224\263\350\257\267", nullptr));
+        removeFriendButton->setText(QCoreApplication::translate("InfoFormPageLzy", "\345\210\240\351\231\244\345\245\275\345\217\213", nullptr));
     } // retranslateUi
 
 };

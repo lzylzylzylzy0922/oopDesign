@@ -31,14 +31,17 @@ InfoFormPageLzy::InfoFormPageLzy(AccountLzy* account,AccountLzy* searchAccount,Q
     if (hasSentRequest) {
         ui->addFriendButton->hide();
         ui->sendMessageButton->hide();
+        ui->removeFriendButton->hide();
     } else if (isFriend) {
         ui->addFriendButton->hide();
         ui->agreeButton->hide();
         ui->rejectButton->hide();
+        ui->removeFriendButton->show();
     } else {
         ui->agreeButton->hide();
         ui->rejectButton->hide();
         ui->sendMessageButton->hide();
+        ui->removeFriendButton->hide();
     }
 
 
@@ -101,5 +104,23 @@ void InfoFormPageLzy::on_rejectButton_clicked()
     emit updateMainPageLzy(this->searchAccount,tfs);
 
     this->hide();
+}
+
+
+void InfoFormPageLzy::on_removeFriendButton_clicked()
+{
+    if(userDao->removeFriend(account,searchAccount)){
+        //先双方从好友列表中移除好友再弹窗
+        emit updateMainPageLzy(this->searchAccount,TackleFriendRequest::REMOVE);
+        //改变界面
+        ui->addFriendButton->show();
+        ui->removeFriendButton->hide();
+        ui->sendMessageButton->hide();
+        //弹窗
+        QMessageBox::information(this,"提示","删除好友成功");
+    }else{
+        QMessageBox::warning(this,"警告","删除好友失败");
+    }
+
 }
 

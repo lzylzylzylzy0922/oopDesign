@@ -134,6 +134,19 @@
     <string>拒绝好友申请</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="removeFriendButton">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>320</y>
+     <width>56</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>删除好友</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -75,6 +75,14 @@ serverPageLzy::serverPageLzy(QWidget *parent)
                 }
             }
 
+            else if(type=="remove_friend"){
+                QString fromId = obj["account_id"].toString();
+                QString toId = obj["friend_account_id"].toString();
+
+                qDebug()<< fromId << "删除了" << toId<< "好友";
+
+                forwardFriendRequest(type,fromId, toId);
+            }
             else {
                 qDebug() << "未知消息类型:" << type;
             }

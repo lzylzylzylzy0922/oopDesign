@@ -11,7 +11,7 @@
 #include<QTcpSocket>
 #include<tcpconnectionmanager.h>
 
-enum class TackleFriendRequest{AGREE,REJECT};
+enum class TackleFriendRequest{AGREE,REJECT,REMOVE};
 
 namespace Ui {
 class InfoFormPageLzy;
@@ -31,6 +31,8 @@ private slots:
     void on_agreeButton_clicked();
 
     void on_rejectButton_clicked();
+
+    void on_removeFriendButton_clicked();
 
 private:
     Ui::InfoFormPageLzy *ui;

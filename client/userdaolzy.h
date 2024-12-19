@@ -32,6 +32,7 @@ public:
     QSqlQuery searchUsersById(QString text);
     bool checkIfFriend(int userId1,int userId2,AccountType type);                                                  //查询双方是否为好友
     bool addFriend(AccountLzy* account,AccountLzy* friendAccount);//添加好友
+    bool removeFriend(AccountLzy* account,AccountLzy* friendAccount);
     bool ifSentAddFriendRequest(AccountLzy* account,AccountLzy* friendAccount);//是否已经发送好友申请
     QSqlQuery searchRequest(const QString& accountId);
     QSqlQuery searchGroups(const QString& accountId);

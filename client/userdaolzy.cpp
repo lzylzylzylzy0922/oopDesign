@@ -322,6 +322,45 @@ bool userDaoLzy::addFriend(AccountLzy* account,AccountLzy* friendAccount){
     return true;
 }
 
+bool userDaoLzy::removeFriend(AccountLzy* account, AccountLzy* friendAccount) {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
+
+    QSqlQuery query;
+    int userId = userDao->returnUser(account->getAccountId())->getUserId();
+    int friendId = userDao->returnUser(friendAccount->getAccountId())->getUserId();
+    QString type = utilsLzy::getInstance()->getType(account);
+
+    query.prepare("delete from friendship where user_id=:userId and friend_id=:friendId and type=:type");
+    query.bindValue(":userId", userId);
+    query.bindValue(":friendId", friendId);
+    query.bindValue(":type", type);
+
+    if (!query.exec()) {
+        qWarning() << "remove friend failed:" << query.lastError().text()
+        << " | SQL: " << query.executedQuery()
+        << " | userId: " << userId << ", friendId: " << friendId << ", type: " << type;
+        db.rollback();
+        return false;
+    }
+
+    query.prepare("delete from friendship where user_id=:userId and friend_id=:friendId and type=:type");
+    query.bindValue(":userId", friendId);
+    query.bindValue(":friendId", userId);
+    query.bindValue(":type", type);
+
+    if (!query.exec()) {
+        qWarning() << "remove friend failed:" << query.lastError().text()
+        << " | SQL: " << query.executedQuery()
+        << " | userId: " << friendId << ", friendId: " << userId << ", type: " << type;
+        db.rollback();
+        return false;
+    }
+
+    db.commit();
+    return true;
+}
+
 QSqlQuery userDaoLzy::searchRequest(const QString& accountId){
     QSqlQuery query;
     query.prepare("select * from friend_request where friend_account_id=:friendAccountId;");

@@ -220,7 +220,8 @@ void MainPageLzy::OnReadyRead(){
 
             if (widget && widget->property("accountId").toString() == searchAccount->getAccountId()) {
                 itemToRemove = qobject_cast<infoItemFrameLzy*>(widget);
-                break;
+                layout->removeWidget(itemToRemove);
+                itemToRemove->deleteLater();
             }
         }
     }else if(obj["type"].toString()=="invit_friends"){
@@ -237,12 +238,32 @@ void MainPageLzy::OnReadyRead(){
 
         //提示
         QMessageBox::information(this,"提示","你被邀请加入群聊"+QString::number(groupId));
+    }else if(obj["type"]=="remove_friend"){
+        AccountLzy* fromAccount=userDao->returnAccount(obj["from_id"].toString());
+
+        QLayout* layout = ui->contactsArea->widget()->layout();
+        infoItemFrameLzy* itemToRemove = nullptr;
+        // 遍历布局，查找并移除对应的组件
+
+        for (int i = 0; i < layout->count(); ++i) {
+            QWidget* widget = layout->itemAt(i)->widget();
+            if(widget)
+                qDebug()<<widget->property("accountId");
+
+            if (widget && widget->property("accountId").toString() == fromAccount->getAccountId()) {
+                itemToRemove = qobject_cast<infoItemFrameLzy*>(widget);
+                layout->removeWidget(itemToRemove);
+                itemToRemove->deleteLater();
+            }
+        }
+        QMessageBox::information(this,"提示","你被"+obj["from_id"].toString()+"删除了好友");
     }
 }
 
 
 
 void MainPageLzy::updateByInfoFormPageLzy(AccountLzy* searchAccount,TackleFriendRequest tfs){
+    utilsLzy* utils=utilsLzy::getInstance();
     QLayout* layout = ui->requestArea->widget()->layout();
 
 
@@ -264,6 +285,26 @@ void MainPageLzy::updateByInfoFormPageLzy(AccountLzy* searchAccount,TackleFriend
         layout->removeWidget(itemToRemove);
         itemToRemove->deleteLater();
     }
+    //移除联系人
+    layout = ui->contactsArea->widget()->layout();
+
+    itemToRemove = nullptr;
+    // 遍历布局，查找并移除对应的组件
+
+    for (int i = 0; i < layout->count(); ++i) {
+        QWidget* widget = layout->itemAt(i)->widget();
+        if(widget)
+            qDebug()<<widget->property("accountId");
+
+        if (widget && widget->property("accountId").toString() == searchAccount->getAccountId()) {
+            itemToRemove = qobject_cast<infoItemFrameLzy*>(widget);
+        }
+    }
+
+    if (itemToRemove) {
+        layout->removeWidget(itemToRemove);
+        itemToRemove->deleteLater();
+    }
 
     if (tfs == TackleFriendRequest::AGREE) {
         //在联系人界面加入该用户
@@ -271,24 +312,20 @@ void MainPageLzy::updateByInfoFormPageLzy(AccountLzy* searchAccount,TackleFriend
         newContact->setFixedSize(300,88);
         connect(newContact, &infoItemFrameLzy::clicked, this, &MainPageLzy::onInfoItemClicked);
 
-        //向该用户发送已经通过好友申请信息
-        utilsLzy* utils=utilsLzy::getInstance();
-        QJsonDocument doc=utils->toJsonDoc("friend_request_agreed",this->account->getAccountId(),searchAccount->getAccountId());
-        qDebug()<<"用户同意了好友申请";
-        clientSocket->write(doc.toJson());
-        clientSocket->flush();
-
-
         ui->contactsArea->widget()->layout()->addWidget(newContact);
     }
-    else{
-        utilsLzy* utils=utilsLzy::getInstance();
+    else if(tfs==TackleFriendRequest::REJECT){
         QJsonDocument doc=utils->toJsonDoc("friend_request_rejected",this->account->getAccountId(),searchAccount->getAccountId());
-        qDebug()<<"用户拒绝了好友申请";
+
         clientSocket->write(doc.toJson());
         clientSocket->flush();
-
-
+    }
+    else if(tfs==TackleFriendRequest::REMOVE){
+        //改变对方mainpage
+        QJsonDocument doc=utils->toJsonDoc("remove_friend",this->account->getAccountId(),searchAccount->getAccountId());
+        QTcpSocket* clientSocket=TcpConnectionManager::getInstance();
+        clientSocket->write(doc.toJson());
+        clientSocket->flush();
     }
 
 }

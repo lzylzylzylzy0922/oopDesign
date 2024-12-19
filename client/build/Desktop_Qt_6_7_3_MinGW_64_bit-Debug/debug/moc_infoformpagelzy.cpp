@@ -44,7 +44,8 @@ constexpr auto qt_meta_stringdata_CLASSInfoFormPageLzyENDCLASS = QtMocHelpers::s
     "tfr",
     "on_addFriendButton_clicked",
     "on_agreeButton_clicked",
-    "on_rejectButton_clicked"
+    "on_rejectButton_clicked",
+    "on_removeFriendButton_clicked"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -57,7 +58,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSInfoFormPageLzyENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -65,17 +66,19 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSInfoFormPageLzyENDCLASS[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    2,   38,    2, 0x06,    1 /* Public */,
+       1,    2,   44,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       7,    0,   43,    2, 0x08,    4 /* Private */,
-       8,    0,   44,    2, 0x08,    5 /* Private */,
-       9,    0,   45,    2, 0x08,    6 /* Private */,
+       7,    0,   49,    2, 0x08,    4 /* Private */,
+       8,    0,   50,    2, 0x08,    5 /* Private */,
+       9,    0,   51,    2, 0x08,    6 /* Private */,
+      10,    0,   52,    2, 0x08,    7 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 5,    4,    6,
 
  // slots: parameters
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -101,6 +104,8 @@ Q_CONSTINIT const QMetaObject InfoFormPageLzy::staticMetaObject = { {
         // method 'on_agreeButton_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_rejectButton_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_removeFriendButton_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -116,6 +121,7 @@ void InfoFormPageLzy::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 1: _t->on_addFriendButton_clicked(); break;
         case 2: _t->on_agreeButton_clicked(); break;
         case 3: _t->on_rejectButton_clicked(); break;
+        case 4: _t->on_removeFriendButton_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -160,13 +166,13 @@ int InfoFormPageLzy::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }
