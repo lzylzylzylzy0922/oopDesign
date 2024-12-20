@@ -597,3 +597,65 @@ void userDaoLzy::updateUserService(int userId,QString type){
         return;
     }
 }
+
+QString userDaoLzy::getRole(GroupLzy* group, AccountLzy* acc) {
+    QSqlQuery query;
+    query.prepare("SELECT group_id, user_id, role FROM group_member WHERE group_id=:groupId AND user_id=:userId");
+    query.bindValue(":groupId", group->getGroupId());
+    query.bindValue(":userId", userDao->returnUser(acc->getAccountId())->getUserId());
+
+    qDebug()<<query.lastQuery();
+
+    if (!query.exec()) {
+        qWarning() << "getRole failed. SQL error:" << query.lastError().text();
+        return "";
+    }
+
+    if (!query.next()) {
+        qWarning() << "No matching record found for group_id:" << group->getGroupId()
+        << "and user_id:" << userDao->returnUser(acc->getAccountId())->getUserId();
+        return "";
+    }
+
+    QSqlRecord rec = query.record();
+    qDebug() << "Query fields:" << rec.fieldName(0) << rec.fieldName(1) << rec.fieldName(2);
+
+    QString role = query.value(2).toString();
+    qDebug() << "group_id:" << query.value(0).toInt()
+             << "user_id:" << query.value(1).toInt()
+             << "role:" << role;
+
+    return role;
+}
+
+void userDaoLzy::changeAdmin(int userId,Mode mode){
+    query.prepare("update group_member set role=:role where user_id=:userId");
+
+    query.bindValue(":userId",userId);
+    QString role;
+    if(mode==Mode::ADDADMIN){
+        role="ADMIN";
+    }else if(mode==Mode::REMOVEADMIN){
+        role="MEMBER";
+    }
+
+    query.bindValue(":role",role);
+
+    if (!query.exec()) {
+        qWarning() << "changeAdmin failed. SQL error:" << query.lastError().text();
+        return;
+    }
+}
+
+bool userDaoLzy::removeMember(GroupLzy* group,int userId){
+    query.prepare("delete from group_member where group_id=:groupId and user_id=:userId");
+    query.bindValue(":groupId", group->getGroupId());
+    query.bindValue(":userId", userId);
+
+    if (!query.exec()) {
+        qWarning() << "removeMember failed. SQL error:" << query.lastError().text();
+        return false;
+    }
+
+    return true;
+}

@@ -13,6 +13,7 @@ SOURCES += \
     databaseconnectionlzy.cpp \
     groupformpagelzy.cpp \
     groupitemframelzy.cpp \
+    groupmemberquerylzy.cpp \
     infoformpagelzy.cpp \
     infoitemframelzy.cpp \
     main.cpp \
@@ -34,12 +35,14 @@ HEADERS += \
     GroupLzy.h \
     GroupMemberLzy.h \
     LoginStatusLzy.h \
+    Mode.h \
     UserLzy.h \
     UserServiceLzy.h \
     creategrouppagelzy.h \
     databaseconnectionlzy.h \
     groupformpagelzy.h \
     groupitemframelzy.h \
+    groupmemberquerylzy.h \
     infoformpagelzy.h \
     infoitemframelzy.h \
     mainpagelzy.h \
@@ -55,6 +58,7 @@ FORMS += \
     creategrouppagelzy.ui \
     groupformpagelzy.ui \
     groupitemframelzy.ui \
+    groupmemberquerylzy.ui \
     infoformpagelzy.ui \
     infoitemframelzy.ui \
     mainpagelzy.ui \

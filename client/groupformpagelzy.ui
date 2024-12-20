@@ -112,7 +112,7 @@
    <property name="geometry">
     <rect>
      <x>160</x>
-     <y>310</y>
+     <y>340</y>
      <width>56</width>
      <height>18</height>
     </rect>
@@ -124,27 +124,40 @@
   <widget class="QPushButton" name="tackleAdminButton">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>300</y>
-     <width>56</width>
-     <height>18</height>
+     <x>305</x>
+     <y>297</y>
+     <width>61</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="text">
     <string>处理管理员</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="tackleMemberButton">
+  <widget class="QPushButton" name="searchMemberButton">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>340</y>
-     <width>61</width>
-     <height>18</height>
+     <x>300</x>
+     <y>337</y>
+     <width>71</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>处理群成员</string>
+    <string>查看群成员</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="tackleMemberButton">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>260</y>
+     <width>61</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>管理群成员</string>
    </property>
   </widget>
  </widget>

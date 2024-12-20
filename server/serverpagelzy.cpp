@@ -83,6 +83,15 @@ serverPageLzy::serverPageLzy(QWidget *parent)
 
                 forwardFriendRequest(type,fromId, toId);
             }
+
+            else if(type=="remove_member"){
+                QString toId=obj["to_id"].toString();
+                int groupId=obj["group_id"].toInt();
+
+                qDebug()<<toId<<"被移除"<<QString::number(groupId)<<"群聊";
+
+                forwardGroupJson(type,groupId,toId);
+            }
             else {
                 qDebug() << "未知消息类型:" << type;
             }

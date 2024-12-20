@@ -60,7 +60,7 @@ void SearchForContactsLzy::recvSignal(AccountLzy* account,int groupId){
             selectedUsers.append(accId);
         });
 
-        row++;  // 递增行号
+        row++;
     }
 
     this->show();

@@ -16,6 +16,9 @@
 #include<utilsLzy.h>
 #include<GroupLzy.h>
 #include<QMessageBox>
+#include <QSqlRecord>
+#include<Mode.h>
+
 
 class userDaoLzy : public QObject
 {
@@ -45,6 +48,9 @@ public:
     void addGroupMember(GroupLzy* group,UserLzy* user,int role);//0群主，1管理员，2普通成员
     bool isMember(GroupLzy* group,UserLzy* user);
     void updateUserService(int userId,QString type);
+    QString getRole(GroupLzy* group,AccountLzy* acc);
+    void changeAdmin(int userId,Mode mode);
+    bool removeMember(GroupLzy* group,int userId);
 
 private:
     explicit userDaoLzy(QObject *parent = nullptr);

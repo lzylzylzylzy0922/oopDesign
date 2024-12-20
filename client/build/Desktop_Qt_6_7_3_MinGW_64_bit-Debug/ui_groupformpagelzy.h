@@ -68,7 +68,7 @@ public:
         exitButton->setGeometry(QRect(160, 310, 56, 18));
         dissolveButton = new QPushButton(GroupFormPageLzy);
         dissolveButton->setObjectName("dissolveButton");
-        dissolveButton->setGeometry(QRect(160, 310, 56, 18));
+        dissolveButton->setGeometry(QRect(160, 340, 56, 18));
         tackleAdminButton = new QPushButton(GroupFormPageLzy);
         tackleAdminButton->setObjectName("tackleAdminButton");
         tackleAdminButton->setGeometry(QRect(305, 297, 61, 21));

@@ -240,7 +240,7 @@ void MainPageLzy::OnReadyRead(){
 
         //提示
         QMessageBox::information(this,"提示","你被邀请加入群聊"+QString::number(groupId));
-    }else if(obj["type"]=="remove_friend"){
+    }else if(obj["type"].toString()=="remove_friend"){
         AccountLzy* fromAccount=userDao->returnAccount(obj["from_id"].toString());
 
         QLayout* layout = ui->contactsArea->widget()->layout();
@@ -259,6 +259,25 @@ void MainPageLzy::OnReadyRead(){
             }
         }
         QMessageBox::information(this,"提示","你被"+obj["from_id"].toString()+"删除了好友");
+    }else if(obj["type"].toString()=="remove_member"){
+        AccountLzy* account=userDao->returnAccount(obj["to_id"].toString());
+        GroupLzy* group=userDao->getGroup(obj["group_id"].toInt());
+
+        QLayout* layout = ui->groupArea->widget()->layout();
+        infoItemFrameLzy* itemToRemove = nullptr;
+        // 遍历布局，查找并移除对应的组件
+
+        for (int i = 0; i < layout->count(); ++i) {
+            QWidget* widget = layout->itemAt(i)->widget();
+            if(widget)
+                qDebug()<<widget->property("accountId");
+
+            if (widget && widget->property("groupId").toInt() == group->getGroupId()) {
+                itemToRemove = qobject_cast<infoItemFrameLzy*>(widget);
+                layout->removeWidget(itemToRemove);
+                itemToRemove->deleteLater();
+            }
+        }
     }
 }
 
