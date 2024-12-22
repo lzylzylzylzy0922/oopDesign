@@ -30,6 +30,7 @@ public:
     ~GroupMemberQueryLzy();
 
     void addCheckBox();
+    void tackleMember();
 
 protected:
     void closeEvent(QCloseEvent *event) override;

@@ -36,6 +36,10 @@ void GroupMemberQueryLzy::recvSignal(int groupId)
 
 void GroupMemberQueryLzy::queryGroupMembers()
 {
+    ui->queryButton->hide();
+    ui->removeMemberButton->hide();
+    ui->removeAdminButton->hide();
+
     QSqlQuery query;
     query.prepare("select group_id, user_id, role from group_member WHERE group_id = :group_id");
     query.bindValue(":group_id", groupIdToQuery);
@@ -59,6 +63,8 @@ void GroupMemberQueryLzy::queryGroupMembers()
 
 void GroupMemberQueryLzy::addCheckBox(){
     ui->removeAdminButton->show();
+    ui->queryButton->show();
+    ui->removeMemberButton->hide();
 
     ui->tableWidget->setColumnCount(4);
     ui->tableWidget->setHorizontalHeaderLabels({"Group ID", "User ID", "Role","CheckBox"});
@@ -70,6 +76,9 @@ void GroupMemberQueryLzy::addCheckBox(){
 
     if (model) {
         for (int row = 0; row < model->rowCount(); ++row) {
+            QTableWidgetItem* item = ui->tableWidget->item(row,2);
+            if(item->text()=="OWNER") continue;
+
             QCheckBox* checkBox = new QCheckBox();
             ui->tableWidget->setCellWidget(row, 3, checkBox);
 
@@ -84,6 +93,12 @@ void GroupMemberQueryLzy::addCheckBox(){
             });
         }
     }
+}
+
+void GroupMemberQueryLzy::tackleMember(){
+    ui->removeAdminButton->hide();
+    ui->queryButton->hide();
+    ui->removeMemberButton->show();
 }
 
 void GroupMemberQueryLzy::addAdmin(){

@@ -26,6 +26,7 @@ public:
     QTableWidget *tableWidget;
     QPushButton *queryButton;
     QPushButton *removeAdminButton;
+    QPushButton *removeMemberButton;
 
     void setupUi(QWidget *GroupMemberQueryLzy)
     {
@@ -59,6 +60,11 @@ public:
 
         verticalLayout->addWidget(removeAdminButton);
 
+        removeMemberButton = new QPushButton(GroupMemberQueryLzy);
+        removeMemberButton->setObjectName("removeMemberButton");
+
+        verticalLayout->addWidget(removeMemberButton);
+
 
         retranslateUi(GroupMemberQueryLzy);
 
@@ -78,6 +84,7 @@ public:
         ___qtablewidgetitem3->setText(QCoreApplication::translate("GroupMemberQueryLzy", "\345\244\215\351\200\211\346\241\206", nullptr));
         queryButton->setText(QCoreApplication::translate("GroupMemberQueryLzy", "\346\237\245\350\257\242\347\276\244\346\210\220\345\221\230", nullptr));
         removeAdminButton->setText(QCoreApplication::translate("GroupMemberQueryLzy", "\345\217\226\346\266\210\347\256\241\347\220\206\345\221\230", nullptr));
+        removeMemberButton->setText(QCoreApplication::translate("GroupMemberQueryLzy", "\350\270\242\345\207\272\347\276\244\350\201\212", nullptr));
     } // retranslateUi
 
 };

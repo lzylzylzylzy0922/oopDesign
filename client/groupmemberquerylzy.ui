@@ -52,6 +52,13 @@
      </property>
     </widget>
    </item>
+   <item>
+    <widget class="QPushButton" name="removeMemberButton">
+     <property name="text">
+      <string>踢出群聊</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>

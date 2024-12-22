@@ -35,6 +35,7 @@ public:
     QPushButton *searchMemberButton;
     QPushButton *tackleMemberButton;
     QPushButton *joinGroupButton;
+    QPushButton *invitFriendButton;
 
     void setupUi(QWidget *GroupFormPageLzy)
     {
@@ -82,6 +83,9 @@ public:
         joinGroupButton = new QPushButton(GroupFormPageLzy);
         joinGroupButton->setObjectName("joinGroupButton");
         joinGroupButton->setGeometry(QRect(160, 270, 56, 21));
+        invitFriendButton = new QPushButton(GroupFormPageLzy);
+        invitFriendButton->setObjectName("invitFriendButton");
+        invitFriendButton->setGeometry(QRect(160, 330, 56, 18));
 
         retranslateUi(GroupFormPageLzy);
 
@@ -100,6 +104,7 @@ public:
         searchMemberButton->setText(QCoreApplication::translate("GroupFormPageLzy", "\346\237\245\347\234\213\347\276\244\346\210\220\345\221\230", nullptr));
         tackleMemberButton->setText(QCoreApplication::translate("GroupFormPageLzy", "\347\256\241\347\220\206\347\276\244\346\210\220\345\221\230", nullptr));
         joinGroupButton->setText(QCoreApplication::translate("GroupFormPageLzy", "\345\212\240\345\205\245\347\276\244\350\201\212", nullptr));
+        invitFriendButton->setText(QCoreApplication::translate("GroupFormPageLzy", "\351\202\200\350\257\267\345\245\275\345\217\213", nullptr));
     } // retranslateUi
 
 };

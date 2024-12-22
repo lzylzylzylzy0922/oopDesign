@@ -10,6 +10,7 @@
 #include<userdaolzy.h>
 #include<UserLzy.h>
 #include<AccountType.h>
+#include<searchforcontactslzy.h>
 
 namespace Ui {
 class GroupFormPageLzy;
@@ -32,13 +33,19 @@ private slots:
 
     void on_joinGroupButton_clicked();
 
+    void on_tackleMemberButton_clicked();
+
+    void on_invitFriendButton_clicked();
+
 private:
     Ui::GroupFormPageLzy *ui;
     GroupLzy* group;
     AccountLzy* account;
+    SearchForContactsLzy* s;
 
 signals:
     void showGroupMemberQuery(int groupId);
+    void showSearchForContactsLzy(AccountLzy* acc,int groupId);
 };
 
 #endif // GROUPFORMPAGELZY_H

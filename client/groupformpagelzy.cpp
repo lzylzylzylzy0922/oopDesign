@@ -9,6 +9,7 @@ GroupFormPageLzy::GroupFormPageLzy(GroupLzy* grp,AccountLzy* acc,QWidget *parent
 
     this->group=grp;
     this->account=acc;
+    s=new SearchForContactsLzy;
 
     QVBoxLayout* layout=new QVBoxLayout(ui->container);
     ui->container->setLayout(layout);
@@ -50,6 +51,8 @@ GroupFormPageLzy::GroupFormPageLzy(GroupLzy* grp,AccountLzy* acc,QWidget *parent
     ui->groupNameEdit->setText(grp->getName());
     ui->groupIdEdit->setReadOnly(true);
     ui->groupNameEdit->setReadOnly(true);
+
+    connect(this,&GroupFormPageLzy::showSearchForContactsLzy,s,&SearchForContactsLzy::recvSignal);
 }
 
 GroupFormPageLzy::~GroupFormPageLzy()
@@ -117,5 +120,22 @@ void GroupFormPageLzy::on_joinGroupButton_clicked()
     clientSocket->write(doc.toJson());
     clientSocket->flush();
     QMessageBox::information(this,"提示","申请入群成功");
+}
+
+
+void GroupFormPageLzy::on_tackleMemberButton_clicked()
+{
+    GroupMemberQueryLzy* gm = new GroupMemberQueryLzy;
+    connect(this, &GroupFormPageLzy::showGroupMemberQuery, gm, &GroupMemberQueryLzy::recvSignal);
+
+    emit showGroupMemberQuery(this->group->getGroupId());
+    gm->addCheckBox();
+    gm->tackleMember();
+}
+
+
+void GroupFormPageLzy::on_invitFriendButton_clicked()
+{
+    emit showSearchForContactsLzy(this->account,this->group->getGroupId());
 }
 
