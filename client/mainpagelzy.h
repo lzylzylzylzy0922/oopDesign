@@ -38,6 +38,7 @@ public:
 signals:
     void showSearchPageLzy(AccountLzy* acoount);
     void showCreateGroupPageLzy(AccountLzy* account);
+    void showBindingPage(AccountLzy* account);
 
 public slots:
     void recvSignal(QString AccountId);

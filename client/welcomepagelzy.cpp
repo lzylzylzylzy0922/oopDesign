@@ -109,7 +109,17 @@ void welcomePageLzy::on_loginButton_clicked()
 
     userDaoLzy* userDao=userDaoLzy::getInstance();
     if(!userDao->isUserExistsByAccountAndType(accountId,type)){
-        QMessageBox::warning(this,"警告","ID不存在");
+        accountId=userDao->getBoundAccount(accountId,type);
+        if(!userDao->isUserExistsByAccountAndType(accountId,type)){
+            QMessageBox::warning(this,"警告","ID不存在");
+        }else{
+            if(!userDao->isPasswordCorrect(accountId,password))
+                QMessageBox::warning(this,"警告","密码错误");
+            else{
+                this->hide();
+                emit showMainPageLzy(accountId);
+            }
+        }
     }else{
         //校验密码
         if(!userDao->isPasswordCorrect(accountId,password))

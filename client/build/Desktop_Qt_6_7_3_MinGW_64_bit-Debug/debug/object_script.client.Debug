@@ -1,3 +1,4 @@
+debug/accountbindingpagelzy.o
 debug/creategrouppagelzy.o
 debug/databaseconnectionlzy.o
 debug/groupformpagelzy.o
@@ -14,7 +15,6 @@ debug/tcpconnectionmanager.o
 debug/userdaolzy.o
 debug/utilsLzy.o
 debug/welcomepagelzy.o
-debug/moc_AccountBindingLzy.o
 debug/moc_AccountLzy.o
 debug/moc_FriendshipLzy.o
 debug/moc_FriendshipRequestLzy.o
@@ -22,6 +22,7 @@ debug/moc_GroupLzy.o
 debug/moc_GroupMemberLzy.o
 debug/moc_UserLzy.o
 debug/moc_UserServiceLzy.o
+debug/moc_accountbindingpagelzy.o
 debug/moc_creategrouppagelzy.o
 debug/moc_databaseconnectionlzy.o
 debug/moc_groupformpagelzy.o

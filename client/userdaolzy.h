@@ -54,6 +54,12 @@ public:
     bool removeMember(GroupLzy* group,int userId);
     bool ifMemberExists(GroupLzy* group,AccountLzy* account);
     QString getAccountByUserId(int userId,QString type);
+    QSqlQuery getAccountsByUser(UserLzy* user);
+    bool ifBinding(QString accId1,QString accId2);
+    bool bindAccounts(int userId, const QString &accountId1, const QString &accountId2);
+    bool unbindAccounts(int userId, const QString &accountId1, const QString &accountId2);
+    QString getBoundAccount(const QString& accountId, const QString& type);
+    QString getAccountType(const QString& accountId);
 
 private:
     explicit userDaoLzy(QObject *parent = nullptr);

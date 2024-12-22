@@ -6,6 +6,7 @@
 #include<creategrouppagelzy.h>
 #include<searchforcontactslzy.h>
 #include<groupformpagelzy.h>
+#include<accountbindingpagelzy.h>
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -17,6 +18,7 @@ int main(int argc, char *argv[])
     SearchPageLzy s;
     CreateGroupPageLzy c;
     SearchForContactsLzy sfc;
+    AccountBindingPageLzy abp;
 
 
     QObject::connect(&w,&welcomePageLzy::showRegisterPageLzy,&r,&RegisterPageLzy::recvSignal);
@@ -26,6 +28,7 @@ int main(int argc, char *argv[])
     QObject::connect(&m,&MainPageLzy::showCreateGroupPageLzy,&c,&CreateGroupPageLzy::recvSignal);
     QObject::connect(&c,&CreateGroupPageLzy::showSearchForContactsLzy,&sfc,&SearchForContactsLzy::recvSignal);
     QObject::connect(&c,&CreateGroupPageLzy::updateMainPageLzy,&m,&MainPageLzy::updateByCreateGroupPageLzy);
+    QObject::connect(&m,&MainPageLzy::showBindingPage,&abp,&AccountBindingPageLzy::recvSignal);
 
     w.show();
 

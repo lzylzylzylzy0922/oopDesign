@@ -711,3 +711,129 @@ QString userDaoLzy::getAccountByUserId(int userId,QString type){
 
     return query.value(0).toString();
 }
+
+QSqlQuery userDaoLzy::getAccountsByUser(UserLzy* user){
+    QSqlQuery query;
+    query.prepare("select * from user_service where user_id=:userId");
+
+    query.bindValue(":userId",user->getUserId());
+
+    if (!query.exec()) {
+        qWarning() << "get accounts failed. SQL error:" << query.lastError().text();
+        return query;
+    }
+
+    return query;
+}
+
+bool userDaoLzy::ifBinding(QString accId1,QString accId2){
+    QSqlQuery query;
+    query.prepare("select * from account_binding where account_id_1=:accId1 and account_id_2=:accId2");
+
+    query.bindValue(":accId1",accId1);
+    query.bindValue(":accId2",accId2);
+
+    if (!query.exec()) {
+        qWarning() << "get binding relationship failed. SQL error:" << query.lastError().text();
+        return false;
+    }
+
+    if (!query.next()) {
+        qDebug()<<"not bound yet";
+        return false;
+    }
+
+    return true;
+}
+
+bool userDaoLzy::bindAccounts(int userId, const QString &accountId1, const QString &accountId2) {
+
+    QSqlQuery query;
+
+    query.prepare(
+        "insert into account_binding (user_id, account_id_1, account_id_2, create_time) values (:user_id, :account_id_1, :account_id_2, :create_time)"
+        );
+
+    query.bindValue(":user_id", userId);
+    query.bindValue(":account_id_1", accountId1);
+    query.bindValue(":account_id_2", accountId2);
+    query.bindValue(":create_time", QDateTime::currentDateTime());
+
+    if (!query.exec()) {
+        qWarning() << "failed to bind accounts:" << query.lastError().text();
+        return false;
+    }
+
+    qDebug() << "successfully bound accounts:" << accountId1 << "and" << accountId2;
+    return true;
+}
+
+bool userDaoLzy::unbindAccounts(int userId, const QString &accountId1, const QString &accountId2) {
+    QSqlQuery query;
+
+
+    query.prepare(
+        "DELETE FROM account_binding WHERE user_id = :user_id AND account_id_1 = :account_id_1 AND account_id_2 = :account_id_2"
+        );
+
+    query.bindValue(":user_id", userId);
+    query.bindValue(":account_id_1", accountId1);
+    query.bindValue(":account_id_2", accountId2);
+
+
+    if (!query.exec()) {
+        qWarning() << "Failed to unbind accounts:" << query.lastError().text();
+        return false;
+    }
+
+    qDebug() << "Successfully unbound accounts:" << accountId1 << "and" << accountId2;
+    return true;
+}
+
+QString userDaoLzy::getBoundAccount(const QString& accountId, const QString& type) {
+    QSqlQuery query;
+    query.prepare("SELECT account_id_1, account_id_2 FROM account_binding WHERE account_id_1 = :account_id OR account_id_2 = :account_id");
+    query.bindValue(":account_id", accountId);
+
+    if (!query.exec()) {
+        qWarning() << "Failed to execute query on account_binding:" << query.lastError().text();
+        return "";
+    }
+
+    while (query.next()) {
+        QString boundAccount1 = query.value("account_id_1").toString();
+        QString boundAccount2 = query.value("account_id_2").toString();
+
+        if (boundAccount1 == accountId) {
+            QString accountType = getAccountType(boundAccount2);
+            if (accountType == type) {
+                return boundAccount2;
+            }
+        }
+        if (boundAccount2 == accountId) {
+            QString accountType = getAccountType(boundAccount1);
+            if (accountType == type) {
+                return boundAccount1;
+            }
+        }
+    }
+
+    return "";
+}
+
+QString userDaoLzy::getAccountType(const QString& accountId) {
+    QSqlQuery query;
+    query.prepare("SELECT type FROM account WHERE account_id = :account_id");
+    query.bindValue(":account_id", accountId);
+
+    if (!query.exec()) {
+        qWarning() << "Failed to execute query on account table:" << query.lastError().text();
+        return "";
+    }
+
+    if (query.next()) {
+        return query.value("type").toString();
+    }
+
+    return "";
+}

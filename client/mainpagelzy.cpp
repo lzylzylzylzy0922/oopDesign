@@ -148,6 +148,7 @@ void MainPageLzy::on_comboBox_activated(int index)
     case 2:
         //绑定账户 TODO
         //打开绑定界面
+        emit showBindingPage(account);
         qDebug()<<"打开绑定界面";
         break;
     case 3:

@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    accountbindingpagelzy.cpp \
     creategrouppagelzy.cpp \
     databaseconnectionlzy.cpp \
     groupformpagelzy.cpp \
@@ -27,7 +28,6 @@ SOURCES += \
     welcomepagelzy.cpp
 
 HEADERS += \
-    AccountBindingLzy.h \
     AccountLzy.h \
     AccountType.h \
     FriendshipLzy.h \
@@ -38,6 +38,7 @@ HEADERS += \
     Mode.h \
     UserLzy.h \
     UserServiceLzy.h \
+    accountbindingpagelzy.h \
     creategrouppagelzy.h \
     databaseconnectionlzy.h \
     groupformpagelzy.h \
@@ -55,6 +56,7 @@ HEADERS += \
     welcomepagelzy.h
 
 FORMS += \
+    accountbindingpagelzy.ui \
     creategrouppagelzy.ui \
     groupformpagelzy.ui \
     groupitemframelzy.ui \
