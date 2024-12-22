@@ -87,7 +87,6 @@ void MainPageLzy::recvSignal(QString accountId){
         QMessageBox::warning(this,"连接提示","连接异常，请检查网络");
     });
 
-    //如果连接成功
     if (clientSocket->state() == QTcpSocket::ConnectedState) {
         utilsLzy* utils=utilsLzy::getInstance();
         QJsonDocument doc=utils->toJsonDoc("add_user",accountId);
@@ -214,7 +213,6 @@ void MainPageLzy::OnReadyRead(){
 
         QLayout* layout = ui->requestArea->widget()->layout();
         infoItemFrameLzy* itemToRemove = nullptr;
-        // 遍历布局，查找并移除对应的组件
 
         for (int i = 0; i < layout->count(); ++i) {
             QWidget* widget = layout->itemAt(i)->widget();
@@ -316,9 +314,7 @@ void MainPageLzy::OnReadyRead(){
         }else{
             QMessageBox::information(this,"提示","入群申请被拒绝");
         }
-    }else if(obj["type"].toString()=="remove_group_member"){
-        GroupLzy* group=userDao->getGroup(obj["group_id"].toInt());
-
+    }else if(obj["type"].toString()=="remove_group_member"||obj["type"].toString()=="dissolve_group"){
         QLayout* layout = ui->groupArea->widget()->layout();
         GroupItemFrameLzy* itemToRemove = nullptr;
 
@@ -327,13 +323,14 @@ void MainPageLzy::OnReadyRead(){
             if(widget)
                 qDebug()<<widget->property("groupId");
 
-            if (widget && widget->property("groupId").toInt() == group->getGroupId()) {
+            if (widget && widget->property("groupId").toInt() == obj["group_id"].toInt()) {
                 itemToRemove = qobject_cast<GroupItemFrameLzy*>(widget);
                 layout->removeWidget(itemToRemove);
                 itemToRemove->deleteLater();
             }
         }
-        QMessageBox::information(this,"提示","你被踢出群了");
+        if(obj["type"].toString()=="remove_group_member") QMessageBox::information(this,"提示","你被踢出群了");
+        else QMessageBox::information(this,"提示",QString::number(obj["group_id"].toInt())+"群已经解散");
     }
 }
 

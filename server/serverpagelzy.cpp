@@ -125,7 +125,7 @@ serverPageLzy::serverPageLzy(QWidget *parent)
                 clientSocket->flush();
             }
 
-            else if(type=="remove_group_member"){
+            else if(type=="remove_group_member"||type=="dissolve_group"){
                 int groupId=obj["group_id"].toInt();
                 QJsonArray dataArray = obj["data"].toArray();
 

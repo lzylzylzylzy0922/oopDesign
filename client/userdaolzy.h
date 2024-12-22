@@ -60,6 +60,8 @@ public:
     bool unbindAccounts(int userId, const QString &accountId1, const QString &accountId2);
     QString getBoundAccount(const QString& accountId, const QString& type);
     QString getAccountType(const QString& accountId);
+    QSqlQuery getMembers(int groupId);
+    void dissolveGroup(int groupId);
 
 private:
     explicit userDaoLzy(QObject *parent = nullptr);

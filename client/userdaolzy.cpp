@@ -837,3 +837,27 @@ QString userDaoLzy::getAccountType(const QString& accountId) {
 
     return "";
 }
+
+QSqlQuery userDaoLzy::getMembers(int groupId){
+    QSqlQuery query;
+    query.prepare("select * from group_member where group_id=:groupId");
+    query.bindValue(":groupId",groupId);
+
+    if (!query.exec()) {
+        qWarning() << "Failed to get members:" << query.lastError().text();
+        return query;
+    }
+
+    return query;
+}
+
+void userDaoLzy::dissolveGroup(int groupId){
+    QSqlQuery query;
+    query.prepare("delete from user_group where group_id=:groupId");
+    query.bindValue(":groupId",groupId);
+
+    if (!query.exec()) {
+        qWarning() << "Failed to dissolve group:" << query.lastError().text();
+    }
+
+}

@@ -142,6 +142,35 @@ void GroupFormPageLzy::on_invitFriendButton_clicked()
 
 void GroupFormPageLzy::on_dissolveButton_clicked()
 {
+    QTcpSocket* clientSocket=TcpConnectionManager::getInstance();
+    QJsonObject obj;
+    obj["type"]="dissolve_group";
+    obj["group_id"]=group->getGroupId();
 
+
+    userDaoLzy* userDao=userDaoLzy::getInstance();
+
+    QString type;
+    if(group->getType()==GroupType::QQ) type="QQ";
+    else type="WECHAT";
+
+    QSqlQuery query=userDao->getMembers(group->getGroupId());
+    QJsonArray array;
+    while(query.next()){
+        int userId=query.value(1).toInt();
+        userDao->removeMember(group,userId);
+        QString toId=userDao->getAccountByUserId(userId,type);
+        array.append(toId);
+    }
+
+    obj["data"]=array;
+
+    QJsonDocument doc(obj);
+
+    clientSocket->write(doc.toJson());
+    clientSocket->flush();
+
+    //删除群聊
+    userDao->dissolveGroup(group->getGroupId());
 }
 
