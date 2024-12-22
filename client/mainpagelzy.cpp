@@ -316,6 +316,24 @@ void MainPageLzy::OnReadyRead(){
         }else{
             QMessageBox::information(this,"提示","入群申请被拒绝");
         }
+    }else if(obj["type"].toString()=="remove_group_member"){
+        GroupLzy* group=userDao->getGroup(obj["group_id"].toInt());
+
+        QLayout* layout = ui->groupArea->widget()->layout();
+        GroupItemFrameLzy* itemToRemove = nullptr;
+
+        for (int i = 0; i < layout->count(); ++i) {
+            QWidget* widget = layout->itemAt(i)->widget();
+            if(widget)
+                qDebug()<<widget->property("groupId");
+
+            if (widget && widget->property("groupId").toInt() == group->getGroupId()) {
+                itemToRemove = qobject_cast<GroupItemFrameLzy*>(widget);
+                layout->removeWidget(itemToRemove);
+                itemToRemove->deleteLater();
+            }
+        }
+        QMessageBox::information(this,"提示","你被踢出群了");
     }
 }
 

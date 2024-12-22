@@ -39,6 +39,7 @@ public slots:
     void recvSignal(int groupId);
     void addAdmin();
     void removeAdmin();
+    void removeGroupMembers();
 
 private:
     Ui::GroupMemberQueryLzy *ui;

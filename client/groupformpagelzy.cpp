@@ -139,3 +139,9 @@ void GroupFormPageLzy::on_invitFriendButton_clicked()
     emit showSearchForContactsLzy(this->account,this->group->getGroupId());
 }
 
+
+void GroupFormPageLzy::on_dissolveButton_clicked()
+{
+
+}
+

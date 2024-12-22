@@ -114,7 +114,6 @@ serverPageLzy::serverPageLzy(QWidget *parent)
             }
 
             else if(type=="tackle_group_request"){
-                qDebug()<<obj;
                 QString toId=obj["to_id"].toString();
                 QTcpSocket* clientSocket=this->getSocketById(toId);
                 if(clientSocket==nullptr){
@@ -125,6 +124,19 @@ serverPageLzy::serverPageLzy(QWidget *parent)
                 clientSocket->write(doc.toJson());
                 clientSocket->flush();
             }
+
+            else if(type=="remove_group_member"){
+                int groupId=obj["group_id"].toInt();
+                QJsonArray dataArray = obj["data"].toArray();
+
+                for (const QJsonValue &value : dataArray) {
+                    if (value.isString()) {
+                        QString accountId = value.toString();
+                        forwardGroupJson(type,groupId,accountId);
+                    }
+                }
+            }
+
             else {
                 qDebug() << "未知消息类型:" << type;
             }

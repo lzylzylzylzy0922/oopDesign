@@ -37,6 +37,8 @@ private slots:
 
     void on_invitFriendButton_clicked();
 
+    void on_dissolveButton_clicked();
+
 private:
     Ui::GroupFormPageLzy *ui;
     GroupLzy* group;

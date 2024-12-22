@@ -13,6 +13,8 @@ GroupMemberQueryLzy::GroupMemberQueryLzy(QWidget *parent)
 
     ui->removeAdminButton->hide();
     //connect(ui->queryButton, &QPushButton::clicked, this, &GroupMemberQueryLzy::queryGroupMembers);
+
+    connect(ui->removeMemberButton,&QPushButton::clicked,this,&GroupMemberQueryLzy::removeGroupMembers);
 }
 
 GroupMemberQueryLzy::~GroupMemberQueryLzy()
@@ -123,6 +125,39 @@ void GroupMemberQueryLzy::removeAdmin(){
     QMessageBox::information(this,"提示","移除管理员成功");
 }
 
+void GroupMemberQueryLzy::removeGroupMembers() {
+    userDaoLzy* userDao = userDaoLzy::getInstance();
+    QJsonArray removedUsers;
 
+    for (const QJsonValue& value : selectedUsers) {
+        int userId = value.toInt();
+        if (userId == userDao->getGroup(groupIdToQuery)->getOwnerId()) continue;
+
+        GroupLzy* group=userDao->getGroup(groupIdToQuery);
+        userDao->removeMember(group, userId);
+        QString type;
+        if(group->getType()==GroupType::QQ) type="QQ";
+        else type="WECHAT";
+
+        removedUsers.append(userDao->getAccountByUserId(userId,type));
+    }
+
+    QTcpSocket* clientSocket = TcpConnectionManager::getInstance();
+
+    if (clientSocket && clientSocket->isOpen() && !removedUsers.isEmpty()) {
+        QJsonObject obj;
+        obj["type"] = "remove_group_member";
+        obj["group_id"] = groupIdToQuery;
+        obj["data"] = removedUsers;
+
+        QJsonDocument doc(obj);
+        QByteArray jsonData = doc.toJson();
+
+        clientSocket->write(jsonData);
+        clientSocket->flush();
+    }
+
+    QMessageBox::information(this, "提示", "踢出群员成功");
+}
 
 
