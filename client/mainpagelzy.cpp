@@ -264,19 +264,56 @@ void MainPageLzy::OnReadyRead(){
         GroupLzy* group=userDao->getGroup(obj["group_id"].toInt());
 
         QLayout* layout = ui->groupArea->widget()->layout();
-        infoItemFrameLzy* itemToRemove = nullptr;
+        GroupItemFrameLzy* itemToRemove = nullptr;
         // 遍历布局，查找并移除对应的组件
 
         for (int i = 0; i < layout->count(); ++i) {
             QWidget* widget = layout->itemAt(i)->widget();
             if(widget)
-                qDebug()<<widget->property("accountId");
+                qDebug()<<widget->property("groupId");
 
             if (widget && widget->property("groupId").toInt() == group->getGroupId()) {
-                itemToRemove = qobject_cast<infoItemFrameLzy*>(widget);
+                itemToRemove = qobject_cast<GroupItemFrameLzy*>(widget);
                 layout->removeWidget(itemToRemove);
                 itemToRemove->deleteLater();
             }
+        }
+    }else if(obj["type"].toString()=="join_group_request"){
+        int groupId=obj["group_id"].toInt();
+        qDebug()<<"------"<<obj;
+        QJsonObject returnObj;
+        returnObj["type"]="tackle_group_request";
+        returnObj["to_id"]=obj["from_id"];
+        returnObj["group_id"]=groupId;
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this,
+                                      "加入请求",
+                                      obj["from_id"].toString()+"申请加入"+QString::number(groupId)+",你同意吗？",
+                                      QMessageBox::Yes | QMessageBox::No);
+
+        if (reply == QMessageBox::Yes) {
+            qDebug() << "用户选择了Yes";
+            userDao->addGroupMember(userDao->getGroup(groupId),userDao->returnUser(obj["from_id"].toString()),2);
+            returnObj["dicision"]="AGREE";
+        } else {
+            qDebug() << "用户选择了No";
+            returnObj["dicision"]="REJECT";
+        }
+        QJsonDocument doc(returnObj);
+        clientSocket->write(doc.toJson());
+        clientSocket->flush();
+    }else if(obj["type"].toString()=="tackle_group_request"){
+        if(obj["dicision"].toString()=="AGREE"){
+            int groupId=obj["group_id"].toInt();
+            GroupLzy* group=userDao->getGroup(groupId);
+            GroupItemFrameLzy* newItem=new GroupItemFrameLzy(group);
+            newItem->setFixedSize(300,110);
+
+            connect(newItem, &GroupItemFrameLzy::clicked, this, &MainPageLzy::onGroupItemClicked);
+            ui->groupArea->widget()->layout()->addWidget(newItem);
+            QMessageBox::information(this,"提示","入群申请通过");
+        }else{
+            QMessageBox::information(this,"提示","入群申请被拒绝");
         }
     }
 }

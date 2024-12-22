@@ -46,7 +46,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>ID号/群号：</string>
+    <string>ID号：</string>
    </property>
   </widget>
   <widget class="QPushButton" name="searchButton">
@@ -81,7 +81,7 @@
      <x>110</x>
      <y>100</y>
      <width>231</width>
-     <height>271</height>
+     <height>191</height>
     </rect>
    </property>
    <property name="widgetResizable">
@@ -93,7 +93,7 @@
       <x>0</x>
       <y>0</y>
       <width>229</width>
-      <height>269</height>
+      <height>189</height>
      </rect>
     </property>
    </widget>
@@ -102,7 +102,7 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>400</y>
+     <y>340</y>
      <width>40</width>
      <height>12</height>
     </rect>
@@ -115,9 +115,9 @@
    <property name="geometry">
     <rect>
      <x>110</x>
-     <y>400</y>
+     <y>340</y>
      <width>231</width>
-     <height>80</height>
+     <height>181</height>
     </rect>
    </property>
    <property name="widgetResizable">
@@ -129,10 +129,49 @@
       <x>0</x>
       <y>0</y>
       <width>229</width>
-      <height>78</height>
+      <height>179</height>
      </rect>
     </property>
    </widget>
+  </widget>
+  <widget class="QLineEdit" name="groupIdEdit">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>310</y>
+     <width>201</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>310</y>
+     <width>51</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>群号：</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="searchGroupButton">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>310</y>
+     <width>56</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>查找</string>
+   </property>
   </widget>
  </widget>
  <resources/>

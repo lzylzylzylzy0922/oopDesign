@@ -30,6 +30,8 @@ private slots:
 
     void on_exitButton_clicked();
 
+    void on_joinGroupButton_clicked();
+
 private:
     Ui::GroupFormPageLzy *ui;
     GroupLzy* group;

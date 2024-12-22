@@ -32,6 +32,9 @@ public:
     QLabel *label_4;
     QScrollArea *groupScrollArea;
     QWidget *scrollAreaWidgetContents_2;
+    QLineEdit *groupIdEdit;
+    QLabel *label_5;
+    QPushButton *searchGroupButton;
 
     void setupUi(QWidget *SearchPageLzy)
     {
@@ -55,23 +58,32 @@ public:
         label_3->setGeometry(QRect(50, 100, 40, 12));
         userScrollArea = new QScrollArea(SearchPageLzy);
         userScrollArea->setObjectName("userScrollArea");
-        userScrollArea->setGeometry(QRect(110, 100, 231, 271));
+        userScrollArea->setGeometry(QRect(110, 100, 231, 191));
         userScrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 229, 269));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 229, 189));
         userScrollArea->setWidget(scrollAreaWidgetContents);
         label_4 = new QLabel(SearchPageLzy);
         label_4->setObjectName("label_4");
-        label_4->setGeometry(QRect(50, 400, 40, 12));
+        label_4->setGeometry(QRect(50, 340, 40, 12));
         groupScrollArea = new QScrollArea(SearchPageLzy);
         groupScrollArea->setObjectName("groupScrollArea");
-        groupScrollArea->setGeometry(QRect(110, 400, 231, 80));
+        groupScrollArea->setGeometry(QRect(110, 340, 231, 181));
         groupScrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName("scrollAreaWidgetContents_2");
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 229, 78));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 229, 179));
         groupScrollArea->setWidget(scrollAreaWidgetContents_2);
+        groupIdEdit = new QLineEdit(SearchPageLzy);
+        groupIdEdit->setObjectName("groupIdEdit");
+        groupIdEdit->setGeometry(QRect(110, 310, 201, 21));
+        label_5 = new QLabel(SearchPageLzy);
+        label_5->setObjectName("label_5");
+        label_5->setGeometry(QRect(50, 310, 51, 20));
+        searchGroupButton = new QPushButton(SearchPageLzy);
+        searchGroupButton->setObjectName("searchGroupButton");
+        searchGroupButton->setGeometry(QRect(320, 310, 56, 18));
 
         retranslateUi(SearchPageLzy);
 
@@ -82,10 +94,13 @@ public:
     {
         SearchPageLzy->setWindowTitle(QCoreApplication::translate("SearchPageLzy", "Form", nullptr));
         label->setText(QCoreApplication::translate("SearchPageLzy", "<html><head/><body><p align=\"center\">\346\237\245\346\211\276\347\224\250\346\210\267\345\222\214\347\276\244\350\201\212</p></body></html>", nullptr));
-        label_2->setText(QCoreApplication::translate("SearchPageLzy", "ID\345\217\267/\347\276\244\345\217\267\357\274\232", nullptr));
+        label_2->setText(QCoreApplication::translate("SearchPageLzy", "ID\345\217\267\357\274\232", nullptr));
         searchButton->setText(QCoreApplication::translate("SearchPageLzy", "\346\237\245\346\211\276", nullptr));
         label_3->setText(QCoreApplication::translate("SearchPageLzy", "\347\224\250\346\210\267\357\274\232", nullptr));
         label_4->setText(QCoreApplication::translate("SearchPageLzy", "\347\276\244\350\201\212\357\274\232", nullptr));
+        groupIdEdit->setText(QString());
+        label_5->setText(QCoreApplication::translate("SearchPageLzy", "\347\276\244\345\217\267\357\274\232", nullptr));
+        searchGroupButton->setText(QCoreApplication::translate("SearchPageLzy", "\346\237\245\346\211\276", nullptr));
     } // retranslateUi
 
 };

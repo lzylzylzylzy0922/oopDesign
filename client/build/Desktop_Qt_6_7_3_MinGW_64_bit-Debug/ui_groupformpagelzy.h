@@ -34,6 +34,7 @@ public:
     QPushButton *tackleAdminButton;
     QPushButton *searchMemberButton;
     QPushButton *tackleMemberButton;
+    QPushButton *joinGroupButton;
 
     void setupUi(QWidget *GroupFormPageLzy)
     {
@@ -65,10 +66,10 @@ public:
         sendMessageButton->setGeometry(QRect(160, 270, 56, 18));
         exitButton = new QPushButton(GroupFormPageLzy);
         exitButton->setObjectName("exitButton");
-        exitButton->setGeometry(QRect(160, 310, 56, 18));
+        exitButton->setGeometry(QRect(160, 300, 56, 18));
         dissolveButton = new QPushButton(GroupFormPageLzy);
         dissolveButton->setObjectName("dissolveButton");
-        dissolveButton->setGeometry(QRect(160, 340, 56, 18));
+        dissolveButton->setGeometry(QRect(160, 300, 56, 18));
         tackleAdminButton = new QPushButton(GroupFormPageLzy);
         tackleAdminButton->setObjectName("tackleAdminButton");
         tackleAdminButton->setGeometry(QRect(305, 297, 61, 21));
@@ -78,6 +79,9 @@ public:
         tackleMemberButton = new QPushButton(GroupFormPageLzy);
         tackleMemberButton->setObjectName("tackleMemberButton");
         tackleMemberButton->setGeometry(QRect(300, 260, 61, 21));
+        joinGroupButton = new QPushButton(GroupFormPageLzy);
+        joinGroupButton->setObjectName("joinGroupButton");
+        joinGroupButton->setGeometry(QRect(160, 270, 56, 21));
 
         retranslateUi(GroupFormPageLzy);
 
@@ -95,6 +99,7 @@ public:
         tackleAdminButton->setText(QCoreApplication::translate("GroupFormPageLzy", "\345\244\204\347\220\206\347\256\241\347\220\206\345\221\230", nullptr));
         searchMemberButton->setText(QCoreApplication::translate("GroupFormPageLzy", "\346\237\245\347\234\213\347\276\244\346\210\220\345\221\230", nullptr));
         tackleMemberButton->setText(QCoreApplication::translate("GroupFormPageLzy", "\347\256\241\347\220\206\347\276\244\346\210\220\345\221\230", nullptr));
+        joinGroupButton->setText(QCoreApplication::translate("GroupFormPageLzy", "\345\212\240\345\205\245\347\276\244\350\201\212", nullptr));
     } // retranslateUi
 
 };

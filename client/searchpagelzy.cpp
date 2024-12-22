@@ -68,8 +68,26 @@ void SearchPageLzy::searchUsers(QString text){
 
 }
 
-void SearchPageLzy::searchGroups(QString text){
+void SearchPageLzy::searchGroups(int groupId){
+    userDaoLzy* userDao=userDaoLzy::getInstance();
+    QSqlQuery query=userDao->searchGroupsById(groupId);
 
+    while(query.next()){
+        int groupId=query.value(0).toInt();
+        GroupLzy* group=userDao->getGroup(groupId);
+
+        qDebug()<<"搜索到群聊："<<group->getGroupId();
+        GroupItemFrameLzy* infoItem=new GroupItemFrameLzy(group);
+        infoItem->setFixedSize(200,110);
+
+        connect(infoItem, &GroupItemFrameLzy::clicked, this, &SearchPageLzy::onGroupItemClicked);
+
+        if(!groups.contains(group)){
+            groups.append(group);
+            ui->groupScrollArea->widget()->layout()->addWidget(infoItem);//这里尤其注意！！！
+        }
+
+    }
 }
 void SearchPageLzy::on_searchButton_clicked()
 {
@@ -86,7 +104,7 @@ void SearchPageLzy::on_searchButton_clicked()
 
     QString text=ui->idEdit->text();
     this->searchUsers(text);
-    this->searchGroups(text);
+    //this->searchGroups(text);
 }
 
 
@@ -101,3 +119,26 @@ void SearchPageLzy::onInfoItemClicked(AccountLzy* account,AccountLzy* friendAcco
     InfoFormPageLzy* infoForm=new InfoFormPageLzy(account,searchAccount);
     infoForm->show();
 }
+
+void SearchPageLzy::onGroupItemClicked(GroupLzy* group){
+    GroupFormPageLzy* infoForm=new GroupFormPageLzy(group,this->account);
+    infoForm->show();
+}
+
+void SearchPageLzy::on_searchGroupButton_clicked()
+{
+    //再次点击时先清空
+    QLayout* layout = ui->groupScrollArea->widget()->layout();
+    while (QLayoutItem* item = layout->takeAt(0)) {
+        if (QWidget* widget = item->widget()) {
+            widget->deleteLater();
+        }
+        delete item;
+    }
+    users.clear();
+
+
+    int text=ui->groupIdEdit->text().toInt();
+    this->searchGroups(text);
+}
+

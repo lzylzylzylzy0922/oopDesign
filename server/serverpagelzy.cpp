@@ -92,6 +92,39 @@ serverPageLzy::serverPageLzy(QWidget *parent)
 
                 forwardGroupJson(type,groupId,toId);
             }
+
+            else if(type=="join_group_request"){
+                //---------------- QJsonObject({"from_id":"q190981","group_id":123456,"to_id":"q150883","type":"join_group_request"})
+                QString fromId = obj["from_id"].toString();
+                QString toId=obj["to_id"].toString();
+                int groupId=obj["group_id"].toInt();
+
+                qDebug()<<fromId<<"申请加入"<<groupId;
+                QTcpSocket* clientSocket=this->getSocketById(toId);
+                if(clientSocket==nullptr){
+                    qDebug()<<"用户不在列表中，未查找到socket";
+                    return;
+                }
+
+                QJsonDocument doc(obj);
+
+                clientSocket->write(doc.toJson());
+                clientSocket->flush();
+
+            }
+
+            else if(type=="tackle_group_request"){
+                qDebug()<<obj;
+                QString toId=obj["to_id"].toString();
+                QTcpSocket* clientSocket=this->getSocketById(toId);
+                if(clientSocket==nullptr){
+                    qDebug()<<"用户不在列表中，未查找到socket";
+                    return;
+                }
+
+                clientSocket->write(doc.toJson());
+                clientSocket->flush();
+            }
             else {
                 qDebug() << "未知消息类型:" << type;
             }

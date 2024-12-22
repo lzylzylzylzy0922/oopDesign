@@ -14,6 +14,8 @@
 #include<QList>
 #include<QVBoxLayout>
 #include<infoformpagelzy.h>
+#include<groupitemframelzy.h>
+#include<groupformpagelzy.h>
 
 namespace Ui {
 class SearchPageLzy;
@@ -36,16 +38,19 @@ public slots:
 private slots:
     void on_searchButton_clicked();
     void onInfoItemClicked(AccountLzy* account,AccountLzy* friendAccount);//第一个参数：自己，第二个参数：别人
+    void onGroupItemClicked(GroupLzy* group);
+    void on_searchGroupButton_clicked();
+
 private:
     Ui::SearchPageLzy *ui;
     static AccountLzy* account;
     QList<QString> users;
-    QList<infoItemFrameLzy*> groups;
+    QList<GroupLzy*> groups;
 
     void initUserScrollArea();
     void initGroupScrollArea();
     void searchUsers(QString text);
-    void searchGroups(QString text);
+    void searchGroups(int text);
 
 };
 

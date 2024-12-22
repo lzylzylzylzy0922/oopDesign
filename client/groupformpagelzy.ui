@@ -99,7 +99,7 @@
    <property name="geometry">
     <rect>
      <x>160</x>
-     <y>310</y>
+     <y>300</y>
      <width>56</width>
      <height>18</height>
     </rect>
@@ -112,7 +112,7 @@
    <property name="geometry">
     <rect>
      <x>160</x>
-     <y>340</y>
+     <y>300</y>
      <width>56</width>
      <height>18</height>
     </rect>
@@ -158,6 +158,19 @@
    </property>
    <property name="text">
     <string>管理群成员</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="joinGroupButton">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>270</y>
+     <width>56</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>加入群聊</string>
    </property>
   </widget>
  </widget>

@@ -57,7 +57,7 @@
 | request_time | datetime |          申请时间           |
 |    status    |   enum   | 状态("PENDING"/"REJECTED")  |
 
-4.群组表group
+4.群组表user_group
 
 |    字段     |   类型   |        描述        |
 | :---------: | :------: | :----------------: |

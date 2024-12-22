@@ -33,6 +33,7 @@ public:
     UserLzy* returnUser(QString AccountId);                             //通过账号id返回user实体指针
     void updateOnlineStatus(AccountLzy* account,loginStatus status);     // 更新用户状态
     QSqlQuery searchUsersById(QString text);
+    QSqlQuery searchGroupsById(int groupId);
     bool checkIfFriend(int userId1,int userId2,AccountType type);                                                  //查询双方是否为好友
     bool addFriend(AccountLzy* account,AccountLzy* friendAccount);//添加好友
     bool removeFriend(AccountLzy* account,AccountLzy* friendAccount);
@@ -51,6 +52,8 @@ public:
     QString getRole(GroupLzy* group,AccountLzy* acc);
     void changeAdmin(int userId,Mode mode);
     bool removeMember(GroupLzy* group,int userId);
+    bool ifMemberExists(GroupLzy* group,AccountLzy* account);
+    QString getAccountByUserId(int userId,QString type);
 
 private:
     explicit userDaoLzy(QObject *parent = nullptr);

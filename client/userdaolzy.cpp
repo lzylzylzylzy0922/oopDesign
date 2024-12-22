@@ -261,6 +261,19 @@ QSqlQuery userDaoLzy::searchUsersById(QString text){
     return query;
 }
 
+QSqlQuery userDaoLzy::searchGroupsById(int groupId){
+    QSqlQuery query;
+    query.prepare("SELECT * FROM user_group WHERE group_id REGEXP :groupId");
+
+    query.bindValue(":groupId", groupId);
+    if (!query.exec()) {
+        qWarning() << "SQL query execution failed:" << query.lastError().text();
+        return query;
+    }
+
+    return query;
+}
+
 bool userDaoLzy::checkIfFriend(int userId1,int userId2,AccountType type){
     qDebug()<<userId1<<userId2;
 
@@ -604,8 +617,6 @@ QString userDaoLzy::getRole(GroupLzy* group, AccountLzy* acc) {
     query.bindValue(":groupId", group->getGroupId());
     query.bindValue(":userId", userDao->returnUser(acc->getAccountId())->getUserId());
 
-    qDebug()<<query.lastQuery();
-
     if (!query.exec()) {
         qWarning() << "getRole failed. SQL error:" << query.lastError().text();
         return "";
@@ -658,4 +669,45 @@ bool userDaoLzy::removeMember(GroupLzy* group,int userId){
     }
 
     return true;
+}
+
+bool userDaoLzy::ifMemberExists(GroupLzy* group,AccountLzy* account){
+    QSqlQuery query;
+    query.prepare("select * from group_member where group_id=:groupId and user_id=:userId;");
+    query.bindValue(":groupId",group->getGroupId());
+    query.bindValue(":userId",userDao->returnUser(account->getAccountId())->getUserId());
+
+    if (!query.exec()) {
+        qWarning() << "search for member failed. SQL error:" << query.lastError().text();
+        return false;
+    }
+
+    if (!query.next()) {
+        if(query.value(1).toInt()!=userDao->returnUser(account->getAccountId())->getUserId()){
+            qWarning() << "No matching member";
+            return false;
+        }
+    }
+
+    return true;
+}
+
+QString userDaoLzy::getAccountByUserId(int userId,QString type){
+    QSqlQuery query;
+    query.prepare("select * from account where user_id=:userId and type=:type");
+
+    query.bindValue(":userId",userId);
+    query.bindValue(":type",type);
+
+    if (!query.exec()) {
+        qWarning() << "search for account failed. SQL error:" << query.lastError().text();
+        return "";
+    }
+
+    if (!query.next()) {
+        qDebug()<<"user has no such account";
+        return "";
+    }
+
+    return query.value(0).toString();
 }
